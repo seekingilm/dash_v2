@@ -127,7 +127,7 @@ function Hash() {
             noWrap
             sx={{ flexGrow: 1, textAlign: "center", fontWeight: 'bold' }} // Bold font
           >
-            Intel Dashboard
+            Intel Dashboard For Hashs 
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
@@ -192,10 +192,8 @@ function Hash() {
             width: '100%' // Ensure the Box takes the full width
           }}
         >
-        <TextField id="outlined-basic" label="Search For IP" variant="outlined" />
       </Box>
     </ThemeProvider>
-
   );
 
 }

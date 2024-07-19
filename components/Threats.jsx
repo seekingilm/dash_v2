@@ -127,7 +127,7 @@ function Threats() {
             noWrap
             sx={{ flexGrow: 1, textAlign: "center", fontWeight: 'bold' }} // Bold font
           >
-            Intel Dashboard
+            Intel Dashboard For Threat Hunting
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
