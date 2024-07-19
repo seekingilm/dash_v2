@@ -1,7 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
+
+import Hash from '../components/Hash.jsx'
+import Domain from '../components/Domain.jsx'
 import Threats from '../components/Threats.jsx'
+
 import './index.css'
 import {
   createBrowserRouter,
@@ -16,6 +20,14 @@ const router = createBrowserRouter([
   {
     path: "/threat_hunting",
     element: <Threats />
+  },
+{
+    path: "/hash",
+    element: <Hash/>
+  },
+{
+    path: "/domain",
+    element: <Domain />
   },
 ]);
 

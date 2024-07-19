@@ -233,16 +233,20 @@ function Dash() {
               </Link2>
             </Typography>
             <Divider orientation="vertical" sx={{ borderColor: "white", height: "auto" }} />
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>Domains</Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link href="https://www.mandiant.com" target="_blank" sx={{ color: "inherit", textDecoration: "none" }}>Hashes</Link>
+              <Link2 to={"/domain"}>
+                Domains
+              </Link2>
+              </Typography>
+            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+              <Link2 to={'/Hash'}>Hashes</Link2>
             </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
               <Link2 to={`threat_hunting`}>
               Threat Hunting</Link2>
             </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link href="https://www.flashpoint-intel.com" target="_blank" sx={{ color: "inherit", textDecoration: "none" }}>URL</Link>
+              URL
             </Typography>
             <Divider sx={{ my: 1, borderColor: "white" }} />
             <Sheet onSubmit={getData} />

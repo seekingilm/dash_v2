@@ -169,7 +169,7 @@ function Threats() {
               <Link2 to={'/Hash'}>Hashes</Link2>
             </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={`/threat_hunting`}>
+              <Link2 to={`threat_hunting`}>
               Threat Hunting</Link2>
             </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
