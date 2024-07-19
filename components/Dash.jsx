@@ -1,14 +1,14 @@
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { DataGrid } from '@mui/x-data-grid';
-
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
+import { FormControl, Button, Input } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
+import Typography from "@mui/material/Typography"; // Corrected line
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
@@ -24,9 +24,12 @@ import Ipchart from "./Ipchart";
 import IpTwo from "./IpsTwo";
 import World from "./World";
 import Geo from "./Geochart";
-import Tab_display from './TableDisplay'
-import {mockDataTeam as data} from '../data/mockData'
+import Tab_display from './TableDisplay';
+import { mockDataTeam as data } from '../data/mockData';
 import TableDisplay from "./TableDisplay";
+import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';  // Updated path to your logo image
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
 
 function Sheet(props) {
   const [excelFile, setExcelFile] = useState(null);
@@ -34,8 +37,7 @@ function Sheet(props) {
   const [typeError, setTypeError] = useState(null);
 
   const [excelData, setExcelData] = useState(null);
-  let apiKey =
-    "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c";
+  let apiKey = "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c";
 
   const handleFile = (e) => {
     let fileTypes = [
@@ -75,58 +77,42 @@ function Sheet(props) {
       setExcelData(data.slice(0, 10));
     }
   };
+
   return (
-    <div>
-      <div>
-        <h3>Upload & View Excel Sheets</h3>
+    <Box>
+      <Box>
+        <h3>Upload Excel Sheet</h3>
         <form onSubmit={handleFileSubmit}>
-          <input type="file" required onChange={handleFile} />
-          <button type="submit">UPLOAD</button>
-          {typeError && <div role="alert">{typeError}</div>}
-        </form>
+          <FormControl sx={{ width: '25ch' }}>
+            <Input type="file" required onChange={handleFile} />
+            <Button variant="contained" m={3} type="submit">Upload</Button>
+            {typeError && <div role="alert">{typeError}</div>}
+          </FormControl>
+        </form >
 
         {/* view data */}
 
-        <div className="viewer">
-          {excelData ? (
-            <div>
-              <table>
-                <thead>
-                  <tr>
-                    {Object.keys(excelData[0]).map((key) => (
-                      <th key={key}>{key}</th>
-                    ))}
-                  </tr>
-                </thead>
 
-                <tbody>
-                  {excelData.map((individualExcelData, index) => (
-                    <tr key={index}>
-                      {Object.keys(individualExcelData).map((key) => (
-                        <td key={key}>{individualExcelData[key]}</td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div>No File is uploaded yet!</div>
-          )}
-        </div>
-
-        <div>{dataJSON ? <h1>All IPs</h1> : <h6>no data</h6>}</div>
-      </div>
-    </div>
+        <div>{dataJSON ? <h1>All IPs</h1> : <h6>Click Upload Button To Upload Data</h6>}</div>
+      </Box>
+    </Box>
   );
 }
 
 function Dash() {
-  const defaultTheme = createTheme();
+  const defaultTheme = createTheme({
+    palette: {
+      background: {
+        default: "#C8F0FF",
+      },
+    },
+  });
+
   const drawerWidth = 240;
 
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false); // Default set to false to fully collapse the side header
   const [returnData, setReturnData] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
 
   const getData = (data) => {
     console.log("setting returnData to " + JSON.stringify(data));
@@ -135,6 +121,10 @@ function Dash() {
 
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleChange = (event) => {
+    setSelectedOption(event.target.value);
   };
 
   const Drawer = styled(MuiDrawer, {
@@ -149,16 +139,16 @@ function Dash() {
         duration: theme.transitions.duration.enteringScreen,
       }),
       boxSizing: "border-box",
+      backgroundColor: "#0A4570",
+      color: "white",
       ...(!open && {
         overflowX: "hidden",
         transition: theme.transitions.create("width", {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        width: theme.spacing(7),
-        [theme.breakpoints.up("sm")]: {
-          width: theme.spacing(9),
-        },
+        width: 0, // Set width to 0 when collapsed
+        display: 'none', // Ensure it does not take up any space
       }),
     },
   }));
@@ -181,16 +171,12 @@ function Dash() {
     }),
   }));
 
-    return (
+  return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", width: '100%' }}>
         <CssBaseline />
         <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: "24px", // keep right padding when drawer closed
-            }}
-          >
+          <Toolbar sx={{ pr: "24px" }}>
             <IconButton
               edge="start"
               color="inherit"
@@ -203,8 +189,14 @@ function Dash() {
             >
               <MenuIcon />
             </IconButton>
-            <Typography component="h1" variant="h6" noWrap sx={{ flexGrow: 1 }}>
-              Dashboard
+            <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
+            <Typography
+              component="h1"
+              variant="h5" // Smaller font size
+              noWrap
+              sx={{ flexGrow: 1, textAlign: "center", fontWeight: 'bold' }} // Bold font
+            >
+              Intel Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={0} color="secondary">
@@ -223,13 +215,30 @@ function Dash() {
             }}
           >
             <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
+              <ChevronLeftIcon sx={{ color: "white" }} />
             </IconButton>
           </Toolbar>
-          <Divider />
-          <Sheet onSubmit={getData} />
+          <Divider sx={{ borderColor: "white" }} />
           <List component="nav">
-            <Divider sx={{ my: 1 }} />
+            <Typography variant="h5" sx={{ padding: "16px", fontWeight: "bold", color: "white", display: 'flex', alignItems: 'center' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" style={{ width: '20px', height: '20px', marginRight: '8px' }}>
+                <path fillRule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clipRule="evenodd" />
+              </svg>
+              Main Menu
+            </Typography>
+            <Divider orientation="vertical" sx={{ borderColor: "white", height: "auto" }} />
+            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>Domains</Typography>
+            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+              <Link href="https://www.mandiant.com" target="_blank" sx={{ color: "inherit", textDecoration: "none" }}>Hashes</Link>
+            </Typography>
+            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+              <Link href="https://www.intel471.com" target="_blank" sx={{ color: "inherit", textDecoration: "none" }}>Threat Hunting</Link>
+            </Typography>
+            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+              <Link href="https://www.flashpoint-intel.com" target="_blank" sx={{ color: "inherit", textDecoration: "none" }}>URL</Link>
+            </Typography>
+            <Divider sx={{ my: 1, borderColor: "white" }} />
+            <Sheet onSubmit={getData} />
           </List>
         </Drawer>
         <Box
@@ -242,10 +251,11 @@ function Dash() {
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
+            width: '100%' // Ensure the Box takes the full width
           }}
         >
           <Toolbar />
-          <Container id="worldy" maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container id="worldy" maxWidth={false} sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
               {/* Chart */}
               <Grid item xs={12} md={8} lg={12}>
@@ -254,6 +264,7 @@ function Dash() {
                     p: 2,
                     display: "flex",
                     height: 400,
+                    width: '100%'
                   }}
                 >
                   <Geo geoData={returnData} isDashboard={true} />
@@ -266,6 +277,7 @@ function Dash() {
                     p: 2,
                     display: "flex",
                     height: 240,
+                    width: '100%'
                   }}
                 >
                   <IpTwo barData={returnData} />
@@ -278,6 +290,7 @@ function Dash() {
                     p: 2,
                     display: "flex",
                     height: 240,
+                    width: '100%'
                   }}
                 >
                   <Ipchart pieData={returnData} />
@@ -285,7 +298,10 @@ function Dash() {
               </Grid>
               {/* Recent Orders */}
               {console.log(data)}
-              <TableDisplay tableData={returnData}/>
+             <Grid item xs={12} md={4} lg={12}>
+             <TableDisplay tableData={returnData} />
+             </Grid>
+             
             </Grid>
           </Container>
         </Box>
