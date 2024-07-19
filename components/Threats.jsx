@@ -1,4 +1,5 @@
 import TextField from '@mui/material/TextField'
+import { Outlet, Link as Link2 } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState } from 'react';
 import MuiDrawer from "@mui/material/Drawer";
@@ -116,7 +117,10 @@ function Threats() {
           >
             <MenuIcon />
           </IconButton>
+
+              <Link2 to={"/"}>
           <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
+          </Link2>
           <Typography
             component="h1"
             variant="h5" // Smaller font size
@@ -151,7 +155,9 @@ function Threats() {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" style={{ width: '20px', height: '20px', marginRight: '8px' }}>
               <path fillRule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clipRule="evenodd" />
             </svg>
-            Main Menu
+            <Link2 to={"/"}>
+              Main Menu
+              </Link2>
           </Typography>
           <Divider orientation="vertical" sx={{ borderColor: "white", height: "auto" }} />
           <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>Domains</Typography>
