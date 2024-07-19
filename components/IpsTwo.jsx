@@ -16,7 +16,7 @@ function sumAbuseByCountry(arr) {
     if (result[country] === undefined) {
       result[country] = abuse;
     } else {
-      result[country] += abuse;
+      result[country] = Math.round((result[country] + abuse) / 2)
     }
   });
 

@@ -266,22 +266,34 @@ function GeographyChart({ isDashboard = false, geoData }) {
     let returnGeoData = []
 
     if (workData.constructor === Array) {
-      workData.forEach((item) => {
-        if (item) {
-          returnGeoData.push({ "id": countryCodes[item['country']], "value": item['abuse'] })
-        }
+      workData.forEach(obj => {
+        let country = countryCodes[obj.country];
+        let reports = obj.totalReports;
+
+        returnGeoData.push({ "id": countryCodes[obj['country']], "value": reports })
       });
 
-
+      console.log(returnGeoData)
     }
 
-    return returnGeoData
+    const result = returnGeoData.reduce((acc, { id, value }) => {
+      if (acc[id]) {
+        acc[id] += value;
+      } else {
+        acc[id] = value;
+      }
+      return acc;
+    }, {});
+
+    const resultArray = Object.entries(result).map(([id, value]) => ({ id, value }));
+
+    return resultArray
   }
 
 
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/data', {
+    fetch('http://127.0.0.1:5000/table', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -328,7 +340,7 @@ function GeographyChart({ isDashboard = false, geoData }) {
       }}
       features={geoFeatures.features}
       margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-      domain={[0, 50]}
+      domain={[0, 10]}
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"

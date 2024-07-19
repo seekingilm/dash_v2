@@ -304,7 +304,6 @@ function Dash() {
                 </Paper>
               </Grid>
               {/* Recent Orders */}
-              {console.log(data)}
              <Grid item xs={12} md={4} lg={12}>
              <TableDisplay tableData={returnData} />
              </Grid>
