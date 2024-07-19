@@ -18,8 +18,35 @@ function Ipchart({ pieData }) {
       }
     });
 
+    function consolidateData(data) {
+      // Create an object to store aggregated results
+      const resultMap = {};
+
+      // Iterate over each item in the data array
+      data.forEach(item => {
+        const { id, value } = item;
+
+        // If the id is null, skip it or handle it as needed
+        if (id === null) return;
+
+        // Initialize the resultMap entry if it does not exist
+        if (!resultMap[id]) {
+          resultMap[id] = { id, label: item.label, value: 0 };
+        }
+
+        // Add the value to the existing entry
+        resultMap[id].value += value;
+      });
+      return Object.values(resultMap);
+    }
+
+    let a = consolidateData(Object.values(result))
+    console.log(a)
+    return a
+    
     return Object.keys(result).map(country => ({
       country: country,
+      label: country,
       abuse: result[country]
     }));
   }
@@ -35,7 +62,6 @@ function Ipchart({ pieData }) {
     }).then(res => res.json()).
       then(res => {
         if (res.constructor === Array) {
-          console.log(res)
           setApiData(res)
         }
       })
@@ -45,7 +71,7 @@ function Ipchart({ pieData }) {
   return (
     <ResponsivePie
       data={apiData}
-      margin={{ top: 30, right: 40, bottom: 30, left: 40}}
+      margin={{ top: 30, right: 40, bottom: 30, left: 40 }}
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
