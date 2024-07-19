@@ -283,11 +283,16 @@ function Dash() {
                   sx={{
                     p: 2,
                     display: "flex",
+                    flexDirection: "column",
                     height: 240,
                     width: '100%'
                   }}
                 >
+                  <Typography >
+                    Average Abuse Per Country
+                  </Typography>
                   <IpTwo barData={returnData} />
+                  
                 </Paper>
               </Grid>
 
@@ -296,10 +301,15 @@ function Dash() {
                   sx={{
                     p: 2,
                     display: "flex",
+                    flexDirection: "column",
                     height: 240,
                     width: '100%'
                   }}
                 >
+                  <Typography >
+                    Types Of Abusive IPs
+                  </Typography>
+
                   <Ipchart pieData={returnData} />
                 </Paper>
               </Grid>
