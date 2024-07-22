@@ -1,6 +1,5 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
-import { mockBarData as data } from "../data/mockData";
 import { useState, useEffect } from "react";
 
 function IpsTwo({barData}){

@@ -6,35 +6,16 @@ import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
 import Box from '@mui/material/Box'
 
-import { DataGrid } from '@mui/x-data-grid';
-import * as XLSX from "xlsx";
-import CssBaseline from "@mui/material/CssBaseline";
-import { FormControl, Button, Input } from "@mui/material";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography"; // Corrected line
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Ipchart from "./Ipchart";
-import IpTwo from "./IpsTwo";
-import World from "./World";
-import Geo from "./Geochart";
-import Tab_display from './TableDisplay';
-import { mockDataTeam as data } from '../data/mockData';
-import TableDisplay from "./TableDisplay";
 import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';  // Updated path to your logo image
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-
-
 
 function Threats() {
   const defaultTheme = createTheme({

@@ -26,7 +26,6 @@ import IpTwo from "./IpsTwo";
 import World from "./World";
 import Geo from "./Geochart";
 import Tab_display from './TableDisplay';
-import { mockDataTeam as data } from '../data/mockData';
 import TableDisplay from "./TableDisplay";
 import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';  // Updated path to your logo image
 import MenuItem from '@mui/material/MenuItem';
@@ -190,8 +189,7 @@ function Dash() {
             >
               <MenuIcon />
             </IconButton>
-
-              <Link2 to={"/"}>
+            <Link2 to={"/"}>
             <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
             </Link2>
             <Typography

@@ -28,7 +28,6 @@ import IpTwo from "./IpsTwo";
 import World from "./World";
 import Geo from "./Geochart";
 import Tab_display from './TableDisplay';
-import { mockDataTeam as data } from '../data/mockData';
 import TableDisplay from "./TableDisplay";
 import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';  // Updated path to your logo image
 import MenuItem from '@mui/material/MenuItem';
