@@ -189,7 +189,8 @@ function Dash() {
             >
               <MenuIcon />
             </IconButton>
-            <Link2 to={"/"}>
+
+              <Link2 to={"/"}>
             <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
             </Link2>
             <Typography

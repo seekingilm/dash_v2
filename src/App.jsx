@@ -1,11 +1,8 @@
-import Dash from '../components/Dash'
-import Check from '../components/Check'
-import { store } from '../store'
-import { Provider } from 'react-redux'
+import Blocky from '../components/Blocky'
 
 function App() {
   return (
-      <Dash />
+      <Blocky/>
   )
 }
 
