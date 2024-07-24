@@ -1,4 +1,5 @@
 import { useTheme } from "@mui/material";
+import {mockBarData as data} from "../data/mockData"
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
 
@@ -44,7 +45,7 @@ function sumAbuseByCountry(arr) {
 
   return (
     <ResponsiveBar
-      data={apiData}
+      data={data}
       theme={{
         axis: {
           domain: {
@@ -75,7 +76,7 @@ function sumAbuseByCountry(arr) {
       }}
       keys={['abuse']}
       indexBy="country"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
@@ -120,7 +121,7 @@ function sumAbuseByCountry(arr) {
         tickRotation: 0,
         legend: "Abuse Score", // changed
         legendPosition: "middle",
-        legendOffset: -40,
+        legendOffset: -50,
       }}
       enableLabel={false}
       labelSkipWidth={12}

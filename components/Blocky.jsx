@@ -1,42 +1,43 @@
 import Box from '@mui/system/Box';
-import Typography from "@mui/material/Typography"; // Corrected line
+import Typography from "@mui/material/Typography" // Corrected line
 import Card from './Cards'
-import Grid from '@mui/system/Unstable_Grid';
+import DrawerTwo from './DrawerTwo'
+import MenuBar from './MenuBar';
+import Grid from '@mui/system/Unstable_Grid'
 
 function Blocky() {
   return (
-    <Box sx={{ backgroundColor: 'pink', flexGrow: 1, width: '100vw' }}>
-      <Box>
-        <Typography>Dashboard</Typography>
-      </Box>
-      <Grid container spacing={2}>
+    <Grid>
+    <MenuBar/>
+    <Grid bgcolor={'pink'} container spacing={2}>
         <Grid xs={2}>
-          <div>xs=8</div>
-          <Typography paragraph>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-            enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-            imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-            Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-            Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-            adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-            nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-            leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-            feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-            consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-            sapien faucibus et molestie ac.
-          </Typography>
+          <Card />
         </Grid>
-        <Grid container xs={10} spacing={2}  >
+        <Grid xs={2}>
           <Card />
+        </Grid>
+        <Grid xs={2}>
           <Card />
+        </Grid>
+        <Grid xs={2}>
           <Card />
+        </Grid>
+        <Grid xs={2}>
           <Card />
+        </Grid>
+        <Grid xs={2}>
           <Card />
+        </Grid>
+        <Grid xs={2}> <Card />
+        </Grid>
+        <Grid xs={2}>
+          <Card />
+        </Grid>
+        <Grid xs={2}>
           <Card />
         </Grid>
       </Grid>
-    </Box>
+      </Grid>
   )
 }
 

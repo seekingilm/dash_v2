@@ -9,6 +9,7 @@ import { FormControl, Button, Input } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
+import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography"; // Corrected line
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -103,7 +104,7 @@ function Dash() {
   const defaultTheme = createTheme({
     palette: {
       background: {
-        default: "#C8F0FF",
+        default: "#f3f3f3",
       },
     },
   });
@@ -190,8 +191,8 @@ function Dash() {
               <MenuIcon />
             </IconButton>
 
-              <Link2 to={"/"}>
-            <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
+            <Link2 to={"/"}>
+              <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
             </Link2>
             <Typography
               component="h1"
@@ -228,7 +229,7 @@ function Dash() {
                 <path fillRule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clipRule="evenodd" />
               </svg>
               <Link2 to={"/"}>
-              Main Menu
+                Main Menu
               </Link2>
             </Typography>
             <Divider orientation="vertical" sx={{ borderColor: "white", height: "auto" }} />
@@ -236,13 +237,13 @@ function Dash() {
               <Link2 to={"/domain"}>
                 Domains
               </Link2>
-              </Typography>
+            </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
               <Link2 to={'/Hash'}>Hashes</Link2>
             </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
               <Link2 to={`threat_hunting`}>
-              Threat Hunting</Link2>
+                Threat Hunting</Link2>
             </Typography>
             <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
               URL
@@ -266,61 +267,68 @@ function Dash() {
         >
           <Toolbar />
           <Container id="worldy" maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+            <Typography variant="h4" ml={1} my={3} sx={{
+              fontWeight: "700",
+            }}
+            >Dashboard</Typography>
             <Grid container spacing={3}>
-              {/* Chart */}
               <Grid item xs={12} md={8} lg={12}>
-                <Paper
+                <Card
                   sx={{
                     p: 2,
                     display: "flex",
                     height: 400,
-                    width: '100%'
+                    width: '100%',
+                    borderRadius: '1em',
                   }}
                 >
                   <Geo geoData={returnData} isDashboard={true} />
-                </Paper>
+                </Card>
               </Grid>
               {/* Recent Deposits */}
               <Grid item xs={12} md={4} lg={6}>
-                <Paper
+                <Card
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    height: 240,
+
+                    borderRadius: '1em',
+                    height: 300,
                     width: '100%'
                   }}
                 >
-                  <Typography >
+                  <Typography m={'auto'} sx={{
+                    fontWeight: 500,
+                    color: '#615d5c',
+                  }}>
                     Average Abuse Per Country
                   </Typography>
                   <IpTwo barData={returnData} />
-                  
-                </Paper>
+                </Card>
               </Grid>
-
               <Grid item xs={12} md={4} lg={6}>
-                <Paper
+                <Card
                   sx={{
-                    p: 2,
                     display: "flex",
+                    borderRadius: '1em',
                     flexDirection: "column",
-                    height: 240,
+                    height: 300,
                     width: '100%'
                   }}
                 >
-                  <Typography >
+                  <Typography mt={2} mx={'auto'} sx={{
+                    fontWeight: 500,
+                    color: '#615d5c',
+                  }}>
                     Types Of Abusive IPs
                   </Typography>
-
                   <Ipchart pieData={returnData} />
-                </Paper>
+                </Card>
               </Grid>
-              {/* Recent Orders */}
-             <Grid item xs={12} md={4} lg={12}>
-             <TableDisplay tableData={returnData} />
-             </Grid>
-             
+              <Grid item xs={12} md={4} lg={12}>
+                <TableDisplay tableData={returnData} />
+              </Grid>
             </Grid>
           </Container>
         </Box>

@@ -1,8 +1,9 @@
 import Blocky from '../components/Blocky'
+import Dash from '../components/Dash'
 
 function App() {
   return (
-      <Blocky/>
+      <Dash />
   )
 }
 
