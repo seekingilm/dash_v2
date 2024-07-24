@@ -176,39 +176,6 @@ function Dash() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", width: '100%' }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar sx={{ pr: "24px" }}>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-
-            <Link2 to={"/"}>
-              <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
-            </Link2>
-            <Typography
-              component="h1"
-              variant="h5" // Smaller font size
-              noWrap
-              sx={{ flexGrow: 1, textAlign: "center", fontWeight: 'bold' }} // Bold font
-            >
-              Intel Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={0} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
         <Drawer variant="permanent" open={open}>
           <Toolbar
             sx={{
@@ -265,8 +232,7 @@ function Dash() {
             width: '100%' // Ensure the Box takes the full width
           }}
         >
-          <Toolbar />
-          <Container id="worldy" maxWidth={false} sx={{ mt: 4, mb: 4 }}>
+          <Container id="worldy" maxWidth={false} sx={{ mb: 4 }}>
             <Typography variant="h4" ml={1} my={3} sx={{
               fontWeight: "700",
             }}

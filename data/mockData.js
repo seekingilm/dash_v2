@@ -320,7 +320,8 @@ export const mockTransactions = [
 export const mockBarData = [
   {
     country: "AD",
-    abuse: 5000,
+    'abuse': 5000,
+    "abuseColor": "hsl(309, 70%, 50%)",
   },
   {
     country: "AE",

@@ -1,5 +1,6 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
+import { mockGeographyData as data } from "../data/mockData"
 import { geoFeatures } from "../data/mockGeoFeatures";
 import { tokens } from "../theme";
 import { useState, useEffect } from "react"
@@ -308,7 +309,7 @@ function GeographyChart({ isDashboard = false, geoData }) {
 
   return (
     <ResponsiveChoropleth
-      data={apiData}
+      data={data}
       theme={{
         axis: {
           domain: {
@@ -339,7 +340,8 @@ function GeographyChart({ isDashboard = false, geoData }) {
       }}
       features={geoFeatures.features}
       margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-      domain={[0, 10]}
+      domain={[0, 1000000]} //change back to default of 10
+      colors="nivo"
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
@@ -348,43 +350,86 @@ function GeographyChart({ isDashboard = false, geoData }) {
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor="#ffffff"
-      defs={[{
-        id: 'dots',
-        type: 'patternDots',
-        background: 'inherit',
-        color: '#38bcb2',
-        size: 4,
-        padding: 1,
-        stagger: true
-      }]}
-      legends={
-        !isDashboard
-          ? [
+      defs={[
+        {
+          id: 'dots',
+          type: 'patternDots',
+          background: 'inherit',
+          color: '#38bcb2',
+          size: 4,
+          padding: 1,
+          stagger: true
+        },
+        {
+          id: 'lines',
+          type: 'patternLines',
+          background: 'inherit',
+          color: '#eed312',
+          rotation: -45,
+          lineWidth: 6,
+          spacing: 10
+        },
+        {
+          id: 'gradient',
+          type: 'linearGradient',
+          colors: [
             {
-              anchor: "bottom-left",
-              direction: "column",
-              justify: true,
-              translateX: 20,
-              translateY: -100,
-              itemsSpacing: 0,
-              itemWidth: 94,
-              itemHeight: 18,
-              itemDirection: "left-to-right",
-              itemTextColor: colors.grey[100],
-              itemOpacity: 0.85,
-              symbolSize: 18,
-              effects: [
-                {
-                  on: "hover",
-                  style: {
-                    itemTextColor: "#ffffff",
-                    itemOpacity: 1,
-                  },
-                },
-              ],
+              offset: 0,
+              color: '#000'
             },
+            {
+              offset: 100,
+              color: 'inherit'
+            }
           ]
-          : undefined
+        }
+      ]}
+      fill={[
+        {
+          match: {
+            id: 'CAN'
+          },
+          id: 'dots'
+        },
+        {
+          match: {
+            id: 'CHN'
+          },
+          id: 'lines'
+        },
+        {
+          match: {
+            id: 'ATA'
+          },
+          id: 'gradient'
+        }
+      ]}
+      legends={
+        [
+          {
+            anchor: "bottom-left",
+            direction: "column",
+            justify: true,
+            translateX: 20,
+            translateY: -100,
+            itemsSpacing: 0,
+            itemWidth: 94,
+            itemHeight: 18,
+            itemDirection: "left-to-right",
+            itemTextColor: colors.grey[100],
+            itemOpacity: 0.85,
+            symbolSize: 18,
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  itemTextColor: "#ffffff",
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
+        ]
       }
     />
   );
