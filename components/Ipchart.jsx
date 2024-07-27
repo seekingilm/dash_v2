@@ -71,28 +71,17 @@ function Ipchart({ pieData }) {
 
   return (
     <ResponsivePie
-      data={data}
-      margin={{ top: 10, right: 60, bottom: 60, left: 20}}
-      /*value={'abuse'}*/
+      data={apiData}
+      margin={{ top: 10, right: 60, bottom: 60, left: 20 }}
       innerRadius={0.8}
       padAngle={0.7}
       cornerRadius={3}
       activeOuterRadiusOffset={8}
-      indexBy="Usage Type"
       borderWidth={1}
       enableArcLinkLabels={true}
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
       arcLabelsSkipAngle={10}
-      arcLabelsTextColor={{
-        from: 'color',
-        modifiers: [
-          [
-            'darker',
-            2
-          ]
-        ]
-      }}
     />
   )
 }

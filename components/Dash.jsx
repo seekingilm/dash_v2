@@ -2,6 +2,7 @@ import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
 import Avatar from '@mui/material/Avatar'
 import { Outlet, Link as Link2 } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
+import Modal from '@mui/material/Modal';
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -41,6 +42,10 @@ function Sheet(props) {
   const [excelData, setExcelData] = useState(null);
   let apiKey = "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c";
 
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const handleFile = (e) => {
     let fileTypes = [
       "application/vnd.ms-excel",
@@ -65,6 +70,17 @@ function Sheet(props) {
       console.log("Please select your file");
     }
   };
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 300,
+    bgcolor: 'background.paper',
+    borderRadius: '1rem',
+    boxShadow: 24,
+    p: 4,
+  };
 
   const handleFileSubmit = (e) => {
     e.preventDefault();
@@ -81,18 +97,23 @@ function Sheet(props) {
   };
 
   return (
-    <Box>
-      <Box>
-        <h3>Upload Excel Sheet</h3>
-        <form onSubmit={handleFileSubmit}>
-          <FormControl sx={{ width: '25ch' }}>
-            <Input type="file" required onChange={handleFile} />
-            <Button variant="contained" m={3} type="submit">Upload</Button>
-            {typeError && <div role="alert">{typeError}</div>}
-          </FormControl>
-        </form > 
-        <div>{dataJSON ? <h1>All IPs</h1> : <h6>Click Upload Button To Upload Data</h6>}</div>
-      </Box>
+    <Box display={'inline-block'} ml={1} marginTop={'24px'}>
+      <Button onClick={handleOpen} variant="contained" >Upload From Excel</Button>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <form onSubmit={handleFileSubmit}>
+            <FormControl sx={{ width: '25ch' }}>
+              <Input sx={{ display: 'inline-block' }} type="file" required onChange={handleFile} />
+              <Button sx={{ display: 'inline-block' }} variant="contained" m={3} type="submit">Upload</Button>
+            </FormControl>
+          </form >
+        </Box>
+      </Modal>
     </Box>
   );
 }
@@ -106,7 +127,7 @@ function Dash() {
     },
   });
 
-  const drawerWidth = 240;
+  const drawerWidth = 0;
 
   const [open, setOpen] = useState(false); // Default set to false to fully collapse the side header
   const [returnData, setReturnData] = useState(null);
@@ -133,7 +154,7 @@ function Dash() {
       whiteSpace: "nowrap",
       width: drawerWidth,
       boxSizing: "border-box",
-      backgroundColor: "#000000",
+      backgroundColor: "#ffffff",
       color: "white",
       ...(!open && {
         overflowX: "hidden",
@@ -167,6 +188,37 @@ function Dash() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", width: '100%' }}>
         <CssBaseline />
+        <Drawer variant="permanent" open={open}>
+          <List component="nav">
+            <Link2 to={"/"}>
+              <Typography variant="h5" sx={{ color: "black" }}>
+                Main Menu
+              </Typography>
+            </Link2>
+
+            <Link2 to={"/domain"}>
+              <Typography variant="h6">
+                Domains
+              </Typography>
+
+            </Link2>
+            <Link2 to={'/Hash'}>
+              <Typography variant="h6" >
+                Hashes
+              </Typography>
+            </Link2>
+
+            <Link2 to={`threat_hunting`}>
+              <Typography variant="h6" >
+                Threat Hunting
+              </Typography>
+            </Link2>
+
+            <Typography variant="h6" >
+              URL
+            </Typography>
+          </List>
+        </Drawer>
         <Box
           component="main"
           sx={{
@@ -181,25 +233,78 @@ function Dash() {
           }}
         >
           <Container id="worldy" maxWidth={false} sx={{ mb: 4 }}>
-            <Typography variant="h4" ml={1} my={3} sx={{
-              fontWeight: "700",
-            }}
-            >Dashboard</Typography>
+            <Box display={'flex'} justifyContent={'space-between'}>
+              <Typography display={'inline-block'} variant="h4" ml={1} my={3} sx={{
+                fontWeight: "700",
+              }}
+              >Dashboard</Typography>
+              <Sheet onSubmit={getData} />
+            </Box>
+
             <Grid container spacing={3}>
-              <Grid item xs={12} md={8} lg={12}>
+              <Grid item xs={4} >
                 <Card
                   sx={{
                     p: 2,
                     display: "flex",
-                    height: 400,
-                    width: '100%',
+                    flexDirection: "column",
                     borderRadius: '1em',
+                    height: 300,
+                    width: '100%'
                   }}
                 >
-                  <Geo/>
+                  <Typography mx={3} marginTop={0} sx={{
+                    fontWeight: 900,
+                    color: '#615d5c',
+                  }}>
+                    Average Abuse Per Country
+                  </Typography>
+                  <IpTwo barData={returnData} />
                 </Card>
               </Grid>
-              {/* Recent Deposits */}
+
+              <Grid item xs={4}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    borderRadius: '1em',
+                    flexDirection: "column",
+                    height: 300,
+                    width: '100%'
+                  }}
+                >
+                  <Typography mx={3} marginTop={2} sx={{
+                    fontWeight: 900,
+                    color: '#615d5c',
+                  }}>
+                    Types Of Abusive IPs
+                  </Typography>
+                  <Ipchart pieData={returnData} />
+                </Card>
+              </Grid>
+
+              <Grid item xs={4}>
+                <Card
+                  sx={{
+                    display: "flex",
+                    borderRadius: '1em',
+                    flexDirection: "column",
+                    height: 300,
+                    width: '100%'
+                  }}
+                >
+                  <Typography mx={3} marginTop={2} sx={{
+                    fontWeight: 900,
+                    color: '#615d5c',
+                  }}>
+                    Types Of Abusive IPs
+                  </Typography>
+                  <Ipchart pieData={returnData} />
+                </Card>
+              </Grid>
+
+
+
               <Grid item xs={12} md={4} lg={6}>
                 <Card
                   sx={{
