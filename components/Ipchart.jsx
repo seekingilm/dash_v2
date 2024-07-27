@@ -71,8 +71,9 @@ function Ipchart({ pieData }) {
 
   return (
     <ResponsivePie
-      data={apiData}
+      data={data}
       margin={{ top: 10, right: 60, bottom: 60, left: 20 }}
+      indexBy={'abuse'}
       innerRadius={0.8}
       padAngle={0.7}
       cornerRadius={3}

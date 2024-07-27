@@ -86,11 +86,6 @@ def make_pie_data(excel_data): #use this in case you need for API.
 
     ip_list = extract_values(excel_data, "IPV4") 
 
-    dates = []
-    countries = []
-    country_name = []
-    abuse = []
-
     #key = "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c"
     #key = "9e19a670e5a990c979aef2cd3f66e0a5185d2cdfb3db534d6b5a7b5f7573b35aacb64ac6bf88ac4f"
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
@@ -116,7 +111,7 @@ def make_pie_data(excel_data): #use this in case you need for API.
        
         try:
             fused_lists.append(
-                {"id": response_dict["data"]["usageType"], "label": response_dict["data"]["usageType"], "value": response_dict["data"]["abuseConfidenceScore"],}
+                {"id": clean_labels(response_dict["data"]["usageType"]), "label": clean_labels(response_dict["data"]["usageType"]), "value": response_dict["data"]["abuseConfidenceScore"],}
             )
         except Exception:
            print('Failed to add item to the return list in pie') 
@@ -181,3 +176,13 @@ def clean_urls(urls):
             if type(urls[i]) == str:
                 urls[i] = urls[i].replace("[.]", ".")
     return urls
+
+def clean_labels(label):
+    if label == "Data Center/Web Hosting/Transit":
+        return "DWT"
+    elif label == "Mobile ISP":
+        return "Mobile"
+    elif label == "Content Delivery Network":
+        return "CDN"
+    else:
+        return label 
