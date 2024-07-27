@@ -1,30 +1,30 @@
 import { useTheme } from "@mui/material";
-import {mockBarData as data} from "../data/mockData"
+import { mockBarData as data } from "../data/mockData"
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
 
-function IpsTwo({barData}){
+function IpsTwo({ barData }) {
   const [apiData, setApiData] = useState([])
 
-function sumAbuseByCountry(arr) {
-  const result = {};
+  function sumAbuseByCountry(arr) {
+    const result = {};
 
-  arr.forEach(obj => {
-    const country = obj.country;
-    const abuse = obj.abuse;
+    arr.forEach(obj => {
+      const country = obj.country;
+      const abuse = obj.abuse;
 
-    if (result[country] === undefined) {
-      result[country] = abuse;
-    } else {
-      result[country] = Math.round((result[country] + abuse) / 2)
-    }
-  });
+      if (result[country] === undefined) {
+        result[country] = abuse;
+      } else {
+        result[country] = Math.round((result[country] + abuse) / 2)
+      }
+    });
 
-  return Object.keys(result).map(country => ({
-    country: country,
-    abuse: result[country]
-  }));
-} 
+    return Object.keys(result).map(country => ({
+      country: country,
+      abuse: result[country]
+    }));
+  }
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/data', {
@@ -35,8 +35,8 @@ function sumAbuseByCountry(arr) {
       },
       body: JSON.stringify(barData)
     }).then(res => res.json()).
-      then(res => { 
-        if(res.constructor === Array){
+      then(res => {
+        if (res.constructor === Array) {
           setApiData(sumAbuseByCountry(res))
         }
       })
@@ -46,72 +46,18 @@ function sumAbuseByCountry(arr) {
   return (
     <ResponsiveBar
       data={data}
-      theme={{
-        axis: {
-          domain: {
-            line: {
-              stroke: '#FFA500',
-            },
-          },
-          legend: {
-            text: {
-              fill: '#FFA500',
-            },
-          },
-          ticks: {
-            line: {
-              stroke: '#FFA500',
-              strokeWidth: 1,
-            },
-            text: {
-              fill: '#FFA500',
-            },
-          },
-        },
-        legends: {
-          text: {
-            fill: '#FFA500',
-          },
-        },
-      }}
-      keys={['abuse']}
+      colors={{ scheme: 'dark2' }}
+      keys={['abuse',]}
       indexBy="country"
       margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "#38bcb2",
-          size: 4,
-          padding: 1,
-          stagger: true,
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "#eed312",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10,
-        },
-      ]}
-      borderColor={{
-        from: "color",
-        modifiers: [["darker", "1.6"]],
-      }}
-      axisTop={null}
-      axisRight={null}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend:  "Country", // changed
+        legend: "Country", // changed
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -126,10 +72,6 @@ function sumAbuseByCountry(arr) {
       enableLabel={false}
       labelSkipWidth={12}
       labelSkipHeight={12}
-      labelTextColor={{
-        from: "color",
-        modifiers: [["darker", 1.6]],
-      }}
       legends={[
         {
           dataFrom: "keys",
@@ -153,9 +95,43 @@ function sumAbuseByCountry(arr) {
             },
           ],
         },
-      ]}
+      ]}    defs={[
+            {
+                id: 'dots',
+                type: 'patternDots',
+                background: 'inherit',
+                color: '#38bcb2',
+                size: 4,
+                padding: 1,
+                stagger: true
+            },
+            {
+                id: 'lines',
+                type: 'patternLines',
+                background: 'inherit',
+                color: '#eed312',
+                rotation: -45,
+                lineWidth: 6,
+                spacing: 10
+            }
+        ]}
+        fill={[
+            {
+                match: {
+                    id: 'abuse'
+                },
+                id: 'dots'
+            },
+            {
+                match: {
+                    id: 'sandwich'
+                },
+                id: 'lines'
+            }
+        ]}
+
       role="application"
-      barAriaLabel={function (e) {
+      barAriaLabel={function(e) {
         return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
       }}
     />

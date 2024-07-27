@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@nivo/pie'
 import { useState, useEffect } from "react";
-import {mockBarData as data} from "../data/mockData"
+import {mockPieData as data} from "../data/mockData"
 
 function Ipchart({ pieData }) {
   const [apiData, setApiData] = useState([])
@@ -72,19 +72,18 @@ function Ipchart({ pieData }) {
   return (
     <ResponsivePie
       data={data}
-      margin={{ top: 20, right: 40, bottom: 60, left: 40 }}
-      value={'abuse'}
-      innerRadius={0.5}
+      margin={{ top: 10, right: 60, bottom: 60, left: 20}}
+      /*value={'abuse'}*/
+      innerRadius={0.8}
       padAngle={0.7}
       cornerRadius={3}
       activeOuterRadiusOffset={8}
       indexBy="Usage Type"
       borderWidth={1}
-      enableArcLinkLabels={false}
+      enableArcLinkLabels={true}
       arcLinkLabelsTextColor="#333333"
       arcLinkLabelsThickness={2}
       arcLabelsSkipAngle={10}
-      isInteractive={false}
       arcLabelsTextColor={{
         from: 'color',
         modifiers: [

@@ -319,36 +319,38 @@ export const mockTransactions = [
 
 export const mockBarData = [
   {
-    country: "AD",
-    'abuse': 5000,
+    "country": "AD",
+    "abuse": 5000,
     "abuseColor": "hsl(309, 70%, 50%)",
   },
   {
-    country: "AE",
-    abuse: 4000,
+    "country": "AE",
+    "abuse": 4000,
+    "abuseColor": "hsl(309, 70%, 50%)",
   },
   {
-    country: "LS",
-    abuse: 2031,
+    "country": "LS",
+    "abuse": 2031,
+    "abuseColor": "hsl(309, 70%, 50%)",
   },
-{
-    country: "TF",
-    abuse: 400,
+  {
+    "country": "TF",
+    "abuse": 400,
+    "abuseColor": "hsl(309, 70%, 50%)",
   },
-{
-    country: "DS",
-    abuse: 2877,
+  {
+    "country": "DS",
+    "abuse": 2877,
+    "abuseColor": "hsl(309, 70%, 50%)",
   },
-
-  ];
+];
 
 export const mockPieData = [
   {
     id: "hack",
     label: "hack",
     value: 239,
-    color: "hsl(104, 70%, 50%)",
-  },
+    color: "hsl(104, 70%, 50%)", },
   {
     id: "make",
     label: "make",

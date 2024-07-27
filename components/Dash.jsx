@@ -1,4 +1,5 @@
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
+import Avatar from '@mui/material/Avatar'
 import { Outlet, Link as Link2 } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import * as XLSX from "xlsx";
@@ -89,11 +90,7 @@ function Sheet(props) {
             <Button variant="contained" m={3} type="submit">Upload</Button>
             {typeError && <div role="alert">{typeError}</div>}
           </FormControl>
-        </form >
-
-        {/* view data */}
-
-
+        </form > 
         <div>{dataJSON ? <h1>All IPs</h1> : <h6>Click Upload Button To Upload Data</h6>}</div>
       </Box>
     </Box>
@@ -135,12 +132,8 @@ function Dash() {
       position: "relative",
       whiteSpace: "nowrap",
       width: drawerWidth,
-      transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
       boxSizing: "border-box",
-      backgroundColor: "#0A4570",
+      backgroundColor: "#000000",
       color: "white",
       ...(!open && {
         overflowX: "hidden",
@@ -148,8 +141,6 @@ function Dash() {
           easing: theme.transitions.easing.sharp,
           duration: theme.transitions.duration.leavingScreen,
         }),
-        width: 0, // Set width to 0 when collapsed
-        display: 'none', // Ensure it does not take up any space
       }),
     },
   }));
@@ -176,49 +167,6 @@ function Dash() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", width: '100%' }}>
         <CssBaseline />
-        <Drawer variant="permanent" open={open}>
-          <Toolbar
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "flex-end",
-              px: [1],
-            }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon sx={{ color: "white" }} />
-            </IconButton>
-          </Toolbar>
-          <Divider sx={{ borderColor: "white" }} />
-          <List component="nav">
-            <Typography variant="h5" sx={{ padding: "16px", fontWeight: "bold", color: "white", display: 'flex', alignItems: 'center' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" style={{ width: '20px', height: '20px', marginRight: '8px' }}>
-                <path fillRule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clipRule="evenodd" />
-              </svg>
-              <Link2 to={"/"}>
-                Main Menu
-              </Link2>
-            </Typography>
-            <Divider orientation="vertical" sx={{ borderColor: "white", height: "auto" }} />
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={"/domain"}>
-                Domains
-              </Link2>
-            </Typography>
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={'/Hash'}>Hashes</Link2>
-            </Typography>
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={`threat_hunting`}>
-                Threat Hunting</Link2>
-            </Typography>
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              URL
-            </Typography>
-            <Divider sx={{ my: 1, borderColor: "white" }} />
-            <Sheet onSubmit={getData} />
-          </List>
-        </Drawer>
         <Box
           component="main"
           sx={{
@@ -248,7 +196,7 @@ function Dash() {
                     borderRadius: '1em',
                   }}
                 >
-                  <Geo geoData={returnData} isDashboard={true} />
+                  <Geo/>
                 </Card>
               </Grid>
               {/* Recent Deposits */}
@@ -258,14 +206,13 @@ function Dash() {
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-
                     borderRadius: '1em',
                     height: 300,
                     width: '100%'
                   }}
                 >
-                  <Typography m={'auto'} sx={{
-                    fontWeight: 500,
+                  <Typography mx={3} marginTop={0} sx={{
+                    fontWeight: 900,
                     color: '#615d5c',
                   }}>
                     Average Abuse Per Country
@@ -283,8 +230,8 @@ function Dash() {
                     width: '100%'
                   }}
                 >
-                  <Typography mt={2} mx={'auto'} sx={{
-                    fontWeight: 500,
+                  <Typography mx={3} marginTop={2} sx={{
+                    fontWeight: 900,
                     color: '#615d5c',
                   }}>
                     Types Of Abusive IPs
