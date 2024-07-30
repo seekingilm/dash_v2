@@ -3,7 +3,7 @@ import { mockBarData as data } from "../data/mockData"
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
 
-function IpsTwo({ barData }) {
+function BarChart({ barData }) {
   const [apiData, setApiData] = useState([])
 
   function sumAbuseByCountry(arr) {
@@ -37,7 +37,8 @@ function IpsTwo({ barData }) {
     }).then(res => res.json()).
       then(res => {
         if (res.constructor === Array) {
-          setApiData(sumAbuseByCountry(res))
+          let newRes = res.filter(item => item.country !== null && item.abuse != 0);
+          setApiData(sumAbuseByCountry(newRes))
         }
       })
   }, [barData])
@@ -45,11 +46,11 @@ function IpsTwo({ barData }) {
 
   return (
     <ResponsiveBar
-      data={data}
+      data={apiData}
       colors={{ scheme: 'dark2' }}
       keys={['abuse',]}
       indexBy="country"
-      margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
+      margin={{ top: 30, right: 100, bottom: 60, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
@@ -138,4 +139,4 @@ function IpsTwo({ barData }) {
   );
 }
 
-export default IpsTwo;
+export default BarChart

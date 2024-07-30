@@ -272,8 +272,6 @@ function GeographyChart({ isDashboard = false, geoData }) {
 
         returnGeoData.push({ "id": countryCodes[obj['country']], "value": reports })
       });
-
-      console.log(returnGeoData)
     }
 
     const result = returnGeoData.reduce((acc, { id, value }) => {
@@ -302,6 +300,7 @@ function GeographyChart({ isDashboard = false, geoData }) {
       body: JSON.stringify(geoData)
     }).then(res => res.json())
       .then(res => {
+        console.log(cleanUpAndMakeGeoData(res))
         setApiData(cleanUpAndMakeGeoData(res))
       })
   }, [geoData])
@@ -309,7 +308,7 @@ function GeographyChart({ isDashboard = false, geoData }) {
 
   return (
     <ResponsiveChoropleth
-      data={data}
+      data={apiData}
       theme={{
         axis: {
           domain: {
@@ -339,8 +338,8 @@ function GeographyChart({ isDashboard = false, geoData }) {
         },
       }}
       features={geoFeatures.features}
-      margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-      domain={[0, 1000000]} //change back to default of 10
+      margin={{ top: 10, right: 10, bottom: 10, left: 10 }}
+      domain={[0, 50]} //change back to default of 10
       colors="nivo"
       unknownColor="#666666"
       label="properties.name"
@@ -350,60 +349,6 @@ function GeographyChart({ isDashboard = false, geoData }) {
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor="#ffffff"
-      defs={[
-        {
-          id: 'dots',
-          type: 'patternDots',
-          background: 'inherit',
-          color: '#38bcb2',
-          size: 4,
-          padding: 1,
-          stagger: true
-        },
-        {
-          id: 'lines',
-          type: 'patternLines',
-          background: 'inherit',
-          color: '#eed312',
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10
-        },
-        {
-          id: 'gradient',
-          type: 'linearGradient',
-          colors: [
-            {
-              offset: 0,
-              color: '#000'
-            },
-            {
-              offset: 100,
-              color: 'inherit'
-            }
-          ]
-        }
-      ]}
-      fill={[
-        {
-          match: {
-            id: 'CAN'
-          },
-          id: 'dots'
-        },
-        {
-          match: {
-            id: 'CHN'
-          },
-          id: 'lines'
-        },
-        {
-          match: {
-            id: 'ATA'
-          },
-          id: 'gradient'
-        }
-      ]}
       legends={
         [
           {

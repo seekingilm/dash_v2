@@ -5,6 +5,7 @@ import App from './App.jsx'
 import Hash from '../components/Hash.jsx'
 import Domain from '../components/Domain.jsx'
 import Threats from '../components/Threats.jsx'
+import GeoPage from "../components/GeoPage.jsx"
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
 {
     path: "/domain",
     element: <Domain />
+  },
+  {
+    path: "/GeoPage",
+    element: <GeoPage/>
   },
 ]);
 

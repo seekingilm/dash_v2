@@ -1,5 +1,5 @@
 import Blocky from '../components/Blocky'
-import Dash from '../components/Dash'
+import Dash from '../components/Dash2'
 
 function App() {
   return (

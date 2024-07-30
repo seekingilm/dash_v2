@@ -23,8 +23,6 @@ import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import Ipchart from "./Ipchart";
-import IpTwo from "./IpsTwo";
 import World from "./World";
 import Geo from "./Geochart";
 import Tab_display from './TableDisplay';

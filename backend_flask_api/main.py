@@ -51,7 +51,9 @@ def make_abuse_countries(excel_data):
     #key = "9e19a670e5a990c979aef2cd3f66e0a5185d2cdfb3db534d6b5a7b5f7573b35aacb64ac6bf88ac4f"
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
-    key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    key = "2e4dde3f009ff333f0599006f784841f53991c7b9323cfa47900c8497bc1e84e775d7cfc81913e43" #highest key
+
 
     fused_lists = []
 
@@ -90,7 +92,9 @@ def make_pie_data(excel_data): #use this in case you need for API.
     #key = "9e19a670e5a990c979aef2cd3f66e0a5185d2cdfb3db534d6b5a7b5f7573b35aacb64ac6bf88ac4f"
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
-    key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    key = "2e4dde3f009ff333f0599006f784841f53991c7b9323cfa47900c8497bc1e84e775d7cfc81913e43" # highest key
+
 
 
     fused_lists = []
@@ -111,7 +115,7 @@ def make_pie_data(excel_data): #use this in case you need for API.
        
         try:
             fused_lists.append(
-                {"id": clean_labels(response_dict["data"]["usageType"]), "label": clean_labels(response_dict["data"]["usageType"]), "value": response_dict["data"]["abuseConfidenceScore"],}
+                {"id": clean_labels(response_dict["data"]["usageType"]), "label": clean_labels(response_dict["data"]["usageType"]), "value": response_dict["data"]["abuseConfidenceScore"], "color": "hsl(291, 70%, 50%)"}
             )
         except Exception:
            print('Failed to add item to the return list in pie') 
@@ -133,7 +137,8 @@ def make_table_data(excel_data):
     #key = "9e19a670e5a990c979aef2cd3f66e0a5185d2cdfb3db534d6b5a7b5f7573b35aacb64ac6bf88ac4f"
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
-    key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    # key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    key = "2e4dde3f009ff333f0599006f784841f53991c7b9323cfa47900c8497bc1e84e775d7cfc81913e43" #highest key
 
     fused_lists = []
 

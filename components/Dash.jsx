@@ -1,4 +1,5 @@
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
+import SideBar from "../SideBar"
 import Avatar from '@mui/material/Avatar'
 import { Outlet, Link as Link2 } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
@@ -70,6 +71,7 @@ function Sheet(props) {
       console.log("Please select your file");
     }
   };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -127,7 +129,7 @@ function Dash() {
     },
   });
 
-  const drawerWidth = 0;
+  const drawerWidth = 100;
 
   const [open, setOpen] = useState(false); // Default set to false to fully collapse the side header
   const [returnData, setReturnData] = useState(null);
@@ -166,58 +168,12 @@ function Dash() {
     },
   }));
 
-  const AppBar = styled(MuiAppBar, {
-    shouldForwardProp: (prop) => prop !== "open",
-  })(({ theme, open }) => ({
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    ...(open && {
-      marginLeft: drawerWidth,
-      width: `calc(100% - ${drawerWidth}px)`,
-      transition: theme.transitions.create(["width", "margin"], {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-    }),
-  }));
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", width: '100%' }}>
         <CssBaseline />
         <Drawer variant="permanent" open={open}>
-          <List component="nav">
-            <Link2 to={"/"}>
-              <Typography variant="h5" sx={{ color: "black" }}>
-                Main Menu
-              </Typography>
-            </Link2>
-
-            <Link2 to={"/domain"}>
-              <Typography variant="h6">
-                Domains
-              </Typography>
-
-            </Link2>
-            <Link2 to={'/Hash'}>
-              <Typography variant="h6" >
-                Hashes
-              </Typography>
-            </Link2>
-
-            <Link2 to={`threat_hunting`}>
-              <Typography variant="h6" >
-                Threat Hunting
-              </Typography>
-            </Link2>
-
-            <Typography variant="h6" >
-              URL
-            </Typography>
-          </List>
+          <SideBar open={open} setOpen={setOpen}/>
         </Drawer>
         <Box
           component="main"
