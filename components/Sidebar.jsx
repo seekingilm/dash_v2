@@ -30,7 +30,7 @@ import logoImage from '../public/Green Modern Data Connect Logo (1).jpg';
 const Arr1 = [
   { text: "IP Address ", icon: <HomeOutlinedIcon />, path: "/" },
   { text: "Domains", icon: <PeopleOutlinedIcon />, path: "/GeoPage" },
-  { text: "URL ", icon: <ContactsOutlinedIcon />, path: "/contacts" },
+  { text: "URL ", icon: <ContactsOutlinedIcon />, path: "/flow" },
   { text: "IOC Lookup", icon: <ReceiptOutlinedIcon />, path: "/invoices" },
 ];
 
