@@ -48,10 +48,6 @@ const router = createBrowserRouter([
     element: <GeoPage />
   },
   {
-    path: "/Flow",
-    element: <FlowChart />
-  },
-  {
     path: "/Pie",
     element: <PiePage />
   },

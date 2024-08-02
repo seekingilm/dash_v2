@@ -6,10 +6,13 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   ReactFlowProvider,
+  MiniMap,
+  Controls,
 } from 'react-flow-renderer';
 
 import { useDrop } from './hooks/useDrop';
 import Sidebar from './Sidebar2';
+
 import Editor from './editor/Editor';
 import CustomNode from './nodes/CustomNode';
 import { useGroups } from './hooks/useGroups';
