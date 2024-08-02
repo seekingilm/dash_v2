@@ -34,7 +34,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import SideBar from "./Sidebar"
 import RadialChart from './RadialChart'
-import BoxPlot from './BoxPlot'
 import Flowy from './Flowy'
 
 const drawerWidth = 240;

@@ -23,6 +23,7 @@ import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import { grey } from "@mui/material/colors";
+import PiePage from './PiePage'
 
 // Import the image using ES6 import syntax
 import logoImage from '../public/Green Modern Data Connect Logo (1).jpg';
@@ -30,7 +31,7 @@ import logoImage from '../public/Green Modern Data Connect Logo (1).jpg';
 const Arr1 = [
   { text: "IP Address ", icon: <HomeOutlinedIcon />, path: "/" },
   { text: "Domains", icon: <PeopleOutlinedIcon />, path: "/GeoPage" },
-  { text: "URL ", icon: <ContactsOutlinedIcon />, path: "/flow" },
+  { text: "Pie Chart", icon: <PiePage />, path: "/Pie" },
   { text: "IOC Lookup", icon: <ReceiptOutlinedIcon />, path: "/invoices" },
 ];
 

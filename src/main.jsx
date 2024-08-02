@@ -7,6 +7,7 @@ import Domain from '../components/Domain.jsx'
 import Threats from '../components/Threats.jsx'
 import GeoPage from "../components/GeoPage.jsx"
 import FlowChart from "../components/FlowChart.jsx"
+import PiePage from '../components/PiePage.jsx'
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/GeoPage",
     element: <GeoPage/>
+  },
+  {
+    path: "/Pie",
+    element: <PiePage/>
   },
   {
     path: "/flow",

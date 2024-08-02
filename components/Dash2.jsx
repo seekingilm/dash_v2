@@ -33,8 +33,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import SideBar from "./Sidebar"
 import RadialChart from './RadialChart'
-import BoxPlot from './BoxPlot'
 import GeographyChart from "./Geochart";
+import IpNumber from "./IpNumber"
 
 const drawerWidth = 240;
 
@@ -303,30 +303,7 @@ function Dash() {
               <Sheet onSubmit={getData} />
             </Box>
             <Grid container spacing={3}>
-              <Grid item xs={3}>
-                <Card
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexFlow: "column",
-                    borderRadius: "1em",
-                    justifyContent: "center",
-                    height: 100,
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontWeight: 900,
-                      marginRight: 5,
-                      color: "#615d5c",
-                    }}
-                  >
-                    Ip Address Analyzed
-                  </Typography>
-                  <Typography>100</Typography>
-                </Card>
-              </Grid>
+              <IpNumber IpSource={returnData}/> 
               <Grid item xs={3}>
                 <Card
                   sx={{
@@ -371,7 +348,7 @@ function Dash() {
                 </Card>
               </Grid>
 
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <Card
                   sx={{
                     p: 2,
@@ -392,10 +369,9 @@ function Dash() {
                   >
                     Average Abuse Per Country
                   </Typography>
-                  <BoxPlot boxData={returnData} />
                 </Card>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <Card
                   sx={{
                     display: "flex",
@@ -418,30 +394,7 @@ function Dash() {
                   <PieChart pieData={returnData} />
                 </Card>
               </Grid>
-              <Grid item xs={4}>
-                <Card
-                  sx={{
-                    display: "flex",
-                    borderRadius: "1em",
-                    flexDirection: "column",
-                    height: 300,
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    mx={3}
-                    marginTop={2}
-                    sx={{
-                      fontWeight: 900,
-                      color: "#615d5c",
-                    }}
-                  >
-                    Types Of Abusive IPs
-                  </Typography>
-                  <RadialChart radialData={returnData} />
-                </Card>
-              </Grid>
-              <Grid item xs={6} md={4} lg={6}>
+                <Grid item xs={6} md={4} lg={6}>
                 <Card
                   sx={{
                     p: 2,

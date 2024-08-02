@@ -198,7 +198,7 @@ function Sheet(props) {
 }
 
 
-function GeoPage() {
+function PiePage() {
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -326,7 +326,7 @@ function GeoPage() {
                   >
                     GeoMap
                   </Typography>
-                  <GeographyChart geoData={returnData}/>
+                  <PieChart pieData={returnData}/>
                 </Card>
               </Grid>
             </Grid>
@@ -338,4 +338,4 @@ function GeoPage() {
 }
 
 
-export default GeoPage
+export default PiePage

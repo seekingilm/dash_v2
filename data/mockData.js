@@ -2992,3 +2992,276 @@ export const mockBoxData = [
     "value": 9.328902036352016
   }
 ]
+
+export const mockLineData2 = [
+  {
+    "id": "japan",
+    "color": "hsl(61, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 223
+      },
+      {
+        "x": "helicopter",
+        "y": 79
+      },
+      {
+        "x": "boat",
+        "y": 131
+      },
+      {
+        "x": "train",
+        "y": 157
+      },
+      {
+        "x": "subway",
+        "y": 48
+      },
+      {
+        "x": "bus",
+        "y": 201
+      },
+      {
+        "x": "car",
+        "y": 81
+      },
+      {
+        "x": "moto",
+        "y": 210
+      },
+      {
+        "x": "bicycle",
+        "y": 20
+      },
+      {
+        "x": "horse",
+        "y": 38
+      },
+      {
+        "x": "skateboard",
+        "y": 100
+      },
+      {
+        "x": "others",
+        "y": 37
+      }
+    ]
+  },
+  {
+    "id": "france",
+    "color": "hsl(313, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 65
+      },
+      {
+        "x": "helicopter",
+        "y": 215
+      },
+      {
+        "x": "boat",
+        "y": 73
+      },
+      {
+        "x": "train",
+        "y": 221
+      },
+      {
+        "x": "subway",
+        "y": 201
+      },
+      {
+        "x": "bus",
+        "y": 71
+      },
+      {
+        "x": "car",
+        "y": 67
+      },
+      {
+        "x": "moto",
+        "y": 296
+      },
+      {
+        "x": "bicycle",
+        "y": 36
+      },
+      {
+        "x": "horse",
+        "y": 60
+      },
+      {
+        "x": "skateboard",
+        "y": 137
+      },
+      {
+        "x": "others",
+        "y": 66
+      }
+    ]
+  },
+  {
+    "id": "us",
+    "color": "hsl(121, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 228
+      },
+      {
+        "x": "helicopter",
+        "y": 241
+      },
+      {
+        "x": "boat",
+        "y": 127
+      },
+      {
+        "x": "train",
+        "y": 19
+      },
+      {
+        "x": "subway",
+        "y": 243
+      },
+      {
+        "x": "bus",
+        "y": 14
+      },
+      {
+        "x": "car",
+        "y": 191
+      },
+      {
+        "x": "moto",
+        "y": 160
+      },
+      {
+        "x": "bicycle",
+        "y": 289
+      },
+      {
+        "x": "horse",
+        "y": 24
+      },
+      {
+        "x": "skateboard",
+        "y": 182
+      },
+      {
+        "x": "others",
+        "y": 243
+      }
+    ]
+  },
+  {
+    "id": "germany",
+    "color": "hsl(318, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 6
+      },
+      {
+        "x": "helicopter",
+        "y": 223
+      },
+      {
+        "x": "boat",
+        "y": 77
+      },
+      {
+        "x": "train",
+        "y": 298
+      },
+      {
+        "x": "subway",
+        "y": 220
+      },
+      {
+        "x": "bus",
+        "y": 60
+      },
+      {
+        "x": "car",
+        "y": 176
+      },
+      {
+        "x": "moto",
+        "y": 189
+      },
+      {
+        "x": "bicycle",
+        "y": 245
+      },
+      {
+        "x": "horse",
+        "y": 265
+      },
+      {
+        "x": "skateboard",
+        "y": 289
+      },
+      {
+        "x": "others",
+        "y": 264
+      }
+    ]
+  },
+  {
+    "id": "norway",
+    "color": "hsl(102, 70%, 50%)",
+    "data": [
+      {
+        "x": "plane",
+        "y": 23
+      },
+      {
+        "x": "helicopter",
+        "y": 187
+      },
+      {
+        "x": "boat",
+        "y": 148
+      },
+      {
+        "x": "train",
+        "y": 108
+      },
+      {
+        "x": "subway",
+        "y": 170
+      },
+      {
+        "x": "bus",
+        "y": 201
+      },
+      {
+        "x": "car",
+        "y": 74
+      },
+      {
+        "x": "moto",
+        "y": 35
+      },
+      {
+        "x": "bicycle",
+        "y": 138
+      },
+      {
+        "x": "horse",
+        "y": 82
+      },
+      {
+        "x": "skateboard",
+        "y": 139
+      },
+      {
+        "x": "others",
+        "y": 143
+      }
+    ]
+  }
+]

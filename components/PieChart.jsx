@@ -91,7 +91,7 @@ function PieChart({ pieData }) {
   return (
     <ResponsivePie
       data={apiData}
-      margin={{ top: 10, right: 60, bottom: 60, left: 80}}
+      margin={{ top: 10, right: 60, bottom: 80, left: 80}}
       colors={{ scheme: 'set2' }}
       indexBy={'abuse'}
       innerRadius={0.8}
