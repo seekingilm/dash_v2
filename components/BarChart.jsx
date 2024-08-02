@@ -16,15 +16,20 @@ function BarChart({ barData }) {
       if (result[country] === undefined) {
         result[country] = abuse;
       } else {
-        result[country] = Math.round((result[country] + abuse) / 2)
+        result[country] = Math.round((result[country] + abuse) / 2);
       }
     });
 
-    return Object.keys(result).map(country => ({
-      country: country,
-      abuse: result[country]
-    }));
+    const sortedCountries = Object.keys(result)
+      .map(country => ({
+        country: country,
+        abuse: result[country]
+      }))
+      .sort((a, b) => b.abuse - a.abuse);
+
+    return sortedCountries.slice(0, 5);
   }
+
 
   useEffect(() => {
     fetch('http://127.0.0.1:5000/data', {
@@ -50,7 +55,7 @@ function BarChart({ barData }) {
       colors={{ scheme: 'dark2' }}
       keys={['abuse',]}
       indexBy="country"
-      margin={{ top: 30, right: 100, bottom: 60, left: 60 }}
+      margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
@@ -73,63 +78,40 @@ function BarChart({ barData }) {
       enableLabel={false}
       labelSkipWidth={12}
       labelSkipHeight={12}
-      legends={[
+      defs={[
         {
-          dataFrom: "keys",
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 120,
-          translateY: 0,
-          itemsSpacing: 2,
-          itemWidth: 100,
-          itemHeight: 20,
-          itemDirection: "left-to-right",
-          itemOpacity: 0.85,
-          symbolSize: 20,
-          effects: [
-            {
-              on: "hover",
-              style: {
-                itemOpacity: 1,
-              },
-            },
-          ],
+          id: 'dots',
+          type: 'patternDots',
+          background: 'inherit',
+          color: '#38bcb2',
+          size: 4,
+          padding: 1,
+          stagger: true
         },
-      ]}    defs={[
-            {
-                id: 'dots',
-                type: 'patternDots',
-                background: 'inherit',
-                color: '#38bcb2',
-                size: 4,
-                padding: 1,
-                stagger: true
-            },
-            {
-                id: 'lines',
-                type: 'patternLines',
-                background: 'inherit',
-                color: '#eed312',
-                rotation: -45,
-                lineWidth: 6,
-                spacing: 10
-            }
-        ]}
-        fill={[
-            {
-                match: {
-                    id: 'abuse'
-                },
-                id: 'dots'
-            },
-            {
-                match: {
-                    id: 'sandwich'
-                },
-                id: 'lines'
-            }
-        ]}
+        {
+          id: 'lines',
+          type: 'patternLines',
+          background: 'inherit',
+          color: '#eed312',
+          rotation: -45,
+          lineWidth: 6,
+          spacing: 10
+        }
+      ]}
+      fill={[
+        {
+          match: {
+            id: 'abuse'
+          },
+          id: 'dots'
+        },
+        {
+          match: {
+            id: 'sandwich'
+          },
+          id: 'lines'
+        }
+      ]}
 
       role="application"
       barAriaLabel={function(e) {

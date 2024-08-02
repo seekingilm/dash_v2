@@ -11,21 +11,8 @@ import { Box, Tooltip, Typography, styled, useTheme } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
-import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
-import ContactSupportOutlinedIcon from "@mui/icons-material/ContactSupportOutlined";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import PublicIcon from '@mui/icons-material/Public';
-import PieChartIcon from '@mui/icons-material/PieChart';
-import FlowChart from "./FlowChart";
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import BackupTableIcon from '@mui/icons-material/BackupTable';
 import AssessmentIcon from '@mui/icons-material/Assessment';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import RoomIcon from '@mui/icons-material/Room';
@@ -44,7 +31,7 @@ const Arr1 = [
 
 const Arr2 = [
   { text: "Ip Lookup", icon: <ManageSearchIcon  />, path: "/IpLookup" },
-  { text: "Flow", icon: <BorderColorIcon/>, path: "/Flow" },
+  { text: "Flow", icon: <BorderColorIcon/>, path: "/" },
   { text: "General Report", icon: <AssessmentIcon />, path: "/Report" },
   { text: "Marker World Map", icon: <RoomIcon/>, path: "/Marker" },
 ];

@@ -274,14 +274,15 @@ function GeographyChart({ isDashboard = false, geoData }) {
       });
     }
 
+    
     const result = returnGeoData.reduce((acc, { id, value }) => {
       if (acc[id]) {
-        acc[id] += value;
+        acc[id] += 1;
       } else {
-        acc[id] = value;
+        acc[id] = 1;
       }
       return acc;
-    }, {});
+    }, {}); 
 
     const resultArray = Object.entries(result).map(([id, value]) => ({ id, value }));
 

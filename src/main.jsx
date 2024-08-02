@@ -33,7 +33,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/threat_hunting",
-    element: <Threats /> 
+    element: <Threats />
   },
   {
     path: "/hash",
@@ -53,16 +53,16 @@ const router = createBrowserRouter([
   },
   {
     path: "/Table",
-    element: <TablePage/>
+    element: <TablePage />
   }, {
     path: "/IpLookup",
-    element:  <IpLookUpPage/>
+    element: <IpLookUpPage />
   }, {
     path: "/Marker",
-    element: <MarkerPage /> 
+    element: <MarkerPage />
   }, {
     path: "/Report",
-    element: <GeneralReportPage/>
+    element: <GeneralReportPage />
   },
 ]);
 
