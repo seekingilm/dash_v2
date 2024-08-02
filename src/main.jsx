@@ -6,8 +6,10 @@ import Hash from '../components/Hash.jsx'
 import Domain from '../components/Domain.jsx'
 import Threats from '../components/Threats.jsx'
 import GeoPage from "../components/GeoPage.jsx"
-import FlowChart from "../components/FlowChart.jsx"
 import PiePage from '../components/PiePage.jsx'
+import FlowChart from "../components/FlowChart.jsx"
+import TablePage from "../components/TablePage.jsx"
+import IpLookUpPage from '../components/IpLookUpPage.jsx'
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -20,37 +22,52 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import GeneralReportPage from '../components/GeneralReportPage.jsx'
+import MarkerPage from '../components/MarkerPage.jsx'
+
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/> 
+    element: <App />
   },
   {
     path: "/threat_hunting",
-    element: <Threats />
+    element: <Threats /> 
   },
-{
+  {
     path: "/hash",
-    element: <Hash/>
+    element: <Hash />
   },
-{
+  {
     path: "/domain",
     element: <Domain />
   },
   {
     path: "/GeoPage",
-    element: <GeoPage/>
+    element: <GeoPage />
+  },
+  {
+    path: "/Flow",
+    element: <FlowChart />
   },
   {
     path: "/Pie",
-    element: <PiePage/>
+    element: <PiePage />
   },
   {
-    path: "/flow",
-    element: <FlowChart/>
+    path: "/Table",
+    element: <TablePage/>
+  }, {
+    path: "/IpLookup",
+    element:  <IpLookUpPage/>
+  }, {
+    path: "/Marker",
+    element: <MarkerPage /> 
+  }, {
+    path: "/Report",
+    element: <GeneralReportPage/>
   },
-
 ]);
 
 

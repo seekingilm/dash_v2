@@ -198,7 +198,7 @@ function Sheet(props) {
 }
 
 
-function PiePage() {
+function MarkerPage() {
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -299,7 +299,7 @@ function PiePage() {
                   fontWeight: "700",
                 }}
               >
-                Dashboard
+                Marker World Page 
               </Typography>
               <Sheet onSubmit={getData} />
               <GeographyChart geoData={returnData}/>
@@ -324,9 +324,8 @@ function PiePage() {
                       color: "#615d5c",
                     }}
                   >
-                   Pie Page 
+                    Under Development
                   </Typography>
-                  <PieChart pieData={returnData}/>
                 </Card>
               </Grid>
             </Grid>
@@ -338,4 +337,4 @@ function PiePage() {
 }
 
 
-export default PiePage
+export default MarkerPage 

@@ -198,7 +198,7 @@ function Sheet(props) {
 }
 
 
-function PiePage() {
+function IpLookUpPage() {
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -324,9 +324,8 @@ function PiePage() {
                       color: "#615d5c",
                     }}
                   >
-                   Pie Page 
+                    IP Look Up, Developer Notice
                   </Typography>
-                  <PieChart pieData={returnData}/>
                 </Card>
               </Grid>
             </Grid>
@@ -338,4 +337,4 @@ function PiePage() {
 }
 
 
-export default PiePage
+export default IpLookUpPage 

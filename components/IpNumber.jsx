@@ -3,6 +3,7 @@ import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 
 import { useEffect, useState } from 'react';
+import StorageIcon from '@mui/icons-material/Storage';
 
 function IpNumber({ IpSource }) {
   const [apiData, setApiData] = useState([])
@@ -38,13 +39,16 @@ function IpNumber({ IpSource }) {
         }}
       >
         <Typography
+
           sx={{
             fontWeight: 900,
             marginRight: 5,
+fontSize: "14px",
             color: "#615d5c",
           }}
         >
-          The Number Of Ip Address 
+<StorageIcon sx={{height: '13px' }}/>
+           The Number Of Ip Address 
         </Typography>
         <Typography>{apiData.length}</Typography>
       </Card>

@@ -198,7 +198,7 @@ function Sheet(props) {
 }
 
 
-function PiePage() {
+function TablePage() {
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -324,9 +324,9 @@ function PiePage() {
                       color: "#615d5c",
                     }}
                   >
-                   Pie Page 
+                    Table Page
                   </Typography>
-                  <PieChart pieData={returnData}/>
+                  <TableDisplay tableData={returnData}/>
                 </Card>
               </Grid>
             </Grid>
@@ -338,4 +338,4 @@ function PiePage() {
 }
 
 
-export default PiePage
+export default TablePage 

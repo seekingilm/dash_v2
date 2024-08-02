@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import Filter1Icon from '@mui/icons-material/Filter1';
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import DangerousIcon from '@mui/icons-material/Dangerous';
+import Looks3Icon from '@mui/icons-material/Looks3';
 import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { Outlet, Link as Link2 } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
@@ -35,7 +39,9 @@ import SideBar from "./Sidebar"
 import RadialChart from './RadialChart'
 import GeographyChart from "./Geochart";
 import IpNumber from "./IpNumber"
+import AreaBump from "./AreaBump"
 
+import BoxChart from "./BoxChart";
 const drawerWidth = 240;
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -295,14 +301,14 @@ function Dash() {
                 ml={1}
                 my={3}
                 sx={{
-                  fontWeight: "700",
+                   fontWeight: "700",
                 }}
               >
                 Dashboard
               </Typography>
               <Sheet onSubmit={getData} />
             </Box>
-            <Grid container spacing={3}>
+            <Grid container spacing={2}>
               <IpNumber IpSource={returnData}/> 
               <Grid item xs={3}>
                 <Card
@@ -315,7 +321,9 @@ function Dash() {
                     width: "100%",
                   }}
                 >
-                  <p>PlaceHolder</p>
+                  <p>
+                  <Filter1Icon sx={{height: '13px' }} />
+                    Highest Report Country X</p>
                 </Card>
               </Grid>
               <Grid item xs={3}>
@@ -329,7 +337,9 @@ function Dash() {
                     width: "100%",
                   }}
                 >
-                  <p>PlaceHolder</p>
+                  <p>
+                  <ElectricBoltIcon sx={{height: '13px' }} />
+                    Highest Abuse Country X</p>
                 </Card>
               </Grid>
 
@@ -344,7 +354,34 @@ function Dash() {
                     width: "100%",
                   }}
                 >
-                  <p>PlaceHolder</p>
+                  <p>
+                    <DangerousIcon p={0} sx={{height: "15px"}}/>
+                    Highest Abuse Score I.P X</p>
+                </Card>
+              </Grid>
+
+
+              <Grid item xs={6}>
+                <Card
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: "1em",
+                    height: 300,
+                    width: "100%",
+                  }}
+                >
+                  <Typography
+                    mx={3}
+                    marginTop={0}
+                    sx={{
+                      fontWeight: 900,
+                      color: "#615d5c",
+                    }}
+                  >
+                  </Typography>
+                  <AreaBump/>
                 </Card>
               </Grid>
 
@@ -367,11 +404,12 @@ function Dash() {
                       color: "#615d5c",
                     }}
                   >
-                    Average Abuse Per Country
                   </Typography>
+                  <BoxChart/>
                 </Card>
               </Grid>
-              <Grid item xs={6}>
+              
+              <Grid item xs={4}>
                 <Card
                   sx={{
                     display: "flex",
@@ -394,7 +432,7 @@ function Dash() {
                   <PieChart pieData={returnData} />
                 </Card>
               </Grid>
-                <Grid item xs={6} md={4} lg={6}>
+              <Grid item xs={4}> 
                 <Card
                   sx={{
                     p: 2,
@@ -418,7 +456,7 @@ function Dash() {
                   <BarChart barData={returnData} />
                 </Card>
               </Grid>
-              <Grid item xs={12} md={4} lg={6}>
+              <Grid item xs={4}>
                 <Card
                   sx={{
                     display: "flex",

@@ -198,7 +198,7 @@ function Sheet(props) {
 }
 
 
-function PiePage() {
+function GeneralReportPage() {
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -299,7 +299,7 @@ function PiePage() {
                   fontWeight: "700",
                 }}
               >
-                Dashboard
+                Reports 
               </Typography>
               <Sheet onSubmit={getData} />
               <GeographyChart geoData={returnData}/>
@@ -324,9 +324,7 @@ function PiePage() {
                       color: "#615d5c",
                     }}
                   >
-                   Pie Page 
                   </Typography>
-                  <PieChart pieData={returnData}/>
                 </Card>
               </Grid>
             </Grid>
@@ -338,4 +336,4 @@ function PiePage() {
 }
 
 
-export default PiePage
+export default GeneralReportPage

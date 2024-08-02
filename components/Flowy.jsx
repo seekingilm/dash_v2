@@ -5,8 +5,6 @@ import ReactFlow, {
   Background,
   useNodesState,
   useEdgesState,
-  MiniMap,
-  Controls,
   ReactFlowProvider,
 } from 'react-flow-renderer';
 
@@ -56,24 +54,6 @@ function Flowy({ initial}){
           <Sidebar />
         </div>
         <div className="chart" ref={reactFlowWrapperRef}>
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            onInit={setReactFlowInstance}
-            onDrop={onDrop}
-            onDragOver={onDragOver}
-            onNodeDragStop={onNodeDragStop}
-            nodeTypes={nodeTypes}
-            className="react-flow-subflows-example"
-            fitView
-          >
-            <MiniMap />
-            <Controls />
-            <Background />
-          </ReactFlow>
         </div>
         <Editor />
       </div>

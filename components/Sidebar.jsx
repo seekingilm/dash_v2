@@ -1,4 +1,3 @@
-import React from "react";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -22,30 +21,36 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import DonutLargeOutlinedIcon from "@mui/icons-material/DonutLargeOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
+import PublicIcon from '@mui/icons-material/Public';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import FlowChart from "./FlowChart";
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import BackupTableIcon from '@mui/icons-material/BackupTable';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import RoomIcon from '@mui/icons-material/Room';
 import { grey } from "@mui/material/colors";
-import PiePage from './PiePage'
 
 // Import the image using ES6 import syntax
 import logoImage from '../public/Green Modern Data Connect Logo (1).jpg';
+import { BackupTable, PieChart } from "@mui/icons-material";
 
 const Arr1 = [
-  { text: "IP Address ", icon: <HomeOutlinedIcon />, path: "/" },
-  { text: "Domains", icon: <PeopleOutlinedIcon />, path: "/GeoPage" },
-  { text: "Pie Chart", icon: <PiePage />, path: "/Pie" },
-  { text: "IOC Lookup", icon: <ReceiptOutlinedIcon />, path: "/invoices" },
+  { text: "Home", icon: <HomeOutlinedIcon />, path: "/" },
+  { text: "Choropleth Map", icon: <PublicIcon  />, path: "/GeoPage" },
+  { text: "Pie Chart", icon: <PieChart />, path: "/Pie" },
+  { text: "Table", icon: <BackupTable/>, path: "/Table" },
 ];
 
 const Arr2 = [
-  { text: "Resources", icon: <PersonOutlineOutlinedIcon />, path: "/form" },
-  { text: "Threat Report", icon: <CalendarMonthOutlinedIcon />, path: "/calendar" },
-  { text: "FAQ Page", icon: <ContactSupportOutlinedIcon />, path: "/faq" },
+  { text: "Ip Lookup", icon: <ManageSearchIcon  />, path: "/IpLookup" },
+  { text: "Flow", icon: <BorderColorIcon/>, path: "/Flow" },
+  { text: "General Report", icon: <AssessmentIcon />, path: "/Report" },
+  { text: "Marker World Map", icon: <RoomIcon/>, path: "/Marker" },
 ];
 
 const Arr3 = [
-  { text: "Bar Chart", icon: <BarChartOutlinedIcon />, path: "/GeoPage" },
-  { text: " Pie Chart", icon: <DonutLargeOutlinedIcon />, path: "/redialChart" },
-  { text: "Network Map Domains", icon: <LanguageOutlinedIcon />, path: "/lineChart" },
-  { text: "Geography Map IP ", icon: <LanguageOutlinedIcon />, path: "/geography" },
+  {}
 ];
 
 function SideBar({ open, setOpen, DrawerHeader }) {
