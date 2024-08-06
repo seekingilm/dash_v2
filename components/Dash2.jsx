@@ -38,7 +38,7 @@ import Select from '@mui/material/Select';
 import SideBar from "./Sidebar"
 import RadialChart from './RadialChart'
 import GeographyChart from "./Geochart";
-import IpNumber from "./IpNumber"
+import IpRow from "./IpRow"
 import AreaBump from "./AreaBump"
 
 import BoxChart from "./BoxChart";
@@ -309,58 +309,7 @@ function Dash() {
               <Sheet onSubmit={getData} />
             </Box>
             <Grid container spacing={2}>
-              <IpNumber IpSource={returnData}/> 
-              <Grid item xs={3}>
-                <Card
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: "1em",
-                    height: 100,
-                    width: "100%",
-                  }}
-                >
-                  <p>
-                  <Filter1Icon sx={{height: '13px' }} />
-                    Highest Report Country X</p>
-                </Card>
-              </Grid>
-              <Grid item xs={3}>
-                <Card
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: "1em",
-                    height: 100,
-                    width: "100%",
-                  }}
-                >
-                  <p>
-                  <ElectricBoltIcon sx={{height: '13px' }} />
-                    Highest Abuse Country X</p>
-                </Card>
-              </Grid>
-
-              <Grid item xs={3}>
-                <Card
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: "1em",
-                    height: 100,
-                    width: "100%",
-                  }}
-                >
-                  <p>
-                    <DangerousIcon p={0} sx={{height: "15px"}}/>
-                    Highest Abuse Score I.P X</p>
-                </Card>
-              </Grid>
-
-
+              <IpRow IpSource={returnData}/> 
               <Grid item xs={6}>
                 <Card
                   sx={{

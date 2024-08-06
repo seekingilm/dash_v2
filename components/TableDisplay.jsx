@@ -14,7 +14,7 @@ function TableDisplay({ tableData }) {
       type: 'number',
       width: 90,
     },
-    { field: 'totalReports', headerName: 'Total Reports', type: 'number', width: 130 },
+    { field: 'total', headerName: 'Total Reports', type: 'number', width: 130 },
   ];
 
   useEffect(() => {

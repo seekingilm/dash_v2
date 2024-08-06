@@ -42,7 +42,6 @@ function PieChart({ pieData }) {
     }
 
     let a = consolidateData(Object.values(result))
-    console.log(a)
     return a
 
     return Object.keys(result).map(country => ({

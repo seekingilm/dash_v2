@@ -5,11 +5,55 @@ import Grid from "@mui/material/Grid";
 import Filter1Icon from '@mui/icons-material/Filter1';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import DangerousIcon from '@mui/icons-material/Dangerous';
+import Looks3Icon from '@mui/icons-material/Looks3';
 
 import { useEffect, useState } from 'react';
 import StorageIcon from '@mui/icons-material/Storage';
 
-function IpNumber({ IpSource }) {
+function highestReportCountry(data) {
+  let highestReport = { country: '', report: 0 }
+
+  data.forEach(item => {
+    if (item['total'] > highestReport['report']) {
+        highestReport['report'] = item['total']
+        highestReport['country'] = item['country']
+    }
+  });
+
+  console.log(highestReport['country'])
+
+  return highestReport['country'] 
+}
+
+
+
+function highestIpByAbuseScore(data) {
+  let highestAbuseIp = { ip: '', abuse: 0 }
+
+  data.forEach(item => {
+    if (item['abuse'] > highestAbuseIp['abuse']) {
+        highestAbuseIp['abuse'] = item['abuse']
+        highestAbuseIp['ip'] = item['ip']
+    }
+  });
+
+  return highestAbuseIp['ip'] 
+}
+
+function highestAbuseCountry(data) {
+  let highestAbuseCountry = { country: '', abuse: 0 }
+
+  data.forEach(item => {
+    if (item['abuse'] > highestAbuseCountry['abuse']) {
+        highestAbuseCountry['abuse'] = item['abuse']
+        highestAbuseCountry['country'] = item['country']
+    }
+  });
+
+  return highestAbuseCountry['country'] 
+}
+
+function IpRow({ IpSource }) {
   const [apiData, setApiData] = useState([])
 
   useEffect(() => {
@@ -23,6 +67,7 @@ function IpNumber({ IpSource }) {
     }).then(res => res.json()).
       then(res => {
         if (res.constructor === Array) {
+          console.log(highestIpByAbuseScore(apiData))
           setApiData(res)
         }
       })
@@ -71,7 +116,9 @@ function IpNumber({ IpSource }) {
         >
           <p>
             <Filter1Icon sx={{ height: '13px' }} />
-            Highest Report Country X</p>
+            Highest Report Country <br/>
+            <strong>{highestReportCountry(apiData) ? highestReportCountry(apiData) : "Loading"}</strong>
+          </p>
         </Card>
       </Grid>
       <Grid item xs={3}>
@@ -87,7 +134,9 @@ function IpNumber({ IpSource }) {
         >
           <p>
             <ElectricBoltIcon sx={{ height: '13px' }} />
-            Highest Abuse Country X</p>
+            Highest Abuse Country  <br/>
+            <strong>{highestAbuseCountry(apiData) ? highestAbuseCountry(apiData) : "Loading"}</strong>
+          </p>
         </Card>
       </Grid>
 
@@ -104,7 +153,9 @@ function IpNumber({ IpSource }) {
         >
           <p>
             <DangerousIcon p={0} sx={{ height: "15px" }} />
-            Highest Abuse Score I.P X</p>
+            Highest Abuse Score I.P <br/> 
+            <strong>{highestIpByAbuseScore(apiData) ? highestIpByAbuseScore(apiData) : "Loading"}</strong>
+          </p>
         </Card>
       </Grid>
     </>
@@ -112,4 +163,4 @@ function IpNumber({ IpSource }) {
   )
 }
 
-export default IpNumber
+export default IpRow
