@@ -219,7 +219,6 @@ function Dash() {
   const [selectedOption, setSelectedOption] = useState("");
 
   const getData = (data) => {
-    console.log("setting returnData to " + JSON.stringify(data));
     setReturnData(data);
   };
 

@@ -20,7 +20,6 @@ function highestReportCountry(data) {
     }
   });
 
-  console.log(highestReport['country'])
 
   return highestReport['country'] 
 }
@@ -67,7 +66,6 @@ function IpRow({ IpSource }) {
     }).then(res => res.json()).
       then(res => {
         if (res.constructor === Array) {
-          console.log(highestIpByAbuseScore(apiData))
           setApiData(res)
         }
       })
