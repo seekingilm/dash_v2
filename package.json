@@ -23,6 +23,7 @@
     "@nivo/geo": "^0.87.0",
     "@nivo/pie": "^0.87.0",
     "@nivo/radial-bar": "^0.87.0",
+    "@react-pdf/renderer": "^3.4.4",
     "@xyflow/react": "^12.0.4",
     "framer-motion": "^11.2.13",
     "lodash.debounce": "^4.0.8",

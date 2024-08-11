@@ -34,6 +34,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import SideBar from "./Sidebar"
 import RadialChart from './RadialChart'
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 
 
 const drawerWidth = 240;
@@ -45,6 +47,20 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'space-between',
 }));
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'row',
+    backgroundColor: '#E4E4E4'
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    flexGrow: 1
+  }
+});
+
+
 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -177,7 +193,7 @@ function Sheet(props) {
 
   return (
     <Box display={'inline-block'} ml={1} marginTop={'24px'}>
-      <Button onClick={handleOpen} variant="contained">Upload From Excel</Button>
+      <Button sx={{ 'padding': 1.5 }} onClick={handleOpen} variant="contained">Upload</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -299,10 +315,10 @@ function GeneralReportPage() {
                   fontWeight: "700",
                 }}
               >
-                Reports 
+                Reports
               </Typography>
               <Sheet onSubmit={getData} />
-              <GeographyChart geoData={returnData}/>
+              <GeographyChart geoData={returnData} />
             </Box>
             <Grid container >
               <Grid item xs={24}>
@@ -310,21 +326,24 @@ function GeneralReportPage() {
                   sx={{
                     p: 2,
                     display: "flex",
-                    flexFlow: "column",
                     borderRadius: "1em",
                     justifyContent: "center",
                     height: 800,
                     width: "100%",
                   }}
                 >
-                  <Typography
-                    sx={{
-                      fontWeight: 900,
-                      marginRight: 5,
-                      color: "#615d5c",
-                    }}
-                  >
-                  </Typography>
+                    <PDFViewer>
+                      <Document>
+                        <Page size="A4" style={styles.page}>
+                          <View style={styles.section}>
+                            <Text>Section #1</Text>
+                          </View>
+                          <View style={styles.section}>
+                            <Text>Section #2</Text>
+                          </View>
+                        </Page>
+                      </Document>
+                    </PDFViewer>
                 </Card>
               </Grid>
             </Grid>
