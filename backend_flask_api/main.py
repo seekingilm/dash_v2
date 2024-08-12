@@ -52,7 +52,7 @@ def make_abuse_countries(excel_data):
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
     #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
-    key = "2e4dde3f009ff333f0599006f784841f53991c7b9323cfa47900c8497bc1e84e775d7cfc81913e43" #highest key
+    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
 
 
     fused_lists = []
@@ -93,7 +93,7 @@ def make_pie_data(excel_data): #use this in case you need for API.
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
     #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
-    key = "2e4dde3f009ff333f0599006f784841f53991c7b9323cfa47900c8497bc1e84e775d7cfc81913e43" # highest key
+    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" # highest key
 
 
 
@@ -138,7 +138,7 @@ def make_table_data(excel_data):
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
     # key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
-    key = "2e4dde3f009ff333f0599006f784841f53991c7b9323cfa47900c8497bc1e84e775d7cfc81913e43" #highest key
+    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
 
     fused_lists = []
 

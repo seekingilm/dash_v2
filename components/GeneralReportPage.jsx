@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { Outlet, Link as Link2 } from "react-router-dom";
-import { DataGrid } from '@mui/x-data-grid';
 import Modal from '@mui/material/Modal';
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,32 +8,22 @@ import Box from "@mui/material/Box";
 import { FormControl, Button, Input } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import PieChart from "./PieChart";
-import BarChart from "./BarChart";
-import World from "./World";
 import GeographyChart from './Geochart'
-import Tab_display from './TableDisplay';
-import TableDisplay from "./TableDisplay";
-import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import SideBar from "./Sidebar"
-import RadialChart from './RadialChart'
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import { Page, Text, View, Document, Image, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
+
+import pie from '../public/pdf_images/pie.png';
+import bar from '../public/pdf_images/bar.png';
+import radial from '../public/pdf_images/radial.png';
 
 
 const drawerWidth = 240;
@@ -50,14 +38,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'row',
-    backgroundColor: '#E4E4E4'
+    flexDirection: 'column',
+    backgroundColor: '#E4E4E4',
   },
   section: {
     margin: 10,
     padding: 10,
+    width: '100%',
+    flexGrow: 1
+  },
+  image: {
+    margin: 10,
+    padding: 10,
+    width: '250px',
     flexGrow: 1
   }
+
 });
 
 
@@ -327,23 +323,33 @@ function GeneralReportPage() {
                     p: 2,
                     display: "flex",
                     borderRadius: "1em",
-                    justifyContent: "center",
                     height: 800,
-                    width: "100%",
                   }}
                 >
-                    <PDFViewer>
+                    <PDFViewer style={{ width: '100%'}}>
                       <Document>
-                        <Page size="A4" style={styles.page}>
+                        <Page style={styles.page}>
                           <View style={styles.section}>
-                            <Text>Section #1</Text>
-                          </View>
-                          <View style={styles.section}>
-                            <Text>Section #2</Text>
-                          </View>
-                        </Page>
-                      </Document>
-                    </PDFViewer>
+                            <Text>{new Date().toLocaleDateString('en-US')}</Text>
+                            <Text>Header</Text>
+                          <Image
+                            style={styles.image}
+                            src={bar}
+                          />
+                          <Image
+                            style={styles.image}
+                            src={pie}
+                          />                         <Image
+                            style={styles.image}
+                            src={radial}
+                          />
+                        </View>
+                        <View style={styles.section}>
+                          <Text>Footer</Text>
+                        </View>
+                      </Page>
+                    </Document>
+                  </PDFViewer>
                 </Card>
               </Grid>
             </Grid>
@@ -354,5 +360,4 @@ function GeneralReportPage() {
   );
 }
 
-
-export default GeneralReportPage
+export default GeneralReportPage 
