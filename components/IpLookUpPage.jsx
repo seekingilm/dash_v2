@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import { Outlet, Link as Link2 } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
@@ -12,6 +12,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Card from "@mui/material/Card";
+import TextField from '@mui/material/TextField';
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -34,6 +35,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import SideBar from "./Sidebar"
 import RadialChart from './RadialChart'
+import { Page, Text, View, Document, Image, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer } from '@react-pdf/renderer';
 
 
 const drawerWidth = 240;
@@ -111,6 +114,26 @@ const closedMixin = (theme) => ({
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
+
+const styles = StyleSheet.create({
+  page: {
+    flexDirection: 'column',
+    backgroundColor: '#E4E4E4',
+  },
+  section: {
+    margin: 10,
+    padding: 10,
+    width: '100%',
+    flexGrow: 1
+  },
+  image: {
+    margin: 10,
+    padding: 10,
+    width: '250px',
+    flexGrow: 1
+  }
+})
+
 
 function Sheet(props) {
   const [excelFile, setExcelFile] = useState(null);
@@ -211,7 +234,10 @@ function IpLookUpPage() {
 
   const [open, setOpen] = useState(false);
   const [returnData, setReturnData] = useState(null);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [allData, setAllData] = useState([]);
+  const [ipAddress, saveIpAddress] = useState(null);
+  let tempIp = '';
+  let versionOfAPI = 0;
 
   const getData = (data) => {
     console.log("setting returnData to " + JSON.stringify(data));
@@ -222,9 +248,47 @@ function IpLookUpPage() {
     setOpen(!open);
   };
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-  };
+  function updateInput(ish){
+    tempIp = ish
+    console.log('The Ip is: ', tempIp)
+  }
+
+  function saveIp(){
+    saveIpAddress(tempIp);
+  }
+
+  useEffect(() => {
+    if (ipAddress != null) {
+      fetch('http://127.0.0.1:5000/table', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify([{"IPV4": ipAddress}])
+      }).then(res => res.json()).
+        then(res => {
+          if (res.constructor === Array) {
+            if (res[0].abuse < 5) {
+              setAllData(res)
+            }
+            else if(res[0].abuse > 5 /** && res[0].abuse < 20**/){
+              fetch('http://127.0.0.1:5000/virus', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(ipAddress)
+              }).then(res => res.json()).then(res => setAllData(res))
+            }
+            else if (res[0].abuse > 20){
+              console.log('Final Api Call')
+            }
+          }
+        })
+    }
+  }, [ipAddress]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -302,7 +366,7 @@ function IpLookUpPage() {
                 Dashboard
               </Typography>
               <Sheet onSubmit={getData} />
-              <GeographyChart geoData={returnData}/>
+              <GeographyChart geoData={returnData} />
             </Box>
             <Grid container >
               <Grid item xs={24}>
@@ -324,8 +388,55 @@ function IpLookUpPage() {
                       color: "#615d5c",
                     }}
                   >
-                    IP Look Up, Developer Notice
+                    <Box
+                      sx={{
+                        width: 500,
+                        margin: 'auto',
+                        marginBottom: '10px',
+                        display: 'flex',
+                        maxWidth: '100%',
+                      }}
+                    >
+                      <TextField
+                        fullWidth
+                        onChange={(event) => updateInput(event.target.value)}
+                        label="Search For IP"
+                        id="fullWidth"
+                      />
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        sx={{marginLeft: '0.5rem'}}
+                        onClick={() => {
+                          event.preventDefault();
+                          saveIp()
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </Box>
                   </Typography>
+                  <Box sx={{
+                    maxWidth: '100%',
+                  }}
+                  >
+                    <PDFViewer style={{ width: '100%', height: '600px' }}>
+                      <Document>
+                        <Page style={styles.page}>
+                          <View style={styles.section}>
+                            <Text>IP Search Report On {new Date().toLocaleDateString('en-US')}</Text>
+                            <Text>{allData ? JSON.stringify(allData) : "No Data"} </Text>
+                            <Text>IP Lookup: {ipAddress ? ipAddress: "No IP"}</Text>
+                            <Text>Abuse Score: {allData.length > 0 ? JSON.stringify(allData[0].abuse) : 0}</Text>
+                            <Text>Country: {allData.length > 0 ? allData[0].country : 'N/A'}</Text>
+                            <Text>ISP: {allData.length > 0 ? allData[0].category : 'N/A'}</Text>
+                            <Text>Total Reports: {allData.length > 0 ? JSON.stringify(allData[0].total) : 'N/A'}</Text>
+                          </View>
+                        </Page>
+                      </Document>
+                    </PDFViewer>
+                  </Box>
+
                 </Card>
               </Grid>
             </Grid>

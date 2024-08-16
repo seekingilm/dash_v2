@@ -24,8 +24,6 @@ function highestReportCountry(data) {
   return highestReport['country'] 
 }
 
-
-
 function highestIpByAbuseScore(data) {
   let highestAbuseIp = { ip: '', abuse: 0 }
 

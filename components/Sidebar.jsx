@@ -14,7 +14,6 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PublicIcon from '@mui/icons-material/Public';
 import ManageSearchIcon from '@mui/icons-material/ManageSearch';
 import AssessmentIcon from '@mui/icons-material/Assessment';
-import BorderColorIcon from '@mui/icons-material/BorderColor';
 import RoomIcon from '@mui/icons-material/Room';
 import { grey } from "@mui/material/colors";
 
@@ -31,7 +30,6 @@ const Arr1 = [
 
 const Arr2 = [
   { text: "Ip Lookup", icon: <ManageSearchIcon  />, path: "/IpLookup" },
-  { text: "Flow", icon: <BorderColorIcon/>, path: "/" },
   { text: "General Report", icon: <AssessmentIcon />, path: "/Report" },
   { text: "Marker World Map", icon: <RoomIcon/>, path: "/Marker" },
 ];

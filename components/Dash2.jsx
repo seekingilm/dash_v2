@@ -309,6 +309,20 @@ function Dash() {
             </Box>
             <Grid container spacing={2}>
               <IpRow IpSource={returnData}/> 
+              <Grid item xs={12}>
+                <Card
+                  sx={{
+                    p: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: "1em",
+                    height: 400,
+                    width: "100%",
+                  }}
+                >
+                  <GeographyChart geoData={returnData} />
+                </Card>
+              </Grid>
               <Grid item xs={6}>
                 <Card
                   sx={{
@@ -426,9 +440,6 @@ function Dash() {
                   </Typography>
                   <RadialChart radialData={returnData} />
                 </Card>
-              </Grid>
-              <Grid item xs={12} md={4} lg={12}>
-                <TableDisplay tableData={returnData} />
               </Grid>
             </Grid>
           </Container>
