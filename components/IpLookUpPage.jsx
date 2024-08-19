@@ -272,7 +272,7 @@ function IpLookUpPage() {
             if (res[0].abuse < 5) {
               setAllData(res)
             }
-            else if(res[0].abuse > 5 /** && res[0].abuse < 20**/){
+            else if(res[0].abuse > 5  && res[0].abuse < 20){
               fetch('http://127.0.0.1:5000/virus', {
                 method: 'POST',
                 headers: {
@@ -283,7 +283,14 @@ function IpLookUpPage() {
               }).then(res => res.json()).then(res => setAllData(res))
             }
             else if (res[0].abuse > 20){
-              console.log('Final Api Call')
+              fetch('http://127.0.0.1:5000/alien', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(ipAddress)
+              }).then(res => res.json()).then(res => setAllData(res))
             }
           }
         })

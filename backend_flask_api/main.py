@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import json
 import requests
+from OTXv2 import OTXv2, IndicatorTypes
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -44,6 +45,16 @@ def virus():
     if request.method == "POST":
         print(f"The request is {request.json}")
         data = use_virus_total(request.json)
+        print(f"The data is {data}")
+        return data
+    return "200"
+
+@app.route("/alien", methods=["GET", "POST"])
+@cross_origin()
+def alien():
+    if request.method == "POST":
+        print(f"The request is {request.json}")
+        data = use_alien_total(request.json)
         print(f"The data is {data}")
         return data
     return "200"
@@ -186,8 +197,9 @@ def use_virus_total(ip):
 
 def use_alien_total(ip):
     key = '5ae2fecc55d39959269bd3f7cc40f631722dbe37594e3e121e1f1435038840d0'
-    return "200"
-
+    otx = OTXv2(key)
+    ip_details = otx.get_indicator_details_full(IndicatorTypes.IPv4, ip)
+    return ip_details
 
 def extract_values(obj_list, key):
     return_list = []
