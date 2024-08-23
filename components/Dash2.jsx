@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Filter1Icon from '@mui/icons-material/Filter1';
 import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
 import DangerousIcon from '@mui/icons-material/Dangerous';
 import Looks3Icon from '@mui/icons-material/Looks3';
@@ -60,7 +59,7 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  backgroundColor: "magenta",
+  backgroundColor: "#0039a6",
   color: "white",
   ...(open && {
     marginLeft: drawerWidth,
@@ -300,7 +299,7 @@ function Dash() {
                 ml={1}
                 my={3}
                 sx={{
-                   fontWeight: "700",
+                  fontWeight: "700",
                 }}
               >
                 Dashboard
@@ -308,7 +307,7 @@ function Dash() {
               <Sheet onSubmit={getData} />
             </Box>
             <Grid container spacing={2}>
-              <IpRow IpSource={returnData}/> 
+              <IpRow IpSource={returnData} />
               <Grid item xs={12}>
                 <Card
                   sx={{
@@ -321,29 +320,6 @@ function Dash() {
                   }}
                 >
                   <GeographyChart geoData={returnData} />
-                </Card>
-              </Grid>
-              <Grid item xs={6}>
-                <Card
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: "1em",
-                    height: 300,
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    mx={3}
-                    marginTop={0}
-                    sx={{
-                      fontWeight: 900,
-                      color: "#615d5c",
-                    }}
-                  >
-                  </Typography>
-                  <AreaBump/>
                 </Card>
               </Grid>
 
@@ -367,11 +343,11 @@ function Dash() {
                     }}
                   >
                   </Typography>
-                  <BoxChart/>
+                  <BoxChart updating={returnData}/>
                 </Card>
               </Grid>
-              
-              <Grid item xs={4}>
+
+              <Grid item xs={6}>
                 <Card
                   sx={{
                     display: "flex",
@@ -394,7 +370,7 @@ function Dash() {
                   <PieChart pieData={returnData} />
                 </Card>
               </Grid>
-              <Grid item xs={4}> 
+              <Grid item xs={6}>
                 <Card
                   sx={{
                     p: 2,
@@ -418,7 +394,7 @@ function Dash() {
                   <BarChart barData={returnData} />
                 </Card>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={6}>
                 <Card
                   sx={{
                     display: "flex",
@@ -440,6 +416,11 @@ function Dash() {
                   </Typography>
                   <RadialChart radialData={returnData} />
                 </Card>
+
+
+              </Grid>
+              <Grid item xs={12}>
+                <TableDisplay tableData={returnData} />
               </Grid>
             </Grid>
           </Container>

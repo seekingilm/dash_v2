@@ -7,7 +7,6 @@ import Domain from '../components/Domain.jsx'
 import Threats from '../components/Threats.jsx'
 import GeoPage from "../components/GeoPage.jsx"
 import PiePage from '../components/PiePage.jsx'
-import FlowChart from "../components/FlowChart.jsx"
 import TablePage from "../components/TablePage.jsx"
 import IpLookUpPage from '../components/IpLookUpPage.jsx'
 
@@ -15,7 +14,6 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-
 
 import './index.css'
 import {

@@ -9,6 +9,8 @@ pandas = "*"
 requests = "*"
 flask-cors = "*"
 otxv2 = "*"
+asyncio = "*"
+aiohttp = "*"
 
 [dev-packages]
 

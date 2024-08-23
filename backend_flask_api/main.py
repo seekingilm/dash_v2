@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 import json
+import aiohttp
+import asyncio
 import requests
 from OTXv2 import OTXv2, IndicatorTypes
 
@@ -28,14 +30,13 @@ def pie():
     if request.method == "POST":
         data = make_pie_data(request.json)
         return data
-
-    return "200"
+return "200"
 
 @app.route("/table", methods=["GET", "POST"])
 @cross_origin()
-def table():
+def table(): #doesn't work
     if request.method == "POST":
-        data = make_table_data(request.json)
+        data = make_table_data2(request.json)
         return data
     return "200"
 
@@ -104,7 +105,7 @@ def make_pie_data(excel_data): #use this in case you need for API.
         print(f'Type of list is {type(excel_data)}')
         print(f'The excel data is {excel_data}')
         return '206'
-
+    
     ip_list = extract_values(excel_data, "IPV4") 
 
     #key = "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c"
@@ -113,8 +114,6 @@ def make_pie_data(excel_data): #use this in case you need for API.
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
     #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
     key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" # highest key
-
-
 
     fused_lists = []
 
@@ -141,7 +140,38 @@ def make_pie_data(excel_data): #use this in case you need for API.
 
     return fused_lists
 
-def make_table_data(excel_data):
+async def make_table_data(excel_data):
+    if not isinstance(excel_data, list):
+        return '206'
+
+    ip_list = extract_values(excel_data, "IPV4")
+    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
+
+    fused_lists = []
+    
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_ip_data(session, ip.replace("[.]", "."), key) for ip in ip_list]
+        responses = await asyncio.gather(*tasks)
+
+        for response_dict in responses:
+            try:
+                data = response_dict["data"]
+                fused_lists.append(
+                    {
+                        "id": data["ipAddress"],
+                        "ip": data["ipAddress"],
+                        "abuse": data["abuseConfidenceScore"],
+                        "category": data["usageType"],
+                        "country": data["countryCode"],
+                        "totalReports": data["totalReports"]
+                    }
+                )
+            except:
+                print('Failed to parse response data')
+
+    return fused_lists
+
+def make_table_data2(excel_data):
     if type(excel_data) is not list:
         return '206'
 
@@ -226,4 +256,3 @@ def clean_labels(label):
         return "CDN"
     else:
         return label 
-

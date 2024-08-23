@@ -1,11 +1,12 @@
 import { ResponsiveBoxPlot } from '@nivo/boxplot'
 import { mockBoxData as data } from '../data/mockData';
 
-function BoxChart(){
+function BoxChart(updating){
+  console.log(updating)
   return (
     <ResponsiveBoxPlot
-        data={data}
-        margin={{ top: 60, right: 140, bottom: 60, left: 60 }}
+        data={updating.length > 1 ? [] : data}
+        margin={{ top: 60, right: 80, bottom: 60, left: 80 }}
         minValue={0}
         maxValue={10}
         subGroupBy="subgroup"
@@ -78,31 +79,7 @@ function BoxChart(){
             ]
         }}
         motionConfig="stiff"
-        legends={[
-            {
-                anchor: 'right',
-                direction: 'column',
-                justify: false,
-                translateX: 100,
-                translateY: 0,
-                itemWidth: 60,
-                itemHeight: 20,
-                itemsSpacing: 3,
-                itemTextColor: '#999',
-                itemDirection: 'left-to-right',
-                symbolSize: 20,
-                symbolShape: 'square',
-                effects: [
-                    {
-                        on: 'hover',
-                        style: {
-                            itemTextColor: '#000'
-                        }
-                    }
-                ]
-            }
-        ]}
-    />
+            />
 )
 
 }

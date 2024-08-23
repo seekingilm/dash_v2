@@ -37,7 +37,7 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  backgroundColor: "magenta",
+  backgroundColor: "#0039a6",
   color: "white",
   ...(open && {
     marginLeft: drawerWidth,

@@ -57,7 +57,7 @@ const AppBar = styled(MuiAppBar, {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  backgroundColor: "magenta",
+  backgroundColor: "#0039a6",
   color: "white",
   ...(open && {
     marginLeft: drawerWidth,
@@ -236,6 +236,8 @@ function IpLookUpPage() {
   const [returnData, setReturnData] = useState(null);
   const [allData, setAllData] = useState([]);
   const [ipAddress, saveIpAddress] = useState(null);
+
+  const [nameOfAPI, setNameOfAPI] = useState("");
   let tempIp = '';
   let versionOfAPI = 0;
 
@@ -270,6 +272,7 @@ function IpLookUpPage() {
         then(res => {
           if (res.constructor === Array) {
             if (res[0].abuse < 5) {
+              setNameOfAPI('Abuse API')
               setAllData(res)
             }
             else if(res[0].abuse > 5  && res[0].abuse < 20){
@@ -280,7 +283,7 @@ function IpLookUpPage() {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(ipAddress)
-              }).then(res => res.json()).then(res => setAllData(res))
+              }).then(res => res.json()).then(res => {setNameOfAPI('Virus API'); setAllData(res)})
             }
             else if (res[0].abuse > 20){
               fetch('http://127.0.0.1:5000/alien', {
@@ -290,7 +293,7 @@ function IpLookUpPage() {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(ipAddress)
-              }).then(res => res.json()).then(res => setAllData(res))
+              }).then(res => res.json()).then(res => {setNameOfAPI('Alien API'); setAllData(res)})
             }
           }
         })
@@ -432,6 +435,7 @@ function IpLookUpPage() {
                         <Page style={styles.page}>
                           <View style={styles.section}>
                             <Text>IP Search Report On {new Date().toLocaleDateString('en-US')}</Text>
+                            <Text>Using: {nameOfAPI ? nameOfAPI : "Not Available"}</Text>
                             <Text>{allData ? JSON.stringify(allData) : "No Data"} </Text>
                             <Text>IP Lookup: {ipAddress ? ipAddress: "No IP"}</Text>
                             <Text>Abuse Score: {allData.length > 0 ? JSON.stringify(allData[0].abuse) : 0}</Text>
