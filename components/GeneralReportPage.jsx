@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
 import Modal from '@mui/material/Modal';
 import * as XLSX from "xlsx";
@@ -90,10 +90,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
     marginTop: 15,
-    fontWeight: 400,
   },
   bodyText: {
     fontSize: 12,
+    display: 'block',
     marginBottom: 5,
   },
   footer: {
@@ -201,6 +201,93 @@ function Sheet(props) {
 }
 
 function GeneralReportPage() {
+  const [returnData, setReturnData] = useState(null);
+  const [allData, setAllData] = useState([]);
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:5000/table', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(returnData)
+      }).then(res => res.json()).
+        then(res => {
+          if (res.constructor === Array) {
+              setAllData(res)
+          }
+        })
+  }, [returnData]);
+
+  function highestReportCountry(arr) {
+    if (!Array.isArray(arr)) {
+      return [];
+    }
+
+    const result = {};
+
+    arr.forEach(obj => {
+      const { country, abuse, totalReports, ipAddress, usageType } = obj;
+
+      if (!result[country]) {
+        result[country] = { totalAbuse: 0, totalReports: 0, ipAddress, usageType, count: 0 };
+      }
+
+      // Aggregate abuse and other details
+      result[country].totalAbuse += abuse;
+      result[country].totalReports += totalReports;
+      result[country].ipAddress = ipAddress; // Assuming last IP address to be kept
+      result[country].usageType = usageType; // Assuming last usage type to be kept
+      result[country].count += 1;
+    });
+
+    // Calculate average abuse per country and prepare the result array
+    const sortedCountries = Object.keys(result)
+      .map(country => ({
+        country,
+        abuse: Math.round(result[country].totalAbuse / result[country].count), // Calculate average abuse
+        reports: result[country].totalReports,
+        ip: result[country].ipAddress,
+        type: result[country].usageType
+      }))
+      .sort((a, b) => b.abuse - a.abuse); // Sort by average abuse
+
+    return sortedCountries.slice(0, 5); // Return top 5 countries
+  }
+
+  function extractBigThree(arr) {
+    if (!Array.isArray(arr)) {
+      return [];
+    }
+  
+    let returnArray = [];
+
+    arr.forEach(obj => {
+      const { country, abuse, totalReports, ip, category } = obj;
+
+      returnArray.push({
+        'country': country,
+        'abuse': abuse,
+        'total': totalReports,
+        'ip': ip,
+        'usageType': category
+      })  
+
+      console.log(returnArray)
+    });
+
+    returnArray.sort((a, b) => {
+      if(a['abuse'] > b['abuse']){
+        return -1;
+      }else {
+        return 1;
+      }
+    });
+
+    return returnArray.slice(0, 5)
+  }
+
   const defaultTheme = createTheme({
     palette: {
       background: {
@@ -213,9 +300,7 @@ function GeneralReportPage() {
   });
 
   const theme = useTheme();
-
   const [open, setOpen] = useState(false);
-  const [returnData, setReturnData] = useState(null);
 
   const getData = (data) => {
     console.log("setting returnData to " + JSON.stringify(data));
@@ -225,6 +310,62 @@ function GeneralReportPage() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const ReportSummary = () => {
+    if(allData.length > 0) {
+      return (
+        <Text style={styles.bodyText}>
+          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[0]['ip']}{"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[0]['country']}{"\n"}
+          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[0]['category'] ? extractBigThree(allData)[0]['usageType'] : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[0]['total']}
+
+          {"\n\n"}
+          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[1]['ip']}{"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[1]['country']}{"\n"}
+          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[1]['category'] ? extractBigThree(allData)[1]['usageType'] : "Not Found"}{"\n"}
+          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[1]['total']}
+
+          {"\n\n"}
+          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[2]['ip']}{"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[2]['country']}{"\n"}
+          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[2]['category']? extractBigThree(allData)[2]['usageType'] : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[2]['total']}
+
+          {"\n\n"}
+          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[3]['ip']}{"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[3]['country']}{"\n"}
+          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[3]['usageType'] ? extractBigThree(allData)[3]['usageType'] : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[3]['total']}
+
+          {"\n\n"}
+
+          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[4]['ip']}{"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[4]['country']}{"\n"}
+          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[4]['usageType'] ? extractBigThree(allData)[4]['usageType'] : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[4]['total']}
+
+          {"\n\n"}
+
+
+          <Text style={styles.imageSubheading}>Summary Breakdown </Text>
+          {"\n\n"}
+          <Text style={styles.reportSubtitle}>
+            The data indicates that the majority of the reported IP addresses have low abuse confidence scores and were flagged by a single user, suggesting a low likelihood of confirmed malicious activity. This pattern may indicate the presence of false positives or isolated incidents rather than widespread threats. The reports primarily involve IPs associated with data centers, web hosting, and other infrastructure services, which are commonly used for both legitimate and malicious purposes. However, in this case, there is no strong evidence pointing to abuse, making it less urgent to take immediate action against these IPs.
+          </Text>
+        </Text>
+
+      );
+      }else{
+      return (
+        <Text>Upload Data</Text>
+      )
+    }
+  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -301,8 +442,7 @@ function GeneralReportPage() {
                 AbuseIPDB Intelligence Report Executive Summary
               </Typography>
               <Typography variant="h6" sx={{ marginBottom: "20px" }}>
-                Date: 8/12/2024
-              </Typography>
+                Date: {new Date().toLocaleDateString('en-US')}              </Typography>
               <Typography variant="h6" sx={{ marginBottom: "20px" }}>
               The report generated in this code is a PDF report that is customized to present a detailed analysis of cybersecurity data, specifically focusing on suspicious IP addresses and their associated activities. Plug in your excel path of Ip address to get your report 
               </Typography>
@@ -325,7 +465,7 @@ function GeneralReportPage() {
                           <View style={styles.reportSection}>
                             <Text style={styles.reportTitle}>SECTOR TARGETING:</Text>
                             <Text style={styles.reportSubtitle}>
-                            Analysis of Suspicious IP Activity and Potential Cybersecurity Threats
+                              Analysis of Suspicious IP Activity and Potential Cybersecurity Threats
                             </Text>
                             <Text style={styles.reportDate}>Date of Report: Auguest 16, 2024</Text>
                           </View>
@@ -366,60 +506,21 @@ function GeneralReportPage() {
                           <Text>REPORT SUMMARY FOR IP ADDRESSES</Text>
                         </View>
                         <View style={styles.section}>
-                          <Text style={styles.subheading}>Total Number of IPs Analyzed:</Text>
-                          <Text style={styles.bodyText}>Count X</Text>
+                          <Text style={styles.subheading}>Total Number of IPs Analyzed: </Text>
+                          <Text style={styles.bodyText}>Count: {allData.length > 0 ? allData.length : "Upload Data"}</Text>
 
                           <Text style={styles.subheading}>Countries with the Most Offending IPs:</Text>
                           <Text style={styles.bodyText}>
-                            • Country A{"\n"}
-                            • Country B{"\n"}
-                            • Country C{"\n"}
-                            • Country D{"\n"}
-                            • Country E
+                            • {allData.length > 1 ? highestReportCountry(allData)[0]['country'] : "Upload Data"  } 
+                            • {allData.length > 1 ? highestReportCountry(allData)[1]['country'] : "Upload Data"  } 
+                            • {allData.length > 1 ? highestReportCountry(allData)[2]['country'] : "Upload Data"  } 
+                            • {allData.length > 1 ? highestReportCountry(allData)[3]['country'] : "Upload Data"  } 
+                            • {allData.length > 1 ? highestReportCountry(allData)[4]['country'] : "Upload Data"  } 
                           </Text>
 
                           <Text style={styles.subheading}>Top Five Offending IPs:</Text>
-                          <Text style={styles.bodyText}>
-                           <b>IP Address:</b> {"\n"}
-                            <b>IP Address:</b>  IP Address: 50.47.208.178{"\n"}
-                            <b>Location:</b> Location: Thailand (TH){"\n"}
-                            <b>Type of Abuse:</b> Type of Abuse: Data Center/Web Hosting/Transit
-                            {"\n"}
-                            <b>Total Reports:</b> Total Reports: 3
-
-                            {"\n\n"}
-                            <b>IP Address:</b>  IP Address:113.161.8.108{"\n"}
-                            <b>Location:</b> Location:Vietnam (VN)
-                            <b>Type of Abuse:</b> Type of Abuse: Not specified{"\n"}
-                            <b>Total Reports:</b> Total Reports: 3
-                            {"\n\n"}
-                            
-                        
-                            <b>IP Address:</b>  IP Address: 50.47.208.178{"\n"}
-                            <b>Location:</b> Location: Thailand (TH){"\n"}
-                            <b>Type of Abuse:</b> Type of Abuse: Commercial{"\n"}
-                            <b>Total Reports:</b> Total Reports: 11
-                            {"\n\n"}
-                            <b>IP Address:</b>  IP Address: 50.47.208.178{"\n"}
-                            <b>Location:</b> Location: Thailand (TH){"\n"}
-                            <b>Type of Abuse:</b> Type of Abuse: Commercial{"\n"}
-                            <b>Total Reports:</b> Total Reports: 11
-
-                            {"\n\n"}
-                            <b>IP Address:</b>  IP Address: 50.47.208.178{"\n"}
-                            <b>Location:</b> Location: Thailand (TH){"\n"}
-                            <b>Type of Abuse:</b> Type of Abuse: Commercial{"\n"}
-                            <b>Total Reports:</b> Total Reports: 11
-                            {"\n\n"}
-
-                            <Text style={styles.imageSubheading}>Summary Breakdown </Text>
-                            {"\n\n"}
-                            <Text style={styles.reportSubtitle}>
-                            The data indicates that the majority of the reported IP addresses have low abuse confidence scores and were flagged by a single user, suggesting a low likelihood of confirmed malicious activity. This pattern may indicate the presence of false positives or isolated incidents rather than widespread threats. The reports primarily involve IPs associated with data centers, web hosting, and other infrastructure services, which are commonly used for both legitimate and malicious purposes. However, in this case, there is no strong evidence pointing to abuse, making it less urgent to take immediate action against these IPs.
-                            </Text>
-
-                          </Text>
-                          {/* Additional IP details here */}
+                                                    {/* Additional IP details here */}
+                          <ReportSummary/>
                         </View>
 
                         {/* Data Visualization Heading */}
@@ -429,11 +530,11 @@ function GeneralReportPage() {
 
                         <View style={styles.section}>
                           <Text style={styles.imageSubheading}>Bar Chart Visualization</Text>
-                          <Image style={styles.image} src={bar} />
+                          <Image  src={bar} />
                           <Text style={styles.imageSubheading}>Pie Chart Visualization</Text>
-                          <Image style={styles.image} src={pie} />
-                          <Text style={styles.imageSubheading}>Radial Chart Visualization</Text>
-                          <Image style={styles.image} src={radial} />
+                          <Image src={pie} />
+                          <Text >Radial Chart Visualization</Text>
+                          <Image  src={radial} />
                         </View>
 
                         {/* Conclusion */}
@@ -464,3 +565,4 @@ function GeneralReportPage() {
 }
 
 export default GeneralReportPage;
+

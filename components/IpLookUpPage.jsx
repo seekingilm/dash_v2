@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import { Outlet, Link as Link2 } from "react-router-dom";
-import { DataGrid } from '@mui/x-data-grid';
 import Modal from '@mui/material/Modal';
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,7 +8,6 @@ import Box from "@mui/material/Box";
 import { FormControl, Button, Input } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import Card from "@mui/material/Card";
 import TextField from '@mui/material/TextField';
 import Typography from "@mui/material/Typography";
@@ -435,13 +432,11 @@ function IpLookUpPage() {
                         <Page style={styles.page}>
                           <View style={styles.section}>
                             <Text>IP Search Report On {new Date().toLocaleDateString('en-US')}</Text>
-                            <Text>Using: {nameOfAPI ? nameOfAPI : "Not Available"}</Text>
-                            <Text>{allData ? JSON.stringify(allData) : "No Data"} </Text>
+                            <Text>Using: {nameOfAPI ? nameOfAPI: "Not Available"}</Text>
                             <Text>IP Lookup: {ipAddress ? ipAddress: "No IP"}</Text>
-                            <Text>Abuse Score: {allData.length > 0 ? JSON.stringify(allData[0].abuse) : 0}</Text>
                             <Text>Country: {allData.length > 0 ? allData[0].country : 'N/A'}</Text>
                             <Text>ISP: {allData.length > 0 ? allData[0].category : 'N/A'}</Text>
-                            <Text>Total Reports: {allData.length > 0 ? JSON.stringify(allData[0].total) : 'N/A'}</Text>
+                            <Text>Total Reports: {allData.length > 0 ? JSON.stringify(allData[0].total): 'N/A'}</Text>
                           </View>
                         </Page>
                       </Document>
