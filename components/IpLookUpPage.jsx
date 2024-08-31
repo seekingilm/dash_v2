@@ -322,7 +322,7 @@ function IpLookUpPage() {
         <>
           <Text>Country: {allData.length > 0 ? allData[0].country : 'N/A'}</Text>
           <Text>ISP: {allData.length > 0 ? allData[0].category : 'N/A'}</Text>
-          <Text>Total Reports: {allData.length > 0 ? JSON.stringify(allData[0].total) : 'N/A'}</Text>
+          <Text>Total Reports: { allData[0].totalReports}</Text>
         </>
       )
     }

@@ -284,7 +284,11 @@ function GeneralReportPage() {
       if(a['abuse'] > b['abuse']){
         return -1;
       }else {
-        return 1;
+        if(a['total'] > b['total']){
+          return -1;
+        }else{
+          return 1;
+        }
       }
     });
 
