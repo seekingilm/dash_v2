@@ -115,6 +115,9 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 10,
   },
+  images: {
+    height: '250px',
+  },
 });
 
 function Sheet(props) {
@@ -530,7 +533,7 @@ function GeneralReportPage() {
 
                         <View style={styles.section}>
                           <Text style={styles.imageSubheading}>Bar Chart Visualization</Text>
-                          <Image  src={bar} />
+                          <Image  src={bar} style={styles.images}/>
                           <Text style={styles.imageSubheading}>Pie Chart Visualization</Text>
                           <Image src={pie} />
                           <Text >Radial Chart Visualization</Text>

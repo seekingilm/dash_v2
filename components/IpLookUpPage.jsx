@@ -3,8 +3,7 @@ import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styl
 import Modal from '@mui/material/Modal';
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer";
-import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer"; import Box from "@mui/material/Box";
 import { FormControl, Button, Input } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -280,7 +279,7 @@ function IpLookUpPage() {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(ipAddress)
-              }).then(res => res.json()).then(res => {setNameOfAPI('Virus API'); setAllData(res)})
+              }).then(res => res.json()).then(res => {setNameOfAPI('Virus API'); console.log(res); setAllData(res)})
             }
             else if (res[0].abuse > 20){
               fetch('http://127.0.0.1:5000/alien', {
@@ -290,12 +289,50 @@ function IpLookUpPage() {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(ipAddress)
-              }).then(res => res.json()).then(res => {setNameOfAPI('Alien API'); setAllData(res)})
+              }).then(res => res.json()).then(res => {setNameOfAPI('Alien API'); console.log(res); setAllData(res)})
             }
           }
         })
     }
   }, [ipAddress]);
+
+  function UpdateBasedOnAPI(){
+    if(nameOfAPI === "Virus API"){
+      return (
+        <>
+          <Text>Country: {allData.data.attributes.country }</Text>
+          <Text>ISP: {allData.data.attributes.regional_internet_registry }</Text>
+          <Text>Total Reports: {allData.data.attributes.reputation}</Text>
+        </>      
+      )  
+    }
+
+    else if (nameOfAPI === "Alien API"){
+      return(
+        <>
+          <Text>Country: {allData.general.country_code}</Text>
+          <Text>ISP: {allData.geo.asn}</Text>
+          <Text>Total Reports: {allData.general.reputation}</Text>
+        </>
+      )
+    }
+
+    else if (nameOfAPI === 'Abuse API'){
+      return(
+        <>
+          <Text>Country: {allData.length > 0 ? allData[0].country : 'N/A'}</Text>
+          <Text>ISP: {allData.length > 0 ? allData[0].category : 'N/A'}</Text>
+          <Text>Total Reports: {allData.length > 0 ? JSON.stringify(allData[0].total) : 'N/A'}</Text>
+        </>
+      )
+    }
+    else {
+      return (
+        <Text>Waiting For Data Upload</Text>
+      )
+    }
+  }
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -434,10 +471,8 @@ function IpLookUpPage() {
                             <Text>IP Search Report On {new Date().toLocaleDateString('en-US')}</Text>
                             <Text>Using: {nameOfAPI ? nameOfAPI: "Not Available"}</Text>
                             <Text>IP Lookup: {ipAddress ? ipAddress: "No IP"}</Text>
-                            <Text>Country: {allData.length > 0 ? allData[0].country : 'N/A'}</Text>
-                            <Text>ISP: {allData.length > 0 ? allData[0].category : 'N/A'}</Text>
-                            <Text>Total Reports: {allData.length > 0 ? JSON.stringify(allData[0].total): 'N/A'}</Text>
-                          </View>
+                            <UpdateBasedOnAPI/>
+                         </View>
                         </Page>
                       </Document>
                     </PDFViewer>
@@ -452,6 +487,7 @@ function IpLookUpPage() {
     </ThemeProvider>
   );
 }
+
 
 
 export default IpLookUpPage 
