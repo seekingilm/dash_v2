@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import Modal from '@mui/material/Modal';
+import {
+  styled,
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
+import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiDrawer from "@mui/material/Drawer"; import Box from "@mui/material/Box";
+import MuiDrawer from "@mui/material/Drawer";
+import Box from "@mui/material/Box";
 import { FormControl, Button, Input } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Card from "@mui/material/Card";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -23,26 +29,32 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PieChart from "./PieChart";
 import BarChart from "./BarChart";
 import World from "./World";
-import GeographyChart from './Geochart'
-import Tab_display from './TableDisplay';
+import GeographyChart from "./Geochart";
+import Tab_display from "./TableDisplay";
 import TableDisplay from "./TableDisplay";
-import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import SideBar from "./Sidebar"
-import RadialChart from './RadialChart'
-import { Page, Text, View, Document, Image, StyleSheet } from '@react-pdf/renderer';
-import { PDFViewer } from '@react-pdf/renderer';
-
+import Logo from "./Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import SideBar from "./Sidebar";
+import RadialChart from "./RadialChart";
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet,
+} from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
 
 const drawerWidth = 240;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: 'space-between',
+  justifyContent: "space-between",
 }));
 
 const AppBar = styled(MuiAppBar, {
@@ -78,58 +90,57 @@ const Drawer = styled(MuiDrawer, {
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  overflowX: 'hidden',
+  overflowX: "hidden",
 });
 
 const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflowX: 'hidden',
+  overflowX: "hidden",
   width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'column',
-    backgroundColor: '#E4E4E4',
+    flexDirection: "column",
+    backgroundColor: "#E4E4E4",
   },
   section: {
     margin: 10,
     padding: 10,
-    width: '100%',
-    flexGrow: 1
+    width: "100%",
+    flexGrow: 1,
   },
   image: {
     margin: 10,
     padding: 10,
-    width: '250px',
-    flexGrow: 1
-  }
-})
-
+    width: "250px",
+    flexGrow: 1,
+  },
+});
 
 function Sheet(props) {
   const [excelFile, setExcelFile] = useState(null);
@@ -137,7 +148,6 @@ function Sheet(props) {
   const [typeError, setTypeError] = useState(null);
 
   const [excelData, setExcelData] = useState(null);
-  let apiKey = "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c";
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -169,13 +179,13 @@ function Sheet(props) {
   };
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 300,
-    bgcolor: 'background.paper',
-    borderRadius: '1rem',
+    bgcolor: "background.paper",
+    borderRadius: "1rem",
     boxShadow: 24,
     p: 4,
   };
@@ -195,8 +205,10 @@ function Sheet(props) {
   };
 
   return (
-    <Box display={'inline-block'} ml={1} marginTop={'24px'}>
-      <Button onClick={handleOpen} variant="contained">Upload From Excel</Button>
+    <Box display={"inline-block"} ml={1} marginTop={"24px"}>
+      <Button onClick={handleOpen} variant="contained">
+        Upload From Excel
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -205,9 +217,21 @@ function Sheet(props) {
       >
         <Box sx={style}>
           <form onSubmit={handleFileSubmit}>
-            <FormControl sx={{ width: '25ch' }}>
-              <Input sx={{ display: 'inline-block' }} type="file" required onChange={handleFile} />
-              <Button sx={{ display: 'inline-block' }} variant="contained" m={3} type="submit">Upload</Button>
+            <FormControl sx={{ width: "25ch" }}>
+              <Input
+                sx={{ display: "inline-block" }}
+                type="file"
+                required
+                onChange={handleFile}
+              />
+              <Button
+                sx={{ display: "inline-block" }}
+                variant="contained"
+                m={3}
+                type="submit"
+              >
+                Upload
+              </Button>
             </FormControl>
           </form>
         </Box>
@@ -215,7 +239,6 @@ function Sheet(props) {
     </Box>
   );
 }
-
 
 function IpLookUpPage() {
   const defaultTheme = createTheme({
@@ -234,7 +257,8 @@ function IpLookUpPage() {
   const [ipAddress, saveIpAddress] = useState(null);
 
   const [nameOfAPI, setNameOfAPI] = useState("");
-  let tempIp = '';
+  const [contentsOfAI, setContentsOfAI] = useState(""); //use this to hold AI contents
+  let tempIp = "";
   let versionOfAPI = 0;
 
   const getData = (data) => {
@@ -246,93 +270,134 @@ function IpLookUpPage() {
     setOpen(!open);
   };
 
-  function updateInput(ish){
-    tempIp = ish
-    console.log('The Ip is: ', tempIp)
+  function updateInput(ish) {
+    tempIp = ish;
+    console.log("The Ip is: ", tempIp);
   }
 
-  function saveIp(){
+  function saveIp() {
     saveIpAddress(tempIp);
   }
 
   useEffect(() => {
     if (ipAddress != null) {
-      fetch('http://127.0.0.1:5000/table', {
-        method: 'POST',
+      fetch("http://127.0.0.1:5000/table", {
+        method: "POST",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify([{"IPV4": ipAddress}])
-      }).then(res => res.json()).
-        then(res => {
+        body: JSON.stringify([{ IPV4: ipAddress }]),
+      })
+        .then((res) => res.json())
+        .then((res) => {
           if (res.constructor === Array) {
             if (res[0].abuse < 5) {
-              setNameOfAPI('Abuse API')
-              setAllData(res)
-            }
-            else if(res[0].abuse > 5  && res[0].abuse < 20){
-              fetch('http://127.0.0.1:5000/virus', {
-                method: 'POST',
+              setNameOfAPI("Abuse API");
+              setAllData(res);
+            } else if (res[0].abuse > 5 && res[0].abuse < 20) {
+              fetch("http://127.0.0.1:5000/virus", {
+                method: "POST",
                 headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
                 },
-                body: JSON.stringify(ipAddress)
-              }).then(res => res.json()).then(res => {setNameOfAPI('Virus API'); console.log(res); setAllData(res)})
-            }
-            else if (res[0].abuse > 20){
-              fetch('http://127.0.0.1:5000/alien', {
-                method: 'POST',
+                body: JSON.stringify(ipAddress),
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  setNameOfAPI("Virus API");
+                  console.log(res);
+                  setAllData(res);
+                });
+            } else if (res[0].abuse > 20) {
+              fetch("http://127.0.0.1:5000/alien", {
+                method: "POST",
                 headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json',
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
                 },
-                body: JSON.stringify(ipAddress)
-              }).then(res => res.json()).then(res => {setNameOfAPI('Alien API'); console.log(res); setAllData(res)})
+                body: JSON.stringify(ipAddress),
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  setNameOfAPI("Alien API");
+                  console.log(res);
+                  setAllData(res);
+                });
             }
           }
-        })
+        });
     }
   }, [ipAddress]);
 
-  function UpdateBasedOnAPI(){
-    if(nameOfAPI === "Virus API"){
+  useEffect(() => {
+    if (ipAddress != null) {
+      fetch("http://127.0.0.1:5000/table", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([{ IPV4: ipAddress }]),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.constructor === Array) {
+              fetch("http://127.0.0.1:5000/Ai", {
+                method: "POST",
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(ipAddress),
+              })
+                .then((res) => res.json())
+                .then((res) => {
+                  setNameOfAPI("Virus API");
+                  setAllData(res);
+                  setContentsOfAI(res);
+                });
+            } 
+          }
+        );
+    }
+  }, [ipAddress]);
+
+
+
+  function UpdateBasedOnAPI() {
+    if (nameOfAPI === "Virus API") {
       return (
         <>
-          <Text>Country: {allData.data.attributes.country }</Text>
-          <Text>ISP: {allData.data.attributes.regional_internet_registry }</Text>
+          <Text>Country: {allData.data.attributes.country}</Text>
+          <Text>ISP: {allData.data.attributes.regional_internet_registry}</Text>
           <Text>Total Reports: {allData.data.attributes.reputation}</Text>
-        </>      
-      )  
-    }
-
-    else if (nameOfAPI === "Alien API"){
-      return(
+          <Text>Ai Contents: {contentsOfAI}</Text>
+        </>
+      );
+    } else if (nameOfAPI === "Alien API") {
+      return (
         <>
           <Text>Country: {allData.general.country_code}</Text>
           <Text>ISP: {allData.geo.asn}</Text>
           <Text>Total Reports: {allData.general.reputation}</Text>
         </>
-      )
-    }
-
-    else if (nameOfAPI === 'Abuse API'){
-      return(
-        <>
-          <Text>Country: {allData.length > 0 ? allData[0].country : 'N/A'}</Text>
-          <Text>ISP: {allData.length > 0 ? allData[0].category : 'N/A'}</Text>
-          <Text>Total Reports: { allData[0].totalReports}</Text>
-        </>
-      )
-    }
-    else {
+      );
+    } else if (nameOfAPI === "Abuse API") {
       return (
-        <Text>Waiting For Data Upload</Text>
-      )
+        <>
+          <Text>
+            Country: {allData.length > 0 ? allData[0].country : "N/A"}
+          </Text>
+          <Text>ISP: {allData.length > 0 ? allData[0].category : "N/A"}</Text>
+          <Text>Total Reports: {allData[0].totalReports}</Text>
+        </>
+      );
+    } else {
+      return <Text>Waiting For Data Upload</Text>;
     }
   }
-
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -412,7 +477,7 @@ function IpLookUpPage() {
               <Sheet onSubmit={getData} />
               <GeographyChart geoData={returnData} />
             </Box>
-            <Grid container >
+            <Grid container>
               <Grid item xs={24}>
                 <Card
                   sx={{
@@ -435,10 +500,10 @@ function IpLookUpPage() {
                     <Box
                       sx={{
                         width: 500,
-                        margin: 'auto',
-                        marginBottom: '10px',
-                        display: 'flex',
-                        maxWidth: '100%',
+                        margin: "auto",
+                        marginBottom: "10px",
+                        display: "flex",
+                        maxWidth: "100%",
                       }}
                     >
                       <TextField
@@ -450,34 +515,41 @@ function IpLookUpPage() {
                       <Button
                         variant="contained"
                         color="primary"
-                        sx={{marginLeft: '0.5rem'}}
+                        sx={{ marginLeft: "0.5rem" }}
                         onClick={() => {
                           event.preventDefault();
-                          saveIp()
+                          saveIp();
                         }}
                       >
                         Submit
                       </Button>
                     </Box>
                   </Typography>
-                  <Box sx={{
-                    maxWidth: '100%',
-                  }}
+                  <Box
+                    sx={{
+                      maxWidth: "100%",
+                    }}
                   >
-                    <PDFViewer style={{ width: '100%', height: '600px' }}>
+                    <PDFViewer style={{ width: "100%", height: "600px" }}>
                       <Document>
                         <Page style={styles.page}>
                           <View style={styles.section}>
-                            <Text>IP Search Report On {new Date().toLocaleDateString('en-US')}</Text>
-                            <Text>Using: {nameOfAPI ? nameOfAPI: "Not Available"}</Text>
-                            <Text>IP Lookup: {ipAddress ? ipAddress: "No IP"}</Text>
-                            <UpdateBasedOnAPI/>
-                         </View>
+                            <Text>
+                              IP Search Report On{" "}
+                              {new Date().toLocaleDateString("en-US")}
+                            </Text>
+                            <Text>
+                              Using: {nameOfAPI ? nameOfAPI : "Not Available"}
+                            </Text>
+                            <Text>
+                              IP Lookup: {ipAddress ? ipAddress : "No IP"}
+                            </Text>
+                            <UpdateBasedOnAPI />
+                          </View>
                         </Page>
                       </Document>
                     </PDFViewer>
                   </Box>
-
                 </Card>
               </Grid>
             </Grid>
@@ -488,6 +560,4 @@ function IpLookUpPage() {
   );
 }
 
-
-
-export default IpLookUpPage 
+export default IpLookUpPage;

@@ -1,9 +1,9 @@
-import { styled, createTheme, ThemeProvider } from "@mui/material/styles"
-import SideBar from "../SideBar"
-import Avatar from '@mui/material/Avatar'
+import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
+import SideBar from "../SideBar";
+import Avatar from "@mui/material/Avatar";
 import { Outlet, Link as Link2 } from "react-router-dom";
-import { DataGrid } from '@mui/x-data-grid';
-import Modal from '@mui/material/Modal';
+import { DataGrid } from "@mui/x-data-grid";
+import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -14,8 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography"; // Corrected line
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
+import Divider from "@mui/material/Divider"; import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -29,11 +28,11 @@ import Ipchart from "./Ipchart";
 import IpTwo from "./IpsTwo";
 import World from "./World";
 import Geo from "./Geochart";
-import Tab_display from './TableDisplay';
+import Tab_display from "./TableDisplay";
 import TableDisplay from "./TableDisplay";
-import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';  // Updated path to your logo image
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
+import Logo from "./Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg"; // Updated path to your logo image
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 function Sheet(props) {
   const [excelFile, setExcelFile] = useState(null);
@@ -73,13 +72,13 @@ function Sheet(props) {
   };
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 300,
-    bgcolor: 'background.paper',
-    borderRadius: '1rem',
+    bgcolor: "background.paper",
+    borderRadius: "1rem",
     boxShadow: 24,
     p: 4,
   };
@@ -99,8 +98,10 @@ function Sheet(props) {
   };
 
   return (
-    <Box display={'inline-block'} ml={1} marginTop={'24px'}>
-      <Button onClick={handleOpen} variant="contained" >Upload From Excel</Button>
+    <Box display={"inline-block"} ml={1} marginTop={"24px"}>
+      <Button onClick={handleOpen} variant="contained">
+        Upload From Excel
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -109,11 +110,23 @@ function Sheet(props) {
       >
         <Box sx={style}>
           <form onSubmit={handleFileSubmit}>
-            <FormControl sx={{ width: '25ch' }}>
-              <Input sx={{ display: 'inline-block' }} type="file" required onChange={handleFile} />
-              <Button sx={{ display: 'inline-block' }} variant="contained" m={3} type="submit">Upload</Button>
+            <FormControl sx={{ width: "25ch" }}>
+              <Input
+                sx={{ display: "inline-block" }}
+                type="file"
+                required
+                onChange={handleFile}
+              />
+              <Button
+                sx={{ display: "inline-block" }}
+                variant="contained"
+                m={3}
+                type="submit"
+              >
+                Upload
+              </Button>
             </FormControl>
-          </form >
+          </form>
         </Box>
       </Modal>
     </Box>
@@ -170,10 +183,10 @@ function Dash() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Box sx={{ display: "flex", width: '100%' }}>
+      <Box sx={{ display: "flex", width: "100%" }}>
         <CssBaseline />
         <Drawer variant="permanent" open={open}>
-          <SideBar open={open} setOpen={setOpen}/>
+          <SideBar open={open} setOpen={setOpen} />
         </Drawer>
         <Box
           component="main"
@@ -185,34 +198,45 @@ function Dash() {
             flexGrow: 1,
             height: "100vh",
             overflow: "auto",
-            width: '100%' // Ensure the Box takes the full width
+            width: "100%", // Ensure the Box takes the full width
           }}
         >
           <Container id="worldy" maxWidth={false} sx={{ mb: 4 }}>
-            <Box display={'flex'} justifyContent={'space-between'}>
-              <Typography display={'inline-block'} variant="h4" ml={1} my={3} sx={{
-                fontWeight: "700",
-              }}
-              >Dashboard</Typography>
+            <Box display={"flex"} justifyContent={"space-between"}>
+              <Typography
+                display={"inline-block"}
+                variant="he"
+                ml={1}
+                my={3}
+                sx={{
+                  fontWeight: "700",
+                }}
+              >
+                Dashboard
+              </Typography>
               <Sheet onSubmit={getData} />
             </Box>
 
             <Grid container spacing={3}>
-              <Grid item xs={4} >
+              <Grid item xs={4}>
                 <Card
                   sx={{
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    borderRadius: '1em',
+                    borderRadius: "1em",
                     height: 300,
-                    width: '100%'
+                    width: "100%",
                   }}
                 >
-                  <Typography mx={3} marginTop={0} sx={{
-                    fontWeight: 900,
-                    color: '#615d5c',
-                  }}>
+                  <Typography
+                    mx={3}
+                    marginTop={0}
+                    sx={{
+                      fontWeight: 900,
+                      color: "#615d5c",
+                    }}
+                  >
                     Average Abuse Per Country
                   </Typography>
                   <IpTwo barData={returnData} />
@@ -223,19 +247,23 @@ function Dash() {
                 <Card
                   sx={{
                     display: "flex",
-                    borderRadius: '1em',
+                    borderRadius: "1em",
                     flexDirection: "column",
                     height: 300,
-                    width: '100%'
+                    width: "100%",
                   }}
                 >
-                  <Typography mx={3} marginTop={2} sx={{
-                    fontWeight: 900,
-                    color: '#615d5c',
-                  }}>
+                  <Typography
+                    mx={3}
+                    marginTop={2}
+                    sx={{
+                      fontWeight: 900,
+                      color: "#615d5c",
+                    }}
+                  >
                     Types Of Abusive IPs
                   </Typography>
-                  <Ipchart pieData={returnData} />
+                  <Ipchart pieData={returnData} , dumb={'hello'}/>
                 </Card>
               </Grid>
 
@@ -243,22 +271,25 @@ function Dash() {
                 <Card
                   sx={{
                     display: "flex",
-                    borderRadius: '1em',
+                    borderRadius: "1em",
                     flexDirection: "column",
                     height: 300,
-                    width: '100%'
+                    width: "100%",
                   }}
                 >
-                  <Typography mx={3} marginTop={2} sx={{
-                    fontWeight: 900,
-                    color: '#615d5c',
-                  }}>
+                  <Typography
+                    mx={3}
+                    marginTop={2}
+                    sx={{
+                      fontWeight: 900,
+                      color: "#615d5c",
+                    }}
+                  >
                     Types Of Abusive IPs
                   </Typography>
                   <Ipchart pieData={returnData} />
                 </Card>
               </Grid>
-
 
               <Grid item xs={12} md={4} lg={6}>
                 <Card
@@ -266,15 +297,19 @@ function Dash() {
                     p: 2,
                     display: "flex",
                     flexDirection: "column",
-                    borderRadius: '1em',
+                    borderRadius: "1em",
                     height: 300,
-                    width: '100%'
+                    width: "100%",
                   }}
                 >
-                  <Typography mx={3} marginTop={0} sx={{
-                    fontWeight: 900,
-                    color: '#615d5c',
-                  }}>
+                  <Typography
+                    mx={3}
+                    marginTop={0}
+                    sx={{
+                      fontWeight: 900,
+                      color: "#615d5c",
+                    }}
+                  >
                     Average Abuse Per Country
                   </Typography>
                   <IpTwo barData={returnData} />
@@ -284,16 +319,20 @@ function Dash() {
                 <Card
                   sx={{
                     display: "flex",
-                    borderRadius: '1em',
+                    borderRadius: "1em",
                     flexDirection: "column",
                     height: 300,
-                    width: '100%'
+                    width: "100%",
                   }}
                 >
-                  <Typography mx={3} marginTop={2} sx={{
-                    fontWeight: 900,
-                    color: '#615d5c',
-                  }}>
+                  <Typography
+                    mx={3}
+                    marginTop={2}
+                    sx={{
+                      fontWeight: 900,
+                      color: "#615d5c",
+                    }}
+                  >
                     Types Of Abusive IPs
                   </Typography>
                   <Ipchart pieData={returnData} />

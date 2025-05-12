@@ -11,32 +11,30 @@ import { Box, Tooltip, Typography, styled, useTheme } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import PublicIcon from '@mui/icons-material/Public';
-import ManageSearchIcon from '@mui/icons-material/ManageSearch';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import RoomIcon from '@mui/icons-material/Room';
+import PublicIcon from "@mui/icons-material/Public";
+import ManageSearchIcon from "@mui/icons-material/ManageSearch";
+import AssessmentIcon from "@mui/icons-material/Assessment";
+import RoomIcon from "@mui/icons-material/Room";
 import { grey } from "@mui/material/colors";
 
 // Import the image using ES6 import syntax
-import logoImage from '../public/Green Modern Data Connect Logo (1).jpg';
+import logoImage from "../public/Green Modern Data Connect Logo (1).jpg";
 import { BackupTable, PieChart } from "@mui/icons-material";
 
 const Arr1 = [
   { text: "Home", icon: <HomeOutlinedIcon />, path: "/" },
-  { text: "Choropleth Map", icon: <PublicIcon  />, path: "/GeoPage" },
+  { text: "Choropleth Map", icon: <PublicIcon />, path: "/GeoPage" },
   { text: "Pie Chart", icon: <PieChart />, path: "/Pie" },
-  { text: "Table", icon: <BackupTable/>, path: "/Table" },
+  { text: "Table", icon: <BackupTable />, path: "/Table" },
 ];
 
 const Arr2 = [
-  { text: "Ip Lookup", icon: <ManageSearchIcon  />, path: "/IpLookup" },
+  { text: "Ip Lookup", icon: <ManageSearchIcon />, path: "/IpLookup" },
   { text: "General Report", icon: <AssessmentIcon />, path: "/Report" },
-  { text: "Marker World Map", icon: <RoomIcon/>, path: "/Marker" },
+  { text: "Marker World Map", icon: <RoomIcon />, path: "/Marker" },
 ];
 
-const Arr3 = [
-  {}
-];
+const Arr3 = [{}];
 
 function SideBar({ open, setOpen, DrawerHeader }) {
   const location = useLocation();
@@ -149,7 +147,11 @@ function SideBar({ open, setOpen, DrawerHeader }) {
       <Divider />
       <List>
         {Arr1.map((item, index) => (
-          <Tooltip key={index} title={open ? "" : item.text} placement="left-start">
+          <Tooltip
+            key={index}
+            title={open ? "" : item.text}
+            placement="left-start"
+          >
             <Box sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -174,7 +176,10 @@ function SideBar({ open, setOpen, DrawerHeader }) {
                 >
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={item.text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </Box>
           </Tooltip>
@@ -183,7 +188,11 @@ function SideBar({ open, setOpen, DrawerHeader }) {
       <Divider />
       <List>
         {Arr2.map((item, index) => (
-          <Tooltip key={index} title={open ? "" : item.text} placement="left-start">
+          <Tooltip
+            key={index}
+            title={open ? "" : item.text}
+            placement="left-start"
+          >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -208,7 +217,10 @@ function SideBar({ open, setOpen, DrawerHeader }) {
                 >
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={item.text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           </Tooltip>
@@ -217,7 +229,11 @@ function SideBar({ open, setOpen, DrawerHeader }) {
       <Divider />
       <List>
         {Arr3.map((item, index) => (
-          <Tooltip key={index} title={open ? "" : item.text} placement="left-start">
+          <Tooltip
+            key={index}
+            title={open ? "" : item.text}
+            placement="left-start"
+          >
             <ListItem disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -242,7 +258,10 @@ function SideBar({ open, setOpen, DrawerHeader }) {
                 >
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText
+                  primary={item.text}
+                  sx={{ opacity: open ? 1 : 0 }}
+                />
               </ListItemButton>
             </ListItem>
           </Tooltip>

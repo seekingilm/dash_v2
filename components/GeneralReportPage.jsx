@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
-import Modal from '@mui/material/Modal';
+import {
+  styled,
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
+import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -16,53 +21,60 @@ import Grid from "@mui/material/Grid";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SideBar from "./Sidebar";
-import { Page, Text, View, Document, Image, StyleSheet } from '@react-pdf/renderer';
-import { PDFViewer } from '@react-pdf/renderer';
+import {
+  Page,
+  Text,
+  View,
+  Document,
+  Image,
+  StyleSheet,
+} from "@react-pdf/renderer";
+import { PDFViewer } from "@react-pdf/renderer";
 
-import pie from '../public/pdf_images/pie.png';
-import bar from '../public/pdf_images/bar.png';
-import radial from '../public/pdf_images/radial.png';
+import pie from "../public/pdf_images/pie.png";
+import bar from "../public/pdf_images/bar.png";
+import radial from "../public/pdf_images/radial.png";
 
 const drawerWidth = 240;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: 'space-between',
+  justifyContent: "space-between",
 }));
 
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'column',
+    flexDirection: "column",
     padding: 20,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
   },
   headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#2C3E50',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#2C3E50",
     padding: 10,
-    color: '#FFFFFF',
+    color: "#FFFFFF",
   },
   logoSection: {
-    width: '50%',
+    width: "50%",
     padding: 10,
   },
   logoText: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   reportSection: {
-    width: '50%',
-    textAlign: 'right',
+    width: "50%",
+    textAlign: "right",
     padding: 10,
   },
   reportTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   reportSubtitle: {
     fontSize: 12,
@@ -73,50 +85,50 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   summaryHeader: {
-    backgroundColor: '#4A4A8A',
-    color: '#FFFFFF',
-    textAlign: 'center',
+    backgroundColor: "#4A4A8A",
+    color: "#FFFFFF",
+    textAlign: "center",
     padding: 10,
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 20,
   },
   section: {
     marginBottom: 20,
     padding: 10,
-    color: '#000000',
+    color: "#000000",
   },
   subheading: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginTop: 15,
   },
   bodyText: {
     fontSize: 12,
-    display: 'block',
+    display: "block",
     marginBottom: 5,
   },
   footer: {
-    marginTop: 'auto',
+    marginTop: "auto",
     padding: 10,
-    textAlign: 'center',
+    textAlign: "center",
     fontSize: 10,
-    color: '#555555',
+    color: "#555555",
   },
   image: {
-    width: '80%',
-    height: 'auto',
+    width: "80%",
+    height: "auto",
     marginBottom: 10,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
   imageSubheading: {
     fontSize: 12,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
     marginBottom: 10,
   },
   images: {
-    height: '250px',
+    height: "250px",
   },
 });
 
@@ -156,13 +168,13 @@ function Sheet(props) {
   };
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 400,
-    bgcolor: 'background.paper',
-    borderRadius: '1rem',
+    bgcolor: "background.paper",
+    borderRadius: "1rem",
     boxShadow: 24,
     p: 4,
   };
@@ -183,7 +195,9 @@ function Sheet(props) {
 
   return (
     <Box ml={2} mt={2}>
-      <Button onClick={handleOpen} variant="contained">Upload</Button>
+      <Button onClick={handleOpen} variant="contained">
+        Upload
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -194,7 +208,9 @@ function Sheet(props) {
           <form onSubmit={handleFileSubmit}>
             <FormControl>
               <Input type="file" required onChange={handleFile} />
-              <Button variant="contained" type="submit" sx={{ mt: 2 }}>Upload</Button>
+              <Button variant="contained" type="submit" sx={{ mt: 2 }}>
+                Upload
+              </Button>
             </FormControl>
           </form>
         </Box>
@@ -208,19 +224,20 @@ function GeneralReportPage() {
   const [allData, setAllData] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/table', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(returnData)
-      }).then(res => res.json()).
-        then(res => {
-          if (res.constructor === Array) {
-              setAllData(res)
-          }
-        })
+    fetch("http://127.0.0.1:5000/table", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(returnData),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.constructor === Array) {
+          setAllData(res);
+        }
+      });
   }, [returnData]);
 
   function highestReportCountry(arr) {
@@ -230,11 +247,17 @@ function GeneralReportPage() {
 
     const result = {};
 
-    arr.forEach(obj => {
+    arr.forEach((obj) => {
       const { country, abuse, totalReports, ipAddress, usageType } = obj;
 
       if (!result[country]) {
-        result[country] = { totalAbuse: 0, totalReports: 0, ipAddress, usageType, count: 0 };
+        result[country] = {
+          totalAbuse: 0,
+          totalReports: 0,
+          ipAddress,
+          usageType,
+          count: 0,
+        };
       }
 
       // Aggregate abuse and other details
@@ -247,12 +270,12 @@ function GeneralReportPage() {
 
     // Calculate average abuse per country and prepare the result array
     const sortedCountries = Object.keys(result)
-      .map(country => ({
+      .map((country) => ({
         country,
         abuse: Math.round(result[country].totalAbuse / result[country].count), // Calculate average abuse
         reports: result[country].totalReports,
         ip: result[country].ipAddress,
-        type: result[country].usageType
+        type: result[country].usageType,
       }))
       .sort((a, b) => b.abuse - a.abuse); // Sort by average abuse
 
@@ -263,36 +286,36 @@ function GeneralReportPage() {
     if (!Array.isArray(arr)) {
       return [];
     }
-  
+
     let returnArray = [];
 
-    arr.forEach(obj => {
+    arr.forEach((obj) => {
       const { country, abuse, totalReports, ip, category } = obj;
 
       returnArray.push({
-        'country': country,
-        'abuse': abuse,
-        'total': totalReports,
-        'ip': ip,
-        'usageType': category
-      })  
+        country: country,
+        abuse: abuse,
+        total: totalReports,
+        ip: ip,
+        usageType: category,
+      });
 
-      console.log(returnArray)
+      console.log(returnArray);
     });
 
     returnArray.sort((a, b) => {
-      if(a['abuse'] > b['abuse']){
+      if (a["abuse"] > b["abuse"]) {
         return -1;
-      }else {
-        if(a['total'] > b['total']){
+      } else {
+        if (a["total"] > b["total"]) {
           return -1;
-        }else{
+        } else {
           return 1;
         }
       }
     });
 
-    return returnArray.slice(0, 5)
+    return returnArray.slice(0, 5);
   }
 
   const defaultTheme = createTheme({
@@ -302,7 +325,7 @@ function GeneralReportPage() {
       },
     },
     typography: {
-      fontFamily: 'Roboto, sans-serif',
+      fontFamily: "Roboto, sans-serif",
     },
   });
 
@@ -319,68 +342,101 @@ function GeneralReportPage() {
   };
 
   const ReportSummary = () => {
-    if(allData.length > 0) {
+    if (allData.length > 0) {
       return (
         <Text style={styles.bodyText}>
-          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[0]['ip']}{"\n"}
-          <b>Location:</b> Location: {extractBigThree(allData)[0]['country']}{"\n"}
-          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[0]['category'] ? extractBigThree(allData)[0]['usageType'] : "Not Found"}
+          <b>IP Address:</b> IP Address: {extractBigThree(allData)[0]["ip"]}
           {"\n"}
-          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[0]['total']}
-
-          {"\n\n"}
-          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[1]['ip']}{"\n"}
-          <b>Location:</b> Location: {extractBigThree(allData)[1]['country']}{"\n"}
-          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[1]['category'] ? extractBigThree(allData)[1]['usageType'] : "Not Found"}{"\n"}
-          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[1]['total']}
-
-          {"\n\n"}
-          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[2]['ip']}{"\n"}
-          <b>Location:</b> Location: {extractBigThree(allData)[2]['country']}{"\n"}
-          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[2]['category']? extractBigThree(allData)[2]['usageType'] : "Not Found"}
+          <b>Location:</b> Location: {extractBigThree(allData)[0]["country"]}
           {"\n"}
-          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[2]['total']}
-
-          {"\n\n"}
-          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[3]['ip']}{"\n"}
-          <b>Location:</b> Location: {extractBigThree(allData)[3]['country']}{"\n"}
-          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[3]['usageType'] ? extractBigThree(allData)[3]['usageType'] : "Not Found"}
+          <b>Type of Abuse:</b> Type of Abuse:{" "}
+          {extractBigThree(allData)[0]["category"]
+            ? extractBigThree(allData)[0]["usageType"]
+            : "Not Found"}
           {"\n"}
-          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[3]['total']}
-
+          <b>Total Reports:</b> Total Reports:{" "}
+          {extractBigThree(allData)[0]["total"]}
           {"\n\n"}
-
-          <b>IP Address:</b>  IP Address: {extractBigThree(allData)[4]['ip']}{"\n"}
-          <b>Location:</b> Location: {extractBigThree(allData)[4]['country']}{"\n"}
-          <b>Type of Abuse:</b> Type of Abuse: {extractBigThree(allData)[4]['usageType'] ? extractBigThree(allData)[4]['usageType'] : "Not Found"}
+          <b>IP Address:</b> IP Address: {extractBigThree(allData)[1]["ip"]}
           {"\n"}
-          <b>Total Reports:</b> Total Reports: {extractBigThree(allData)[4]['total']}
-
+          <b>Location:</b> Location: {extractBigThree(allData)[1]["country"]}
+          {"\n"}
+          <b>Type of Abuse:</b> Type of Abuse:{" "}
+          {extractBigThree(allData)[1]["category"]
+            ? extractBigThree(allData)[1]["usageType"]
+            : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports:{" "}
+          {extractBigThree(allData)[1]["total"]}
           {"\n\n"}
-
-
+          <b>IP Address:</b> IP Address: {extractBigThree(allData)[2]["ip"]}
+          {"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[2]["country"]}
+          {"\n"}
+          <b>Type of Abuse:</b> Type of Abuse:{" "}
+          {extractBigThree(allData)[2]["category"]
+            ? extractBigThree(allData)[2]["usageType"]
+            : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports:{" "}
+          {extractBigThree(allData)[2]["total"]}
+          {"\n\n"}
+          <b>IP Address:</b> IP Address: {extractBigThree(allData)[3]["ip"]}
+          {"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[3]["country"]}
+          {"\n"}
+          <b>Type of Abuse:</b> Type of Abuse:{" "}
+          {extractBigThree(allData)[3]["usageType"]
+            ? extractBigThree(allData)[3]["usageType"]
+            : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports:{" "}
+          {extractBigThree(allData)[3]["total"]}
+          {"\n\n"}
+          <b>IP Address:</b> IP Address: {extractBigThree(allData)[4]["ip"]}
+          {"\n"}
+          <b>Location:</b> Location: {extractBigThree(allData)[4]["country"]}
+          {"\n"}
+          <b>Type of Abuse:</b> Type of Abuse:{" "}
+          {extractBigThree(allData)[4]["usageType"]
+            ? extractBigThree(allData)[4]["usageType"]
+            : "Not Found"}
+          {"\n"}
+          <b>Total Reports:</b> Total Reports:{" "}
+          {extractBigThree(allData)[4]["total"]}
+          {"\n\n"}
           <Text style={styles.imageSubheading}>Summary Breakdown </Text>
           {"\n\n"}
           <Text style={styles.reportSubtitle}>
-            The data indicates that the majority of the reported IP addresses have low abuse confidence scores and were flagged by a single user, suggesting a low likelihood of confirmed malicious activity. This pattern may indicate the presence of false positives or isolated incidents rather than widespread threats. The reports primarily involve IPs associated with data centers, web hosting, and other infrastructure services, which are commonly used for both legitimate and malicious purposes. However, in this case, there is no strong evidence pointing to abuse, making it less urgent to take immediate action against these IPs.
+            The data indicates that the majority of the reported IP addresses
+            have low abuse confidence scores and were flagged by a single user,
+            suggesting a low likelihood of confirmed malicious activity. This
+            pattern may indicate the presence of false positives or isolated
+            incidents rather than widespread threats. The reports primarily
+            involve IPs associated with data centers, web hosting, and other
+            infrastructure services, which are commonly used for both legitimate
+            and malicious purposes. However, in this case, there is no strong
+            evidence pointing to abuse, making it less urgent to take immediate
+            action against these IPs.
           </Text>
         </Text>
-
       );
-      }else{
-      return (
-        <Text>Upload Data</Text>
-      )
+    } else {
+      return <Text>Upload Data</Text>;
     }
-  }
+  };
 
   return (
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", width: "100vw" }}>
         <CssBaseline />
-        <AppBar sx={{
-          backgroundColor: "#0039a6",
-        }} position="absolute" open={open}>
+        <AppBar
+          sx={{
+            backgroundColor: "#0039a6",
+          }}
+          position="absolute"
+          open={open}
+        >
           <Toolbar sx={{ pr: "24px" }}>
             <IconButton
               edge="start"
@@ -435,25 +491,39 @@ function GeneralReportPage() {
             <Box
               sx={{
                 textAlign: "center",
-    padding: "20px",
-    backgroundColor: "#ffffff", // White background
-    color: "#000000", // Black text
-    borderRadius: "8px",
-    marginBottom: "20px",
+                padding: "20px",
+                backgroundColor: "#ffffff", // White background
+                color: "#000000", // Black text
+                borderRadius: "8px",
+                marginBottom: "20px",
               }}
             >
-              <Typography variant="h3" sx={{ fontWeight: "bold", marginBottom: "10px" }}>
+              <Typography
+                variant="h3"
+                sx={{ fontWeight: "bold", marginBottom: "10px" }}
+              >
                 INSIDE REPORT
               </Typography>
               <Typography variant="h5" sx={{ marginBottom: "8px" }}>
                 AbuseIPDB Intelligence Report Executive Summary
               </Typography>
               <Typography variant="h6" sx={{ marginBottom: "20px" }}>
-                Date: {new Date().toLocaleDateString('en-US')}              </Typography>
-              <Typography variant="h6" sx={{ marginBottom: "20px" }}>
-              The report generated in this code is a PDF report that is customized to present a detailed analysis of cybersecurity data, specifically focusing on suspicious IP addresses and their associated activities. Plug in your excel path of Ip address to get your report 
+                Date: {new Date().toLocaleDateString("en-US")}{" "}
               </Typography>
-              <Divider sx={{ borderColor: "#000000", borderWidth: "2px", marginBottom: "5px" }} />
+              <Typography variant="h6" sx={{ marginBottom: "20px" }}>
+                The report generated in this code is a PDF report that is
+                customized to present a detailed analysis of cybersecurity data,
+                specifically focusing on suspicious IP addresses and their
+                associated activities. Plug in your excel path of Ip address to
+                get your report
+              </Typography>
+              <Divider
+                sx={{
+                  borderColor: "#000000",
+                  borderWidth: "2px",
+                  marginBottom: "5px",
+                }}
+              />
             </Box>
 
             <Sheet onSubmit={getData} />
@@ -461,20 +531,27 @@ function GeneralReportPage() {
             <Grid container spacing={3} mt={2}>
               <Grid item xs={12}>
                 <Card sx={{ p: 3, borderRadius: "1em", height: 800 }}>
-                  <PDFViewer style={{ width: '100%', height: '100%' }}>
+                  <PDFViewer style={{ width: "100%", height: "100%" }}>
                     <Document>
                       <Page style={styles.page}>
                         {/* Header */}
                         <View style={styles.headerContainer}>
                           <View style={styles.logoSection}>
-                            <Text style={styles.logoText}>IP Genenerated Report</Text>
+                            <Text style={styles.logoText}>
+                              IP Genenerated Report
+                            </Text>
                           </View>
                           <View style={styles.reportSection}>
-                            <Text style={styles.reportTitle}>SECTOR TARGETING:</Text>
-                            <Text style={styles.reportSubtitle}>
-                              Analysis of Suspicious IP Activity and Potential Cybersecurity Threats
+                            <Text style={styles.reportTitle}>
+                              SECTOR TARGETING:
                             </Text>
-                            <Text style={styles.reportDate}>Date of Report: Auguest 16, 2024</Text>
+                            <Text style={styles.reportSubtitle}>
+                              Analysis of Suspicious IP Activity and Potential
+                              Cybersecurity Threats
+                            </Text>
+                            <Text style={styles.reportDate}>
+                              Date of Report: Auguest 16, 2024
+                            </Text>
                           </View>
                         </View>
 
@@ -485,16 +562,38 @@ function GeneralReportPage() {
 
                         {/* IP Address Details at the Beginning */}
                         <View style={styles.section}>
-                          <Text style={styles.subheading}>IP Address Analysis:</Text>
+                          <Text style={styles.subheading}>
+                            IP Address Analysis:
+                          </Text>
                           <Text style={styles.bodyText}>
-                            One of the key IP addresses identified is <b>50.47.208.178</b>, which is associated with the ISP <b>Ziply Fiber</b> and the domain <b>ziplyfiber.com</b>. This IP address is linked to suspicious activity and has been reported <b>5,632</b> times by <b>373</b> distinct users. The high abuse confidence score of <b>100</b> indicates a strong likelihood of ongoing malicious activity. The associated hostname is <b>50-47-208-178.evrt.wa.ptr.ziplyfiber.com</b>, and it is categorized under Fixed Line ISP usage. Further investigation and monitoring are recommended to address the potential threats posed by this IP.
+                            One of the key IP addresses identified is{" "}
+                            <b>50.47.208.178</b>, which is associated with the
+                            ISP <b>Ziply Fiber</b> and the domain{" "}
+                            <b>ziplyfiber.com</b>. This IP address is linked to
+                            suspicious activity and has been reported{" "}
+                            <b>5,632</b> times by <b>373</b> distinct users. The
+                            high abuse confidence score of <b>100</b> indicates
+                            a strong likelihood of ongoing malicious activity.
+                            The associated hostname is{" "}
+                            <b>50-47-208-178.evrt.wa.ptr.ziplyfiber.com</b>, and
+                            it is categorized under Fixed Line ISP usage.
+                            Further investigation and monitoring are recommended
+                            to address the potential threats posed by this IP.
                           </Text>
                         </View>
 
                         {/* Additional Content Here */}
                         <View style={styles.section}>
                           <Text style={styles.bodyText}>
-                            This report provides a comprehensive analysis of malicious IP addresses extracted from an Excel sheet, utilizing data from an open-source platform's API. The report focuses on identifying key trends, significant incidents, and actionable insights to enhance cybersecurity measures. Through this analysis, we have uncovered critical patterns and threats that require immediate attention and mitigation.
+                            This report provides a comprehensive analysis of
+                            malicious IP addresses extracted from an Excel
+                            sheet, utilizing data from an open-source platform's
+                            API. The report focuses on identifying key trends,
+                            significant incidents, and actionable insights to
+                            enhance cybersecurity measures. Through this
+                            analysis, we have uncovered critical patterns and
+                            threats that require immediate attention and
+                            mitigation.
                           </Text>
                         </View>
 
@@ -503,9 +602,20 @@ function GeneralReportPage() {
                           <Text>KEY HIGHLIGHTS</Text>
                         </View>
                         <View style={styles.section}>
-                          <Text style={styles.bodyText}>- Significant Security Events: Identified major incidents involving the top offending IP addresses, including DDoS attacks, phishing campaigns, and unauthorized access attempts.</Text>
-                          <Text style={styles.bodyText}>- Progress on ongoing cybersecurity projects or mitigations.</Text>
-                          <Text style={styles.bodyText}>- Overview of key metrics and trends observed in the report.</Text>
+                          <Text style={styles.bodyText}>
+                            - Significant Security Events: Identified major
+                            incidents involving the top offending IP addresses,
+                            including DDoS attacks, phishing campaigns, and
+                            unauthorized access attempts.
+                          </Text>
+                          <Text style={styles.bodyText}>
+                            - Progress on ongoing cybersecurity projects or
+                            mitigations.
+                          </Text>
+                          <Text style={styles.bodyText}>
+                            - Overview of key metrics and trends observed in the
+                            report.
+                          </Text>
                         </View>
 
                         {/* Report Summary for IP Addresses */}
@@ -513,21 +623,47 @@ function GeneralReportPage() {
                           <Text>REPORT SUMMARY FOR IP ADDRESSES</Text>
                         </View>
                         <View style={styles.section}>
-                          <Text style={styles.subheading}>Total Number of IPs Analyzed: </Text>
-                          <Text style={styles.bodyText}>Count: {allData.length > 0 ? allData.length : "Upload Data"}</Text>
-
-                          <Text style={styles.subheading}>Countries with the Most Offending IPs:</Text>
+                          <Text style={styles.subheading}>
+                            Total Number of IPs Analyzed:{" "}
+                          </Text>
                           <Text style={styles.bodyText}>
-                            • {allData.length > 1 ? highestReportCountry(allData)[0]['country'] : "Upload Data"  } 
-                            • {allData.length > 1 ? highestReportCountry(allData)[1]['country'] : "Upload Data"  } 
-                            • {allData.length > 1 ? highestReportCountry(allData)[2]['country'] : "Upload Data"  } 
-                            • {allData.length > 1 ? highestReportCountry(allData)[3]['country'] : "Upload Data"  } 
-                            • {allData.length > 1 ? highestReportCountry(allData)[4]['country'] : "Upload Data"  } 
+                            Count:{" "}
+                            {allData.length > 0
+                              ? allData.length
+                              : "Upload Data"}
                           </Text>
 
-                          <Text style={styles.subheading}>Top Five Offending IPs:</Text>
-                                                    {/* Additional IP details here */}
-                          <ReportSummary/>
+                          <Text style={styles.subheading}>
+                            Countries with the Most Offending IPs:
+                          </Text>
+                          <Text style={styles.bodyText}>
+                            •{" "}
+                            {allData.length > 1
+                              ? highestReportCountry(allData)[0]["country"]
+                              : "Upload Data"}
+                            •{" "}
+                            {allData.length > 1
+                              ? highestReportCountry(allData)[1]["country"]
+                              : "Upload Data"}
+                            •{" "}
+                            {allData.length > 1
+                              ? highestReportCountry(allData)[2]["country"]
+                              : "Upload Data"}
+                            •{" "}
+                            {allData.length > 1
+                              ? highestReportCountry(allData)[3]["country"]
+                              : "Upload Data"}
+                            •{" "}
+                            {allData.length > 1
+                              ? highestReportCountry(allData)[4]["country"]
+                              : "Upload Data"}
+                          </Text>
+
+                          <Text style={styles.subheading}>
+                            Top Five Offending IPs:
+                          </Text>
+                          {/* Additional IP details here */}
+                          <ReportSummary />
                         </View>
 
                         {/* Data Visualization Heading */}
@@ -536,12 +672,16 @@ function GeneralReportPage() {
                         </View>
 
                         <View style={styles.section}>
-                          <Text style={styles.imageSubheading}>Bar Chart Visualization</Text>
-                          <Image  src={bar} style={styles.images}/>
-                          <Text style={styles.imageSubheading}>Pie Chart Visualization</Text>
+                          <Text style={styles.imageSubheading}>
+                            Bar Chart Visualization
+                          </Text>
+                          <Image src={bar} style={styles.images} />
+                          <Text style={styles.imageSubheading}>
+                            Pie Chart Visualization
+                          </Text>
                           <Image src={pie} />
-                          <Text >Radial Chart Visualization</Text>
-                          <Image  src={radial} />
+                          <Text>Radial Chart Visualization</Text>
+                          <Image src={radial} />
                         </View>
 
                         {/* Conclusion */}
@@ -550,7 +690,13 @@ function GeneralReportPage() {
                         </View>
                         <View style={styles.section}>
                           <Text style={styles.bodyText}>
-                            The integration of IP address analysis with open-source threat intelligence provides a powerful tool for identifying and mitigating cybersecurity risks. By visualizing the data effectively and focusing on key metrics, the organization can enhance its security posture and make informed decisions to protect against evolving threats.
+                            The integration of IP address analysis with
+                            open-source threat intelligence provides a powerful
+                            tool for identifying and mitigating cybersecurity
+                            risks. By visualizing the data effectively and
+                            focusing on key metrics, the organization can
+                            enhance its security posture and make informed
+                            decisions to protect against evolving threats.
                           </Text>
                         </View>
 
@@ -572,4 +718,3 @@ function GeneralReportPage() {
 }
 
 export default GeneralReportPage;
-

@@ -1,5 +1,5 @@
-import { useEffect } from 'react';
-import { useReactFlow, useUpdateNodeInternals } from 'react-flow-renderer';
+import { useEffect } from "react";
+import { useReactFlow, useUpdateNodeInternals } from "react-flow-renderer";
 
 export const useCustomNode = (id, data) => {
   const { getNode } = useReactFlow();
@@ -8,8 +8,8 @@ export const useCustomNode = (id, data) => {
   const source = data.source || [];
   const height = getNode(id).height;
   useEffect(() => {
-    updateNodeInternals(id)
-  }, [target, source])
+    updateNodeInternals(id);
+  }, [target, source]);
 
-  return {height,target,source}
-}
+  return { height, target, source };
+};

@@ -4,9 +4,11 @@ from flask_cors import CORS, cross_origin
 import json
 import requests
 from OTXv2 import OTXv2, IndicatorTypes
+from google import genai
 
 app = Flask(__name__)
 cors = CORS(app)
+
 app.config["CORS_HEADERS"] = "Content-Type"
 
 @app.route("/")
@@ -60,6 +62,19 @@ def alien():
         return data
     return "200"
 
+@app.route("/Ai",  methods=["GET", "POST"])
+@cross_origin()
+def Ai():
+    if request.method == "POST":
+        data = use_alien_total(request.json)
+        print(f"The data is {data}")
+        return create_ai_response(data)
+    return "200"
+
+
+    return "<p>Hello, World!</p>"
+
+
 def make_abuse_countries(excel_data):
     if type(excel_data) is not list:
         return '205'
@@ -71,8 +86,8 @@ def make_abuse_countries(excel_data):
     #key = "9e19a670e5a990c979aef2cd3f66e0a5185d2cdfb3db534d6b5a7b5f7573b35aacb64ac6bf88ac4f"
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
-    #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
-    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
+    key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    #key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
 
 
     fused_lists = []
@@ -90,7 +105,7 @@ def make_abuse_countries(excel_data):
 
         response_dict = json.loads(response.text)
         print(response_dict)
-       
+
         try:
             fused_lists.append(
                 {"country": response_dict["data"]["countryCode"], "abuse": response_dict["data"]["abuseConfidenceScore"],}
@@ -112,10 +127,8 @@ def make_pie_data(excel_data): #use this in case you need for API.
     #key = "9e19a670e5a990c979aef2cd3f66e0a5185d2cdfb3db534d6b5a7b5f7573b35aacb64ac6bf88ac4f"
     #key = "1029f055131ebf52a89d5c02c0c38b78abfad0c4e2ec23b6a13f83c72124e9c987f07b3fc669b6ed"
     #key = "650fe1cb9944cae2eb43f693418dedbae602b21b21efb56b5578d06a21c799aaeedd5d223eb23410"
-    #key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
-    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" # highest key
-
-
+    key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
+    #key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" # highest key
 
     fused_lists = []
 
@@ -149,7 +162,7 @@ def make_table_data(excel_data):
         return '206'
 
     ip_list = extract_values(excel_data, "IPV4") 
-    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
+    key = "e1ce3d972b778a368f1d3ef617de42076ded1977c0b31ed2d0fe4ac491b8a9a60b5ce98b12842fc1"
 
     fused_lists = []
 
@@ -188,7 +201,7 @@ def use_virus_total(ip):
     return response.json()
 
 def use_alien_total(ip):
-    key = '5ae2fecc55d39959269bd3f7cc40f631722dbe37594e3e121e1f1435038840d0'
+    key = "ee9af4f61858c4df64eb5443bd0f043b8d5ca23281c1da9b1759fc957f220e090cfcb3b7ad2d7c7a" #highest key
     otx = OTXv2(key)
     ip_details = otx.get_indicator_details_full(IndicatorTypes.IPv4, ip)
     return ip_details
@@ -218,3 +231,28 @@ def clean_labels(label):
         return "CDN"
     else:
         return label 
+
+def create_ai_response(json_obj):
+    prompt = """take this json object and convert it into an explanation for an cyber security
+    report.  Write in clear professional english, the beginning of the report goes
+    like this.  One of the key IP addresses identified is , which is associated
+    with the ISP and the domain . This IP address is linked to suspicious activity
+    and has been reported times by distinct users. The high abuse confidence score
+    of indicates a strong likelihood of ongoing malicious activity. The associated
+    hostname is , and it is categorized under Fixed Line ISP usage. Further
+    investigation and monitoring are recommended to address the potential threats
+    posed by this IP.  This report provides a comprehensive analysis of malicious
+    IP addresses extracted from an Excel sheet, utilizing data from an open-source
+    platform's API. The report focuses on identifying key trends, significant
+    incidents, and actionable insights to enhance cybersecurity measures. Through
+    this analysis, we have uncovered critical patterns and threats that require
+    immediate attention and mitigation. the JSON object is this, """  + json.dumps(json_obj)
+
+    client = genai.Client(api_key="AIzaSyCURgqtNCmttB9BCayTBRczqr4ScOEDU3s")
+
+    response = client.models.generate_content(
+        model="gemini-2.0-flash", contents=prompt
+    )
+
+    return response
+

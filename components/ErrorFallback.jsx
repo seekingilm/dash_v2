@@ -1,4 +1,4 @@
-export default ({error, resetErrorBoundary}) => {
+export default ({ error, resetErrorBoundary }) => {
   return (
     <div role="alert">
       <p>Something went wrong:</p>
@@ -6,5 +6,5 @@ export default ({error, resetErrorBoundary}) => {
       <pre>Maybe provided JSON file is not valid</pre>
       <button onClick={resetErrorBoundary}>Try again</button>
     </div>
-  )
-}
+  );
+};

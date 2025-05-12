@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import {
+  styled,
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 import { Outlet, Link as Link2 } from "react-router-dom";
-import { DataGrid } from '@mui/x-data-grid';
-import Modal from '@mui/material/Modal';
+import { DataGrid } from "@mui/x-data-grid";
+import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -17,16 +22,16 @@ import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import SideBar from "./Sidebar"
-import Flowy from './Flowy'
+import SideBar from "./Sidebar";
+import Flowy from "./Flowy";
 
 const drawerWidth = 240;
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: 'space-between',
+  justifyContent: "space-between",
 }));
 
 const AppBar = styled(MuiAppBar, {
@@ -62,35 +67,35 @@ const Drawer = styled(MuiDrawer, {
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  overflowX: 'hidden',
+  overflowX: "hidden",
 });
 
 const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflowX: 'hidden',
+  overflowX: "hidden",
   width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
@@ -185,12 +190,11 @@ function FlowChart() {
           }}
         >
           <DrawerHeader />
-          <Flowy initial={{nodes: [], edges: []}}/>
+          <Flowy initial={{ nodes: [], edges: [] }} />
         </Box>
       </Box>
     </ThemeProvider>
   );
 }
 
-
-export default FlowChart
+export default FlowChart;

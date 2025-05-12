@@ -1,15 +1,18 @@
 import { useTheme } from "@mui/material";
-import { mockBarData as data } from "../data/mockData"
+import { mockBarData as data } from "../data/mockData";
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
 
 function BarChart({ barData }) {
-  const [apiData, setApiData] = useState([])
+  const [apiData, setApiData] = useState([]);
+
+  barData = sumAbuseByCountry(barData.filter((item) => item.country !== null && item.abuse != 0));
+  console.log('The bar data is ',barData)
 
   function sumAbuseByCountry(arr) {
     const result = {};
 
-    arr.forEach(obj => {
+    arr.forEach((obj) => {
       const country = obj.country;
       const abuse = obj.abuse;
 
@@ -21,39 +24,40 @@ function BarChart({ barData }) {
     });
 
     const sortedCountries = Object.keys(result)
-      .map(country => ({
+      .map((country) => ({
         country: country,
-        abuse: result[country]
+        abuse: result[country],
       }))
       .sort((a, b) => b.abuse - a.abuse);
 
     return sortedCountries.slice(0, 5);
   }
 
-
-  useEffect(() => {
-    fetch('http://127.0.0.1:5000/data', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(barData)
-    }).then(res => res.json()).
-      then(res => {
-        if (res.constructor === Array) {
-          let newRes = res.filter(item => item.country !== null && item.abuse != 0);
-          setApiData(sumAbuseByCountry(newRes))
-        }
-      })
-  }, [barData])
-
+  //  useEffect(() => {
+  //    fetch("http://127.0.0.1:5000/data", {
+  //      method: "POST",
+  //      headers: {
+  //        Accept: "application/json",
+  //        "Content-Type": "application/json",
+  //      },
+  //      body: JSON.stringify(barData),
+  //    })
+  //      .then((res) => res.json())
+  //      .then((res) => {
+  //        if (res.constructor === Array) {
+  //          let newRes = res.filter(
+  //            (item) => item.country !== null && item.abuse != 0,
+  //          );
+  //          setApiData(sumAbuseByCountry(newRes));
+  //        }
+  //      });
+  //  }, [barData]);
 
   return (
     <ResponsiveBar
       data={apiData}
-      colors={{ scheme: 'dark2' }}
-      keys={['abuse',]}
+      colors={{ scheme: "dark2" }}
+      keys={["abuse"]}
       indexBy="country"
       margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
       padding={0.3}
@@ -80,45 +84,44 @@ function BarChart({ barData }) {
       labelSkipHeight={12}
       defs={[
         {
-          id: 'dots',
-          type: 'patternDots',
-          background: 'inherit',
-          color: '#38bcb2',
+          id: "dots",
+          type: "patternDots",
+          background: "inherit",
+          color: "#38bcb2",
           size: 4,
           padding: 1,
-          stagger: true
+          stagger: true,
         },
         {
-          id: 'lines',
-          type: 'patternLines',
-          background: 'inherit',
-          color: '#eed312',
+          id: "lines",
+          type: "patternLines",
+          background: "inherit",
+          color: "#eed312",
           rotation: -45,
           lineWidth: 6,
-          spacing: 10
-        }
+          spacing: 10,
+        },
       ]}
       fill={[
         {
           match: {
-            id: 'abuse'
+            id: "abuse",
           },
-          id: 'dots'
+          id: "dots",
         },
         {
           match: {
-            id: 'sandwich'
+            id: "sandwich",
           },
-          id: 'lines'
-        }
+          id: "lines",
+        },
       ]}
-
       role="application"
-      barAriaLabel={function(e) {
+      barAriaLabel={function (e) {
         return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
       }}
     />
   );
 }
 
-export default BarChart
+export default BarChart;

@@ -1,6 +1,5 @@
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
 
-
 function World() {
   return (
     <div width={10} height={10}>

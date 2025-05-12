@@ -1,10 +1,10 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.wrapper{
+.wrapper {
   width: 100%;
   max-width: 1200px;
   margin: auto;
@@ -12,15 +12,15 @@
   padding: 20px;
 }
 
-.custom-form{
+.custom-form {
   width: 500px;
 }
 
-.btn{
+.btn {
   margin: 10px 0;
 }
 
-.viewer{
+.viewer {
   width: 100%;
   background-color: #e4e4e4;
   padding: 20px;

@@ -1,5 +1,5 @@
-import { useRef, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
+import { useRef, useCallback } from "react";
+import { v4 as uuid } from "uuid";
 
 // node types object
 const typeData = {
@@ -13,7 +13,7 @@ const typeData = {
   multiSourceNode: {
     source: [],
   },
-}
+};
 
 export const useDrop = (reactFlowInstance, setNodes) => {
   const reactFlowWrapperRef = useRef(null);
@@ -21,11 +21,12 @@ export const useDrop = (reactFlowInstance, setNodes) => {
     (event) => {
       event.preventDefault();
 
-      const reactFlowBounds = reactFlowWrapperRef.current.getBoundingClientRect();
-      const type = event.dataTransfer.getData('application/reactflow');
+      const reactFlowBounds =
+        reactFlowWrapperRef.current.getBoundingClientRect();
+      const type = event.dataTransfer.getData("application/reactflow");
 
       // check if the dropped element is valid
-      if (typeof type === 'undefined' || !type) {
+      if (typeof type === "undefined" || !type) {
         return;
       }
 
@@ -35,11 +36,11 @@ export const useDrop = (reactFlowInstance, setNodes) => {
       });
       const newNode = {
         id: uuid(),
-        sourcePosition: 'right',
-        targetPosition: 'left',
+        sourcePosition: "right",
+        targetPosition: "left",
         style: {
           width: 150,
-          height: 40
+          height: 40,
         },
         type,
         position,
@@ -48,13 +49,13 @@ export const useDrop = (reactFlowInstance, setNodes) => {
 
       setNodes((nds) => nds.concat(newNode));
     },
-    [reactFlowInstance]
+    [reactFlowInstance],
   );
 
   const onDragOver = useCallback((event) => {
     event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+    event.dataTransfer.dropEffect = "move";
   }, []);
 
-  return {reactFlowWrapperRef, onDrop, onDragOver}
-}
+  return { reactFlowWrapperRef, onDrop, onDragOver };
+};

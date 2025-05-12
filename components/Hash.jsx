@@ -1,12 +1,12 @@
-import TextField from '@mui/material/TextField'
+import TextField from "@mui/material/TextField";
 import { Outlet, Link as Link2 } from "react-router-dom";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
-import { useState } from 'react';
+import { useState } from "react";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
-import Box from '@mui/material/Box'
+import Box from "@mui/material/Box";
 
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import { FormControl, Button, Input } from "@mui/material";
@@ -25,13 +25,11 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import World from "./World";
 import Geo from "./Geochart";
-import Tab_display from './TableDisplay';
+import Tab_display from "./TableDisplay";
 import TableDisplay from "./TableDisplay";
-import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';  // Updated path to your logo image
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-
-
+import Logo from "./Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg"; // Updated path to your logo image
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 function Hash() {
   const defaultTheme = createTheme({
@@ -57,7 +55,8 @@ function Hash() {
 
   const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
-  })(({ theme, open }) => ({ "& .MuiDrawer-paper": {
+  })(({ theme, open }) => ({
+    "& .MuiDrawer-paper": {
       position: "relative",
       whiteSpace: "nowrap",
       width: drawerWidth,
@@ -75,7 +74,7 @@ function Hash() {
           duration: theme.transitions.duration.leavingScreen,
         }),
         width: 0, // Set width to 0 when collapsed
-        display: 'none', // Ensure it does not take up any space
+        display: "none", // Ensure it does not take up any space
       }),
     },
   }));
@@ -115,16 +114,20 @@ function Hash() {
             <MenuIcon />
           </IconButton>
 
-              <Link2 to={"/"}>
-          <img src={Logo} alt="Logo" style={{ height: 50, marginRight: 20 }} />
+          <Link2 to={"/"}>
+            <img
+              src={Logo}
+              alt="Logo"
+              style={{ height: 50, marginRight: 20 }}
+            />
           </Link2>
           <Typography
             component="h1"
             variant="h5" // Smaller font size
             noWrap
-            sx={{ flexGrow: 1, textAlign: "center", fontWeight: 'bold' }} // Bold font
+            sx={{ flexGrow: 1, textAlign: "center", fontWeight: "bold" }} // Bold font
           >
-            Intel Dashboard For Hashs 
+            Intel Dashboard For Hashs
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={0} color="secondary">
@@ -147,52 +150,68 @@ function Hash() {
           </IconButton>
         </Toolbar>
         <Divider sx={{ borderColor: "white" }} />
-        
-<List component="nav">
-            <Typography variant="h5" sx={{ padding: "16px", fontWeight: "bold", color: "white", display: 'flex', alignItems: 'center' }}>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon" style={{ width: '20px', height: '20px', marginRight: '8px' }}>
-                <path fillRule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clipRule="evenodd" />
-              </svg>
-              <Link2 to={"/"}>
-              Main Menu
-              </Link2>
-            </Typography>
-            <Divider orientation="vertical" sx={{ borderColor: "white", height: "auto" }} />
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={"/domain"}>
-                Domains
-              </Link2>
-              </Typography>
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={'/Hash'}>Hashes</Link2>
-            </Typography>
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              <Link2 to={`/threat_hunting`}>
-              Threat Hunting</Link2>
-            </Typography>
-            <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
-              URL
-            </Typography>
-            <Divider sx={{ my: 1, borderColor: "white" }} />
-          </List>
+
+        <List component="nav">
+          <Typography
+            variant="h5"
+            sx={{
+              padding: "16px",
+              fontWeight: "bold",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+              data-slot="icon"
+              style={{ width: "20px", height: "20px", marginRight: "8px" }}
+            >
+              <path
+                fillRule="evenodd"
+                d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <Link2 to={"/"}>Main Menu</Link2>
+          </Typography>
+          <Divider
+            orientation="vertical"
+            sx={{ borderColor: "white", height: "auto" }}
+          />
+          <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+            <Link2 to={"/domain"}>Domains</Link2>
+          </Typography>
+          <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+            <Link2 to={"/Hash"}>Hashes</Link2>
+          </Typography>
+          <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+            <Link2 to={`/threat_hunting`}>Threat Hunting</Link2>
+          </Typography>
+          <Typography variant="h6" sx={{ padding: "8px", color: "white" }}>
+            URL
+          </Typography>
+          <Divider sx={{ my: 1, borderColor: "white" }} />
+        </List>
       </Drawer>
       <Box
-          component="main"
-          sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: "100vh",
-            overflow: "auto",
-            width: '100%' // Ensure the Box takes the full width
-          }}
-        >
-      </Box>
+        component="main"
+        sx={{
+          backgroundColor: (theme) =>
+            theme.palette.mode === "light"
+              ? theme.palette.grey[100]
+              : theme.palette.grey[900],
+          flexGrow: 1,
+          height: "100vh",
+          overflow: "auto",
+          width: "100%", // Ensure the Box takes the full width
+        }}
+      ></Box>
     </ThemeProvider>
   );
-
 }
 
-export default Hash 
+export default Hash;

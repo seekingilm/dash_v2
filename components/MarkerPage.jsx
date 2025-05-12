@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { styled, createTheme, ThemeProvider, useTheme } from "@mui/material/styles";
+import {
+  styled,
+  createTheme,
+  ThemeProvider,
+  useTheme,
+} from "@mui/material/styles";
 import { Outlet, Link as Link2 } from "react-router-dom";
-import { DataGrid } from '@mui/x-data-grid';
-import Modal from '@mui/material/Modal';
+import { DataGrid } from "@mui/x-data-grid";
+import Modal from "@mui/material/Modal";
 import * as XLSX from "xlsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import MuiDrawer from "@mui/material/Drawer";
@@ -26,24 +31,23 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PieChart from "./PieChart";
 import BarChart from "./BarChart";
 import World from "./World";
-import GeographyChart from './Geochart'
-import Tab_display from './TableDisplay';
+import GeographyChart from "./Geochart";
+import Tab_display from "./TableDisplay";
 import TableDisplay from "./TableDisplay";
-import Logo from './Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import SideBar from "./Sidebar"
-import RadialChart from './RadialChart'
-
+import Logo from "./Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
+import SideBar from "./Sidebar";
+import RadialChart from "./RadialChart";
 
 const drawerWidth = 240;
 
-const DrawerHeader = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
+const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
   padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  justifyContent: 'space-between',
+  justifyContent: "space-between",
 }));
 
 const AppBar = styled(MuiAppBar, {
@@ -79,35 +83,35 @@ const Drawer = styled(MuiDrawer, {
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  whiteSpace: 'nowrap',
-  boxSizing: 'border-box',
+  whiteSpace: "nowrap",
+  boxSizing: "border-box",
   ...(open && {
     ...openedMixin(theme),
-    '& .MuiDrawer-paper': openedMixin(theme),
+    "& .MuiDrawer-paper": openedMixin(theme),
   }),
   ...(!open && {
     ...closedMixin(theme),
-    '& .MuiDrawer-paper': closedMixin(theme),
+    "& .MuiDrawer-paper": closedMixin(theme),
   }),
 }));
 
 const openedMixin = (theme) => ({
   width: drawerWidth,
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
-  overflowX: 'hidden',
+  overflowX: "hidden",
 });
 
 const closedMixin = (theme) => ({
-  transition: theme.transitions.create('width', {
+  transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  overflowX: 'hidden',
+  overflowX: "hidden",
   width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
 });
@@ -118,7 +122,8 @@ function Sheet(props) {
   const [typeError, setTypeError] = useState(null);
 
   const [excelData, setExcelData] = useState(null);
-  let apiKey = "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c";
+  let apiKey =
+    "9caf023f75484c2315dc7cac2fa8f980e2728d1a0f69ccdc679f722c694185349e82b4be5e20c76c";
 
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -150,13 +155,13 @@ function Sheet(props) {
   };
 
   const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
     width: 300,
-    bgcolor: 'background.paper',
-    borderRadius: '1rem',
+    bgcolor: "background.paper",
+    borderRadius: "1rem",
     boxShadow: 24,
     p: 4,
   };
@@ -176,8 +181,10 @@ function Sheet(props) {
   };
 
   return (
-    <Box display={'inline-block'} ml={1} marginTop={'24px'}>
-      <Button onClick={handleOpen} variant="contained">Upload From Excel</Button>
+    <Box display={"inline-block"} ml={1} marginTop={"24px"}>
+      <Button onClick={handleOpen} variant="contained">
+        Upload From Excel
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -186,9 +193,21 @@ function Sheet(props) {
       >
         <Box sx={style}>
           <form onSubmit={handleFileSubmit}>
-            <FormControl sx={{ width: '25ch' }}>
-              <Input sx={{ display: 'inline-block' }} type="file" required onChange={handleFile} />
-              <Button sx={{ display: 'inline-block' }} variant="contained" m={3} type="submit">Upload</Button>
+            <FormControl sx={{ width: "25ch" }}>
+              <Input
+                sx={{ display: "inline-block" }}
+                type="file"
+                required
+                onChange={handleFile}
+              />
+              <Button
+                sx={{ display: "inline-block" }}
+                variant="contained"
+                m={3}
+                type="submit"
+              >
+                Upload
+              </Button>
             </FormControl>
           </form>
         </Box>
@@ -196,7 +215,6 @@ function Sheet(props) {
     </Box>
   );
 }
-
 
 function MarkerPage() {
   const defaultTheme = createTheme({
@@ -299,12 +317,12 @@ function MarkerPage() {
                   fontWeight: "700",
                 }}
               >
-                Marker World Page 
+                Marker World Page
               </Typography>
               <Sheet onSubmit={getData} />
-              <GeographyChart geoData={returnData}/>
+              <GeographyChart geoData={returnData} />
             </Box>
-            <Grid container >
+            <Grid container>
               <Grid item xs={24}>
                 <Card
                   sx={{
@@ -336,5 +354,4 @@ function MarkerPage() {
   );
 }
 
-
-export default MarkerPage 
+export default MarkerPage;

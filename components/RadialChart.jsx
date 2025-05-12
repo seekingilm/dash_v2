@@ -1,30 +1,27 @@
-import { ResponsiveRadialBar } from '@nivo/radial-bar'
-import { useState, useEffect } from 'react'
-import { mockRadialData as data } from "../data/mockData"
+import { ResponsiveRadialBar } from "@nivo/radial-bar";
+import { useState, useEffect } from "react";
+import { mockRadialData as data } from "../data/mockData";
 
 function topFive(data) {
+  let returnCountries = [];
 
-  let returnCountries = []
-
-  data.forEach(item => {
-    let country = item['country']
+  data.forEach((item) => {
+    let country = item["country"];
 
     if (returnCountries.length === 0) {
-      returnCountries.push({ 'country': item['country'], 'abuse': item['abuse'] })
+      returnCountries.push({ country: item["country"], abuse: item["abuse"] });
     }
 
-    returnCountries.forEach(x => {
-      if (x['country'] === country) {
-        x['abuse'] = x['abuse'] + item['abuse']
+    returnCountries.forEach((x) => {
+      if (x["country"] === country) {
+        x["abuse"] = x["abuse"] + item["abuse"];
+      } else {
+        returnCountries.push({ country: country, abuse: item["abuse"] });
       }
-      else {
-        returnCountries.push({ 'country': country, 'abuse': item['abuse'] })
-      }
-    })
+    });
+  });
 
-  })
-
-  return 0
+  return 0;
 }
 
 function getTopCountriesByAbuse(objectsList) {
@@ -32,7 +29,7 @@ function getTopCountriesByAbuse(objectsList) {
   const abuseTotals = {};
 
   // Loop through each object and accumulate the abuse score by country
-  objectsList.forEach(obj => {
+  objectsList.forEach((obj) => {
     const country = obj.country;
     const abuseScore = obj.abuse;
 
@@ -61,7 +58,7 @@ function findHighestAbuseScoreForCountry(data, country) {
   let lowestAbuseScore = 0;
 
   if (data.constructor === Array) {
-    data.forEach(entry => {
+    data.forEach((entry) => {
       if (entry.country === country) {
         const abuseScore = entry.abuse;
         if (abuseScore > lowestAbuseScore) {
@@ -82,7 +79,7 @@ function findLowestAbuseScoreForCountry(data, country) {
   let lowestAbuseScore = Infinity;
 
   if (data.constructor === Array) {
-    data.forEach(entry => {
+    data.forEach((entry) => {
       if (entry.country === country) {
         const abuseScore = entry.abuse;
         if (abuseScore < lowestAbuseScore) {
@@ -101,11 +98,11 @@ function findLowestAbuseScoreForCountry(data, country) {
 
 function findMedianAbuseScoreForCountry(data, country) {
   // Filter the data to get only the entries for the specified country
-  const countryData = data.filter(entry => entry.country === country);
-  console.log(countryData)
+  const countryData = data.filter((entry) => entry.country === country);
+  console.log(countryData);
 
   // Extract the abuse scores from the filtered data
-  const abuseScores = countryData.map(entry => entry.abuse);
+  const abuseScores = countryData.map((entry) => entry.abuse);
   console.log(abuseScores);
 
   if (abuseScores.length === 0) {
@@ -120,46 +117,44 @@ function findMedianAbuseScoreForCountry(data, country) {
 }
 
 function createDataStructure(countries, inputData) {
-  let returnList = countries.map(country => ({
+  let returnList = countries.map((country) => ({
     id: country,
     data: [
-      { x: "Low", y: findLowestAbuseScoreForCountry(inputData, country) },    // Random value for 'Low'
+      { x: "Low", y: findLowestAbuseScoreForCountry(inputData, country) }, // Random value for 'Low'
       { x: "Medium", y: findMedianAbuseScoreForCountry(inputData, country) }, // Random value for 'Medium'
-      { x: "High", y: findHighestAbuseScoreForCountry(inputData, country) }    // Random value for 'High'
-    ]
+      { x: "High", y: findHighestAbuseScoreForCountry(inputData, country) }, // Random value for 'High'
+    ],
   }));
 
-  console.log(returnList)
+  console.log(returnList);
 
-  return returnList
+  return returnList;
 }
 
-
 function createData(data) {
-  return createDataStructure(getTopCountriesByAbuse(data), data)
+  return createDataStructure(getTopCountriesByAbuse(data), data);
 }
 
 function RadialChart({ radialData }) {
-  const [apiData, setApiData] = useState([])
+  const [apiData, setApiData] = useState([]);
 
   useEffect(() => {
-    fetch('http://127.0.0.1:5000/table', {
-      method: 'POST',
+    fetch("http://127.0.0.1:5000/table", {
+      method: "POST",
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(radialData)
-    }).then(res => res.json()).
-      then(res => {
+      body: JSON.stringify(radialData),
+    })
+      .then((res) => res.json())
+      .then((res) => {
         if (res.constructor === Array) {
-          console.log(createData(res))
-          setApiData(createData(res))
+          console.log(createData(res));
+          setApiData(createData(res));
         }
-      })
-  }, [radialData])
-
-
+      });
+  }, [radialData]);
 
   return (
     <ResponsiveRadialBar
@@ -170,9 +165,8 @@ function RadialChart({ radialData }) {
       margin={{ top: 40, right: 40, bottom: 80, left: 40 }}
       radialAxisStart={{ tickSize: 5, tickPadding: 5, tickRotation: 0 }}
       circularAxisOuter={{ tickSize: 5, tickPadding: 12, tickRotation: 0 }}
-
     />
-  )
+  );
 }
 
-export default RadialChart
+export default RadialChart;

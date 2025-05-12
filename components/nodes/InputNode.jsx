@@ -9,11 +9,7 @@ export default memo(({ height, data }) => {
         <strong>{data.label}</strong>
       </div>
 
-      <Handle
-        type="source"
-        position="right"
-        style={{ background: "#A4A" }}
-      />
+      <Handle type="source" position="right" style={{ background: "#A4A" }} />
     </>
   );
 });
