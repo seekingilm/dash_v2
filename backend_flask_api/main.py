@@ -67,12 +67,12 @@ def alien():
 def Ai():
     if request.method == "POST":
         data = use_alien_total(request.json)
-        print(f"The data is {data}")
-        return create_ai_response(data)
+        ai_response = create_ai_response(data)
+        return_json = {'contents': ai_response }
+        
+        return {'contents':  ai_response} 
+
     return "200"
-
-
-    return "<p>Hello, World!</p>"
 
 
 def make_abuse_countries(excel_data):
@@ -254,5 +254,5 @@ def create_ai_response(json_obj):
         model="gemini-2.0-flash", contents=prompt
     )
 
-    return response
+    return response.text 
 

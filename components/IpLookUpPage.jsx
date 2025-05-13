@@ -272,7 +272,6 @@ function IpLookUpPage() {
 
   function updateInput(ish) {
     tempIp = ish;
-    console.log("The Ip is: ", tempIp);
   }
 
   function saveIp() {
@@ -307,7 +306,6 @@ function IpLookUpPage() {
                 .then((res) => res.json())
                 .then((res) => {
                   setNameOfAPI("Virus API");
-                  console.log(res);
                   setAllData(res);
                 });
             } else if (res[0].abuse > 20) {
@@ -322,7 +320,6 @@ function IpLookUpPage() {
                 .then((res) => res.json())
                 .then((res) => {
                   setNameOfAPI("Alien API");
-                  console.log(res);
                   setAllData(res);
                 });
             }
@@ -344,7 +341,7 @@ function IpLookUpPage() {
         .then((res) => res.json())
         .then((res) => {
           if (res.constructor === Array) {
-              fetch("http://127.0.0.1:5000/Ai", {
+              fetch("http://127.0.0.1:5000/i", {
                 method: "POST",
                 headers: {
                   Accept: "application/json",
@@ -355,7 +352,6 @@ function IpLookUpPage() {
                 .then((res) => res.json())
                 .then((res) => {
                   setNameOfAPI("Virus API");
-                  setAllData(res);
                   setContentsOfAI(res);
                 });
             } 
@@ -370,10 +366,8 @@ function IpLookUpPage() {
     if (nameOfAPI === "Virus API") {
       return (
         <>
-          <Text>Country: {allData.data.attributes.country}</Text>
-          <Text>ISP: {allData.data.attributes.regional_internet_registry}</Text>
-          <Text>Total Reports: {allData.data.attributes.reputation}</Text>
-          <Text>Ai Contents: {contentsOfAI}</Text>
+          {console.log('the Ai is ', contentsOfAI)}
+          <Text>Ai Contents: {contentsOfAI.contents}</Text>
         </>
       );
     } else if (nameOfAPI === "Alien API") {
@@ -382,6 +376,7 @@ function IpLookUpPage() {
           <Text>Country: {allData.general.country_code}</Text>
           <Text>ISP: {allData.geo.asn}</Text>
           <Text>Total Reports: {allData.general.reputation}</Text>
+          <Text>Ai Contents: {contentsOfAI.contents}</Text>
         </>
       );
     } else if (nameOfAPI === "Abuse API") {
@@ -392,6 +387,7 @@ function IpLookUpPage() {
           </Text>
           <Text>ISP: {allData.length > 0 ? allData[0].category : "N/A"}</Text>
           <Text>Total Reports: {allData[0].totalReports}</Text>
+          <Text>Ai Contents: {contentsOfAI.contents}</Text>
         </>
       );
     } else {
