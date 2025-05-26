@@ -351,7 +351,7 @@ function Dash() {
                   fontWeight: "700",
                 }}
               >
-                Dashboard
+                Intel Dashboard
               </Typography>
               <Sheet onSubmit={getData} />
             </Box>
