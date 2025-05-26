@@ -99,7 +99,7 @@ function IpRow({ IpSource }) {
           </Typography>
           <Typography 
             sx={{ 
-              fontSize: 56, 
+              fontSize: 35, 
               color: "white",
               fontWeight: 600,
               marginBottom: '0.5em',
