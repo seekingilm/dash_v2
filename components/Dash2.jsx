@@ -39,11 +39,12 @@ import TableDisplay from "./TableDisplay";
 import Logo from "./Colorful Illustrative 3D Robot Artificial Intelligence Logo (3).jpg";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import SideBar from "./Sidebar";
+import NewSideBar from "./NewSideBar";
 import RadialChart from "./RadialChart";
 import GeographyChart from "./Geochart";
 import IpRow from "./IpRow";
 import AreaBump from "./AreaBump";
+import UploadIcon from '@mui/icons-material/Upload'; 
 
 import BoxChart from "./BoxChart";
 
@@ -190,11 +191,32 @@ function Sheet(props) {
 
   return (
     <Box display={"inline-block"} ml={1} marginTop={"24px"}>
-      <Button onClick={handleOpen} variant="contained">
-        Upload From Excel
+      <Button onClick={handleOpen} variant="contained"  startIcon={<UploadIcon />} 
+        sx={{
+          borderRadius: '2em',
+          backgroundColor: "#436746",
+          '&:hover': {
+            backgroundColor: "#436746",
+          },
+          '&:submit': { 
+            backgroundColor: "#436746",
+          },       
+        }}
+      >
+        Upload  
       </Button>
-      <Button variant="contained" mr={2}> 
-        <Link2 to="/Report" sx={{}}>Go To General Report</Link2>
+      <Button Button onClick={handleOpen} variant="contained" 
+        sx={{
+          borderRadius: '2em',
+          ml: 2,
+          backgroundColor: "#ffffff",
+          '&:hover': {
+            backgroundColor: 'transparent', // or the same color as the default
+          },
+        }}> 
+        <Link2 to="/Report" ><span style={{
+          color: 'black'
+        }}>General Report</span></Link2>
       </Button>
       <Modal
         open={open}
@@ -231,7 +253,7 @@ function Dash() {
   const defaultTheme = createTheme({
     palette: {
       background: {
-        default: "#f3f3f3",
+        default: "#ffffff",
       },
     },
   });
@@ -282,65 +304,24 @@ function Dash() {
     <ThemeProvider theme={defaultTheme}>
       <Box sx={{ display: "flex", width: "100%" }}>
         <CssBaseline />
-        <AppBar position="absolute" open={open}>
-          <Toolbar
-            sx={{
-              pr: "24px", // keep right padding when drawer closed
-            }}
-          >
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={toggleDrawer}
-              sx={{
-                marginRight: "36px",
-                ...(open && { display: "none" }),
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1, textAlign: "center" }}
-            >
-              Intel Dashboard
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <SideBar open={open} setOpen={setOpen} DrawerHeader={DrawerHeader} />
+        <NewSideBar/>
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === "light"
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: '#f7f7f7',
             flexGrow: 1,
+            borderRadius: "2rem",
             height: "100vh",
             overflow: "auto",
             transition: theme.transitions.create("margin", {
               easing: theme.transitions.easing.sharp,
               duration: theme.transitions.duration.leavingScreen,
             }),
-            marginLeft: open
-              ? `${drawerWidth}px`
-              : `calc(${theme.spacing(7)} + 1px)`,
-            width: open
-              ? `calc(100% - ${drawerWidth}px)`
-              : `calc(100% - ${theme.spacing(7)} - 1px)`,
+            width: '100%',
+            marginTop: '1.5em', 
           }}
         >
-          <DrawerHeader />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 3, mb: 3 }}>
             <Box display={"flex"} justifyContent={"space-between"}>
               <Typography
                 display={"inline-block"}
