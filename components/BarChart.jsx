@@ -6,9 +6,6 @@ import { useState, useEffect } from "react";
 function BarChart({ barData }) {
   const [apiData, setApiData] = useState([]);
 
-  barData = sumAbuseByCountry(barData.filter((item) => item.country !== null && item.abuse != 0));
-  console.log('The bar data is ',barData)
-
   function sumAbuseByCountry(arr) {
     const result = {};
 
@@ -33,32 +30,31 @@ function BarChart({ barData }) {
     return sortedCountries.slice(0, 5);
   }
 
-  //  useEffect(() => {
-  //    fetch("http://127.0.0.1:5000/data", {
-  //      method: "POST",
-  //      headers: {
-  //        Accept: "application/json",
-  //        "Content-Type": "application/json",
-  //      },
-  //      body: JSON.stringify(barData),
-  //    })
-  //      .then((res) => res.json())
-  //      .then((res) => {
-  //        if (res.constructor === Array) {
-  //          let newRes = res.filter(
-  //            (item) => item.country !== null && item.abuse != 0,
-  //          );
-  //          setApiData(sumAbuseByCountry(newRes));
-  //        }
-  //      });
-  //  }, [barData]);
+  useEffect(() => {
+    fetch("http://127.0.0.1:5000/data", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(barData),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.constructor === Array) {
+          let newRes = res.filter(
+            (item) => item.country !== null && item.abuse != 0,
+          );
+          setApiData(sumAbuseByCountry(newRes));
+        }
+      });
+  }, [barData]);
 
   return (
     <ResponsiveBar
       data={apiData}
       colors={{ scheme: "dark2" }}
-      keys={["abuse"]}
-      indexBy="country"
+      keys={["abuse"]} indexBy="country"
       margin={{ top: 30, right: 60, bottom: 60, left: 60 }}
       padding={0.3}
       valueScale={{ type: "linear" }}

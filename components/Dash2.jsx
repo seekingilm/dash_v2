@@ -258,28 +258,6 @@ function Dash() {
     },
   });
 
-  const [apiData, setApiData] = useState([]);
-
-  useEffect(() => {
-    fetch("http://127.0.0.1:5000/data", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(returnData),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.constructor === Array) {
-          let newRes = res.filter(
-            (item) => item.country !== null && item.abuse != 0,
-          );
-          setApiData(newRes);
-        }
-      });
-  }, []);
-
   const theme = useTheme();
 
   const [open, setOpen] = useState(false);
@@ -301,7 +279,7 @@ function Dash() {
   };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       <Box sx={{ display: "flex", width: "100%" }}>
         <CssBaseline />
         <NewSideBar/>
@@ -313,10 +291,6 @@ function Dash() {
             borderRadius: "2rem",
             height: "100vh",
             overflow: "auto",
-            transition: theme.transitions.create("margin", {
-              easing: theme.transitions.easing.sharp,
-              duration: theme.transitions.duration.leavingScreen,
-            }),
             width: '100%',
             marginTop: '1.5em', 
           }}
@@ -355,30 +329,7 @@ function Dash() {
                 </Card>
               </Grid>
 
-              <Grid item xs={6}>
-                <Card
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    borderRadius: "1em",
-                    height: 300,
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    mx={3}
-                    marginTop={0}
-                    sx={{
-                      fontWeight: 900,
-                      color: "#615d5c",
-                    }}
-                  ></Typography>
-                  <BoxChart updating={returnData} />
-                </Card>
-              </Grid>
-
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Card
                   sx={{
                     display: "flex",
@@ -402,7 +353,7 @@ function Dash() {
                 </Card>
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={7}>
                 <Card
                   sx={{
                     p: 2,
@@ -423,17 +374,17 @@ function Dash() {
                   >
                     Average Abuse Per Country
                   </Typography>
-                  <BarChart barData={apiData} />
+                  <BarChart barData={returnData} />
                 </Card>
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={12}>
                 <Card
                   sx={{
                     display: "flex",
                     borderRadius: "1em",
                     flexDirection: "column",
-                    height: 300,
+                    height: 400,
                     width: "100%",
                   }}
                 >
@@ -457,7 +408,7 @@ function Dash() {
           </Container>
         </Box>
       </Box>
-    </ThemeProvider>
+    </>
   );
 }
 

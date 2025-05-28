@@ -14,6 +14,7 @@ function highestReportCountry(data) {
   let highestReport = { country: "", report: 0 };
 
   data.forEach((item) => {
+    console.log(item['total'])
     if (item["total"] > highestReport["report"]) {
       highestReport["report"] = item["total"];
       highestReport["country"] = item["country"];
