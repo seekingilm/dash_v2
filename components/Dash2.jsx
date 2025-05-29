@@ -205,7 +205,7 @@ function Sheet(props) {
       >
         Upload  
       </Button>
-      <Button Button onClick={handleOpen} variant="contained" 
+      <Button variant="contained" 
         sx={{
           borderRadius: '2em',
           ml: 2,
@@ -214,7 +214,7 @@ function Sheet(props) {
             backgroundColor: 'transparent', // or the same color as the default
           },
         }}> 
-        <Link2 to="/Report" ><span style={{
+        <Link2 to="/" ><span style={{
           color: 'black'
         }}>General Report</span></Link2>
       </Button>
