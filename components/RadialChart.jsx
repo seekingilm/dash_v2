@@ -2,6 +2,96 @@ import { ResponsiveRadialBar } from "@nivo/radial-bar";
 import { useState, useEffect } from "react";
 import { mockRadialData as data } from "../data/mockData";
 
+let dumb = 
+[
+  {
+    "id": "",
+    "data": [
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      }
+    ]
+  },
+  {
+    "id": "",
+    "data": [
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      }
+    ]
+  },
+  {
+    "id": "",
+    "data": [
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      }
+    ]
+  },
+  {
+    "id": "",
+    "data": [
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      },
+      {
+        "x": "",
+        "y": 0
+      }
+    ]
+  }
+]
+
+
+
 function topFive(data) {
   let returnCountries = [];
 
@@ -136,7 +226,7 @@ function createData(data) {
 }
 
 function RadialChart({ radialData }) {
-  const [apiData, setApiData] = useState([]);
+  const [apiData, setApiData] = useState(dumb);
 
   useEffect(() => {
     fetch("http://127.0.0.1:5000/table", {

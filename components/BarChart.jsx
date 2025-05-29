@@ -3,8 +3,25 @@ import { mockBarData as data } from "../data/mockData";
 import { ResponsiveBar } from "@nivo/bar";
 import { useState, useEffect } from "react";
 
+let empty = 
+[
+    {
+        "abuse": '0',
+        "country": "US"
+    },
+    {
+        "abuse": 0,
+        "country": "JO"
+    },
+    {
+        "abuse": 0,
+        "country": "ID"
+    }
+    
+] 
+
 function BarChart({ barData }) {
-  const [apiData, setApiData] = useState([]);
+  const [apiData, setApiData] = useState(empty);
 
   function sumAbuseByCountry(arr) {
     const result = {};

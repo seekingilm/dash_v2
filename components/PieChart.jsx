@@ -2,8 +2,17 @@ import { ResponsivePie } from "@nivo/pie";
 import { useState, useEffect } from "react";
 import { mockPieData as data } from "../data/mockData";
 
+let empty = [
+  {
+    "color": "hsl(291, 70%, 50%)",
+    "id": "Loading",
+    "label": "DWT",
+    "value": 100
+  },
+]
+
 function PieChart({ pieData, dumb }) {
-  const [apiData, setApiData] = useState([]);
+  const [apiData, setApiData] = useState(empty);
 
   function sumAbuseByCountry(arr) {
     const result = {};
